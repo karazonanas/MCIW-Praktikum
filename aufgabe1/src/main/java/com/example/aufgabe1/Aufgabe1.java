@@ -2,24 +2,20 @@ package com.example.aufgabe1;
 
 import javafx.application.Application;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBase;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
-
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
 
 public class Aufgabe1 extends Application {
 
@@ -42,115 +38,209 @@ public class Aufgabe1 extends Application {
             40.0, 0.0,
             20.0, 40.0 };
 
-    Set<Shape> shapes = new HashSet<>();
-
-
     @Override
     public void start(Stage stage) throws Exception {
-        /* Hier wird eine AnchorPane erstellt. Dies ist ihr LayoutContainer für
-        diese Aufgabe. Sie soll alle Elemente des POI Tools enthalten. */
-        AnchorPane pane = new AnchorPane();
 
-
-
-        Rectangle museum = new Rectangle(10, 10, 40, 40);   // Rechteck erzeugen
-        Label museumLabel = new Label("Museum");
-        VBox museumVBox = new VBox(10, museum, museumLabel);
-        museumVBox.setAlignment(Pos.CENTER);
-
+        // Museum
+        Pane museumVBox = this.createVBox(
+                10,
+                Pos.CENTER,
+                this.createRectangle(10, 10, 40, 40),
+                this.createLabel("Museum")
+        );
         // Info
-        Circle info = new Circle(20);
-        Label infoLabel = new Label("Info");
-        VBox infoVBox = new VBox(10, info, infoLabel);
-        infoVBox.setAlignment(Pos.CENTER);
-
-
+        Pane infoVBox = this.createVBox(
+                10,
+                Pos.CENTER,
+                this.createCircle(20),
+                this.createLabel("Info")
+        );
         // Sehenswürdigkeit
-        Polygon sehenswuerdigkeit = new Polygon();
-        sehenswuerdigkeit.getPoints().addAll(STERN);
-        sehenswuerdigkeit.setFill(Color.AQUAMARINE);
-        Label sehenswuerdigkeitLabel = new Label("Sehenswürdigkeit");
-        VBox sehenswuerdigkeitVBox = new VBox(10, sehenswuerdigkeit, sehenswuerdigkeitLabel);
-        sehenswuerdigkeitVBox.setAlignment(Pos.CENTER);
-
+        Pane sehenswuerdigkeitVBox = this.createVBox(
+                10,
+                Pos.CENTER,
+                this.createStar(),
+                this.createLabel("Sehenswürdigkeit"));
         // Restaurant
-        Polygon restaurant = new Polygon();
-        restaurant.getPoints().addAll(DREIECK);
-        restaurant.setRotate(180);
-        Label restaurantLabel = new Label("Restaurant");
-        VBox restaurantVBox = new VBox(10, restaurant, restaurantLabel);
-        restaurantVBox.setAlignment(Pos.CENTER);
-
-
-//        rect.setStroke(Color.DARKRED);                    // Rahmenfarbe
-//        rect.setFill(Color.RED);                          // Füllfarbe
-//        pane.getChildren().add(rect);                     // Hinzufügen zur AnchorPane
-
-        // Erstellen der Scene und Vorbereiten & Anzeigen der Stage.
-//        ImageView berlinKarte = getImage("berlin.png");
-//        HBox berlinBox = new HBox(10, berlinKarte);
-//        berlinBox.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 2");
-//        VBox markierungsBox = new VBox(40, museum, info, sehenswuerdigkeit, restaurant);
-//        pane.getChildren().add(berlinBox);
-//        pane.getChildren().add(markierungsBox);
-//        AnchorPane.setRightAnchor(berlinBox, 50d);
-//        AnchorPane.setBottomAnchor(berlinBox, 100d);
-//        AnchorPane.setLeftAnchor(markierungsBox, 50d);
-//        AnchorPane.setTopAnchor(markierungsBox, 100d);
-
+        Pane restaurantVBox = this.createVBox(
+                10,
+                Pos.CENTER,
+                this.createTriangle(),
+                this.createLabel("Restaurant")
+        );
 
         // Symbol-Box
         VBox poiSymbolBox = new VBox(25, museumVBox, infoVBox, sehenswuerdigkeitVBox, restaurantVBox);
         poiSymbolBox.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 2; -fx-padding: 10");
 
-        Label markierungenLabel = new Label("Markierungen");
-        VBox linkeBox = new VBox(10, markierungenLabel, poiSymbolBox);
-        AnchorPane.setLeftAnchor(linkeBox, 50d);
-        AnchorPane.setTopAnchor(linkeBox, 100d);
+        Pane linkeBox = this.createVBoxWithAnchor(
+                10,
+                100d,
+                -1,
+                50d,
+                -1,
+                Pos.TOP_LEFT,
+                this.createLabel("Markierungen"),
+                poiSymbolBox
+        );
 
         // Editor-Box
-        Button add = new Button("+");
-        add.setMinWidth(100);
-        Button remove = new Button("-");
-        remove.setMinWidth(100);
-        VBox editorBox = new VBox(10, add, remove);
-//        editorBox.setPrefHeight(HEIGHT);
-        editorBox.setAlignment(Pos.CENTER);
-        AnchorPane.setLeftAnchor(editorBox, 210d);
-        AnchorPane.setBottomAnchor(editorBox, 300d);
+        Pane editorBox = this.createVBoxWithAnchor(
+                10,
+                -1 ,
+                300d,
+                210d,
+                -1,
+                Pos.TOP_LEFT,
+                this.createButton("+", 100),
+                this.createButton("-", 100)
+        );
 
         // Karten-Box
-        ImageView berlinKarte = getImage("berlin.png");
-        VBox kartenBox = new VBox(0, berlinKarte);
+        Pane kartenBox = this.createVBoxWithAnchor(
+                0,
+                -1,
+                100d,
+                -1,
+                50d,
+                Pos.TOP_LEFT,
+                this.getImage("berlin.png")
+        );
         kartenBox.setStyle("-fx-border-style: solid; -fx-border-color: black; -fx-border-width: 2");
-        AnchorPane.setRightAnchor(kartenBox, 50d);
-        AnchorPane.setBottomAnchor(kartenBox, 100d);
 
-//        HBox masterBox = new HBox(10, poiSymbolBox, editorBox, kartenBox);
-        pane.getChildren().add(linkeBox);
-        pane.getChildren().add(editorBox);
-        pane.getChildren().add(kartenBox);
-//        AnchorPane.setTopAnchor(masterBox, 0.0);
-//        AnchorPane.setRightAnchor(masterBox, 0.0);
-//        AnchorPane.setBottomAnchor(masterBox, 0.0);
-//        AnchorPane.setLeftAnchor(masterBox, 0.0);
-
-        Scene scene = new Scene(pane, WIDTH, HEIGHT);
-        stage.setScene(scene);
-        stage.setTitle("POI Tool");
-        stage.show();
+        this.prepareScene(stage, linkeBox, editorBox, kartenBox);
     }
 
     public static void main(String[] args) {
         launch(args);
     }
 
-//    private VBox erstelleBox(Shape shape, String str) {
-//
-//    }
-
     private ImageView getImage(String imgPfad) {
         Image img = new Image(getClass().getResourceAsStream(imgPfad));
         return new ImageView(img);
+    }
+
+    /**
+     * Erstelle Kreis
+     *
+     * @param diameter Durchmesser
+     * @return Circle-Objekt
+     */
+    private Shape createCircle(int diameter)
+    {
+        return new Circle(diameter);
+    }
+
+    /**
+     * Erstelle ein Rechteckt
+     * @param marginLeft Außenabstand links
+     * @param marginTop Außenabstand oben
+     * @param width Breite
+     * @param height Höhe
+     * @return Erstelltes Rechteck-Shape
+     */
+    private Shape createRectangle(int marginLeft, int marginTop, int width, int height)
+    {
+        return new Rectangle(marginLeft, marginTop, width, height);
+    }
+
+    /**
+     * Erstelle einen Stern-Shape
+     *
+     * @return Erstelle Stern-Shape
+     */
+    private Shape createStar()
+    {
+        Polygon starShape = new Polygon();
+        starShape.getPoints().addAll(STERN);
+        starShape.setFill(Color.AQUAMARINE);
+
+        return starShape;
+    }
+
+    /**
+     * Erstelle Dreieck
+     *
+     * @return Erstelltes Dreieck
+     */
+    private Shape createTriangle()
+    {
+        Polygon triangle = new Polygon();
+        triangle.getPoints().addAll(DREIECK);
+        triangle.setRotate(180);
+
+        return triangle;
+    }
+
+    private ButtonBase createButton(String label, int minWidth)
+    {
+        Button button = new Button(label);
+        if (minWidth != -1) button.setMinWidth(minWidth);
+
+        return button;
+    }
+
+    /**
+     * Erstelle Label
+     *
+     * @param label Label-Text
+     * @return Erstelltes Label
+     */
+    private Label createLabel(String label)
+    {
+        return new Label(label);
+    }
+
+    /**
+     * Erstelle eine VBox mit einem Label und einem Shape
+     * @param padding Abstand zwischen den Items
+     * @param position Positionierung der Items
+     * @param items Zu verwendende Items
+     * @return Die generierte VBox
+     */
+    private Pane createVBox(int padding, Pos position, Node... items) {
+        VBox vbox = new VBox(padding, items);
+        vbox.setAlignment(position);
+
+        return vbox;
+    }
+
+    /**
+     * Erstelle eine VBox mit einem Anchor
+     * @param padding Innenabstand
+     * @param top Anker oben
+     * @param bottom Anker unten
+     * @param left Anker links
+     * @param right Anker rechts
+     * @param items Die Items
+     * @return VBox
+     */
+    private Pane createVBoxWithAnchor(int padding, double top, double bottom, double left, double right, Pos position, Node... items) {
+        Pane vBox = this.createVBox(padding, position, items);
+
+        if (left != -1) AnchorPane.setLeftAnchor(vBox, left);
+        if (right != -1) AnchorPane.setRightAnchor(vBox, right);
+        if (top != -1) AnchorPane.setTopAnchor(vBox, top);
+        if (bottom != -1) AnchorPane.setBottomAnchor(vBox, bottom);
+
+        return vBox;
+    }
+
+    /**
+     *
+     * @param stage
+     * @param items
+     * Erstellen der Scene und Vorbereiten & Anzeigen der Stage.
+     */
+    private void prepareScene(Stage stage, Node... items) {
+        Pane pane = new AnchorPane();
+        Scene scene = new Scene(pane, WIDTH, HEIGHT);
+        stage.setScene(scene);
+        stage.setTitle("POI Tool");
+        stage.show();
+
+        for(Node item : items) {
+            pane.getChildren().add(item);
+        }
     }
 }
