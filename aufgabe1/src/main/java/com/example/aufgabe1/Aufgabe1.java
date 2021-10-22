@@ -20,8 +20,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 
-import java.util.HashSet;
-import java.util.Set;
 
 public class Aufgabe1 extends Application {
 
@@ -44,7 +42,6 @@ public class Aufgabe1 extends Application {
             40.0, 0.0,
             20.0, 40.0 };
     private Shape selectedElement;
-    private Set<Shape> elements;
     private Pane anchorPaneKarte = new AnchorPane(this.getImage("berlin.png"));
     private Pane kartenBox =  this.createVBoxWithAnchor(
             0,
@@ -55,17 +52,14 @@ public class Aufgabe1 extends Application {
             Pos.TOP_LEFT,
             this.anchorPaneKarte
     );
-    double startSceneX, startSceneY;
-    double startCircleTranslateX, startCircleTranslateY;
+    private double startSceneX, startSceneY;
+    private double startCircleTranslateX, startCircleTranslateY;
 
     @Override
     public void start(Stage stage) throws Exception {
         this.selectedElement = null;
-        this.elements = new HashSet<>();
-        this.handleDragDrop();
-
         // Museum
-        Shape museum = this.createRectangle(10, 10, 40, 40, true);
+        Shape museum = this.createRectangle(10, 10, 40, 40, false);
 
         Pane museumVBox = this.createVBox(
                 10,
@@ -74,7 +68,7 @@ public class Aufgabe1 extends Application {
                 this.createLabel("Museum")
         );
         // Info
-        Shape info = this.createCircle(20, true);
+        Shape info = this.createCircle(20, false);
         Pane infoVBox = this.createVBox(
                 10,
                 Pos.CENTER,
@@ -83,7 +77,7 @@ public class Aufgabe1 extends Application {
         );
 
         // Sehenswürdigkeit
-        Shape sehenswuerdigkeit = this.createPolygon(STERN, false, true);
+        Shape sehenswuerdigkeit = this.createPolygon(STERN, false, false);
         Pane sehenswuerdigkeitVBox = this.createVBox(
                 10,
                 Pos.CENTER,
@@ -91,7 +85,7 @@ public class Aufgabe1 extends Application {
                 this.createLabel("Sehenswürdigkeit"));
 
         // Restaurant
-        Shape restaurant = this.createPolygon(DREIECK, true, true);
+        Shape restaurant = this.createPolygon(DREIECK, true, false);
         Pane restaurantVBox = this.createVBox(
                 10,
                 Pos.CENTER,
@@ -119,7 +113,6 @@ public class Aufgabe1 extends Application {
         ButtonBase minusBtn = this.createButton("-", 100);
         this.handlePlusButton(plusBtn);
         this.handleMinusButton(minusBtn);
-        this.handleDragDrop();
 
 
         Pane editorBox = this.createVBoxWithAnchor(
@@ -139,8 +132,11 @@ public class Aufgabe1 extends Application {
         this.prepareScene(stage, linkeBox, editorBox, kartenBox);
     }
 
-    private void changeSelectedElement(Shape geklicktesElement)
-    {
+    /**
+     * ändert den Wert von this.selectedElement
+     * @param geklicktesElement das zuletzt angelicktes Element
+     */
+    private void changeSelectedElement(Shape geklicktesElement) {
         if (this.selectedElement != null) {
             this.selectedElement.setFill(Color.BLACK);
         }
@@ -149,10 +145,11 @@ public class Aufgabe1 extends Application {
         this.selectedElement = geklicktesElement;
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
-
+    /**
+     * erstellt ImageView
+     * @param imgPfad Bildpfad
+     * @return das ImageView
+     */
     private ImageView getImage(String imgPfad) {
         Image img = new Image(getClass().getResourceAsStream(imgPfad));
         return new ImageView(img);
@@ -164,11 +161,11 @@ public class Aufgabe1 extends Application {
      * @param diameter Durchmesser
      * @return Circle-Objekt
      */
-    private Shape createCircle(int diameter, boolean highlightable)
-    {
+    private Shape createCircle(int diameter, boolean dragDrop) {
         Shape circle = new Circle(diameter);
-        if (highlightable)
-            circle.setOnMouseClicked(e -> changeSelectedElement(circle));
+        circle.setOnMouseClicked(e -> changeSelectedElement(circle));
+        if (dragDrop)
+            this.handleDragDrop(circle);
         return circle;
     }
 
@@ -180,27 +177,40 @@ public class Aufgabe1 extends Application {
      * @param height Höhe
      * @return Erstelltes Rechteck-Shape
      */
-    private Shape createRectangle(double marginLeft, double marginTop, double width, double height, boolean highlightable)
-    {
+    private Shape createRectangle(double marginLeft, double marginTop, double width, double height, boolean dragDrop) {
         Shape rectangle = new Rectangle(marginLeft, marginTop, width, height);
-        if (highlightable)
-            rectangle.setOnMouseClicked(e -> changeSelectedElement(rectangle));
+        rectangle.setOnMouseClicked(e -> changeSelectedElement(rectangle));
+        if (dragDrop)
+            this.handleDragDrop(rectangle);
         return rectangle;
     }
-    private Shape createPolygon(Double[] points, boolean rotate180, boolean highlightable)
-    {
+
+    /**
+     * Erstellt Polygone
+     * @param points Polygonpunkte
+     * @param rotate180 wichtig für den Dreieck
+     * @param dragDrop für die neu erstellte Poygone
+     * @return Polygon (Dreieck, Stern)
+     */
+    private Shape createPolygon(Double[] points, boolean rotate180, boolean dragDrop) {
         Polygon randomPolygon = new Polygon();
         randomPolygon.getPoints().addAll(points);
         if (rotate180)
             randomPolygon.setRotate(180d);
-        if (highlightable)
-            randomPolygon.setOnMouseClicked(e -> changeSelectedElement(randomPolygon));
+        randomPolygon.setOnMouseClicked(e -> changeSelectedElement(randomPolygon));
+        if (dragDrop)
+            this.handleDragDrop(randomPolygon);
 
         return randomPolygon;
     }
 
-    private ButtonBase createButton(String label, int minWidth)
-    {
+    /**
+     * Erstellt einen Button mit Beschriftung
+     * @param label für den Button
+     * @param minWidth die Mindestgröße des Buttons
+     * @return ButtonBase
+     */
+    private ButtonBase createButton(String label, int minWidth) {
         Button button = new Button(label);
         if (minWidth != -1) button.setMinWidth(minWidth);
 
@@ -254,10 +264,9 @@ public class Aufgabe1 extends Application {
     }
 
     /**
-     *
+     * Erstellen der Scene und Vorbereiten & Anzeigen der Stage.
      * @param stage muss übergeben werden
      * @param items die in das neue Pane hinzugefügt werden müssen
-     * Erstellen der Scene und Vorbereiten & Anzeigen der Stage.
      */
     private void prepareScene(Stage stage, Node... items) {
         Pane pane = new AnchorPane();
@@ -272,7 +281,7 @@ public class Aufgabe1 extends Application {
     }
 
     /**
-     *
+     * handling Plus Button, um neue Elemente hinzuzufügen
      * @param plusBtn wenn geklickt, ausgewählte Element wird duplizieren
      */
     private void handlePlusButton(ButtonBase plusBtn) {
@@ -288,26 +297,23 @@ public class Aufgabe1 extends Application {
                         points[i] = d;
                         i++;
                     }
-                    Shape newPolygon = createPolygon( points, polygon.getRotate() != 0, false);
-                    elements.add(newPolygon);
+                    Shape newPolygon = createPolygon( points, polygon.getRotate() != 0, true);
+                    anchorPaneKarte.getChildren().add(newPolygon);
 
                 }
                 else if (selectedElement instanceof Rectangle) {
                     Rectangle rectangle = (Rectangle) selectedElement;
-                    Shape newRectangle = createRectangle(-1,-1,rectangle.getWidth(), rectangle.getHeight(), false);
-                    elements.add(newRectangle);
+                    Shape newRectangle = createRectangle(-1,-1,rectangle.getWidth(), rectangle.getHeight(), true);
+                    anchorPaneKarte.getChildren().add(newRectangle);
 
                 } else if (selectedElement instanceof Circle) {
                     Circle circle = (Circle) selectedElement;
 
-                    Shape newCircle = createCircle((int)circle.getRadius(), false);
+                    Shape newCircle = createCircle((int)circle.getRadius(), true);
                     AnchorPane.setLeftAnchor(newCircle, 10d);
                     AnchorPane.setTopAnchor(newCircle, 10d);
 
-                    elements.add(newCircle);
-                }
-                for (Shape shape:elements) {
-                    anchorPaneKarte.getChildren().add(shape);
+                    anchorPaneKarte.getChildren().add(newCircle);
                 }
             }
         };
@@ -315,7 +321,7 @@ public class Aufgabe1 extends Application {
     }
 
     /**
-     *
+     * handling Minus Button, um ausgewählte Elemente in der Kartensicht zu löschen.
      * @param minusBtn wenn geklickt, ausgewählte Element löschen (nur Elemente, die auf der Karte liegen)
      */
     private void handleMinusButton (ButtonBase minusBtn) {
@@ -323,46 +329,45 @@ public class Aufgabe1 extends Application {
         selectedElement = null;
     }
 
-//    private void handleDragDrop() {
-//        EventHandler<MouseEvent> cPressed = mouseEvent -> {
-//            startSceneX = mouseEvent.getSceneX();
-//            startSceneY = mouseEvent.getSceneY();
-//
-//            startCircleTranslateX = selectedElement.getTranslateX();
-//            System.out.println("Kreis Start-Translation X:" + startCircleTranslateX);
-//            startCircleTranslateY = selectedElement.getTranslateY();
-//            System.out.println("Kreis Start-Translation Y:" + startCircleTranslateY);
-//
-//        };
-//        EventHandler<MouseEvent> cDragged = new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//
-//                // berechnet die Veränderung der Mausposition
-//                double offsetX = event.getSceneX() - startSceneX;
-//                double offsetY = event.getSceneY() - startSceneY;
-//
-//                // berechnet die neue Translation des Objekts durch Einbezug der veränderten Mausposition
-//                double stopCircleTranslateX = startCircleTranslateX + offsetX;
-//                double stopCircleTranslateY = startCircleTranslateY + offsetY;
-//
-//                if (selectedElement != null) {
-//                    selectedElement.setTranslateX(stopCircleTranslateX);
-//                    selectedElement.setTranslateY(stopCircleTranslateY);
-//                }
-//
-//            }
-//        };
-//
-//        if (selectedElement != null) {
-//
-//            selectedElement.setOnMousePressed(cPressed);
-//            selectedElement.setOnMouseDragged(cDragged);
-//
-//            anchorPaneKarte.getChildren().clear();
-//            anchorPaneKarte.getChildren().add(getImage("berlin.png"));
-//            anchorPaneKarte.getChildren().add(selectedElement);
-//        }
-//    }
+    /**
+     * handling Drag & Drop, um es möglich zu machen Elemente zu verschieben.
+     * @param shape das erstellte Figur
+     */
+    private void handleDragDrop(Shape shape) {
+        EventHandler<MouseEvent> cPressed = mouseEvent -> {
+            startSceneX = mouseEvent.getSceneX();
+            startSceneY = mouseEvent.getSceneY();
 
+            startCircleTranslateX = shape.getTranslateX();
+            startCircleTranslateY = shape.getTranslateY();
+
+        };
+        EventHandler<MouseEvent> cDragged = new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+
+                // berechnet die Veränderung der Mausposition
+                double offsetX = event.getSceneX() - startSceneX;
+                double offsetY = event.getSceneY() - startSceneY;
+
+                // berechnet die neue Translation des Objekts durch Einbezug der veränderten Mausposition
+                double stopCircleTranslateX = startCircleTranslateX + offsetX;
+                double stopCircleTranslateY = startCircleTranslateY + offsetY;
+
+                shape.setTranslateX(stopCircleTranslateX);
+                shape.setTranslateY(stopCircleTranslateY);
+            }
+        };
+        shape.setOnMousePressed(cPressed);
+        shape.setOnMouseDragged(cDragged);
+
+    }
+
+    /**
+     * die Basis-Methode
+     * @param args wird an der Funktion launch() übergeben.
+     */
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
