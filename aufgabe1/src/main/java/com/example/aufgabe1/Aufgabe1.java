@@ -25,6 +25,7 @@ public class Aufgabe1 extends Application {
 
     private static final int WIDTH = 900;
     private static final int HEIGHT = 600;
+    private static final Color SHAPECOLOR = Color.GREEN;
     private static final Double[] STERN = {
             0.0, 16.5,
             18.2, 16.5,
@@ -141,7 +142,7 @@ public class Aufgabe1 extends Application {
             this.selectedElement.setFill(Color.BLACK);
         }
 
-        geklicktesElement.setFill(Color.GREEN);
+        geklicktesElement.setFill(SHAPECOLOR);
         this.selectedElement = geklicktesElement;
     }
 
@@ -337,6 +338,7 @@ public class Aufgabe1 extends Application {
         EventHandler<MouseEvent> cPressed = mouseEvent -> {
             startSceneX = mouseEvent.getSceneX();
             startSceneY = mouseEvent.getSceneY();
+            shape.setFill(SHAPECOLOR);
 
             startCircleTranslateX = shape.getTranslateX();
             startCircleTranslateY = shape.getTranslateY();
