@@ -54,7 +54,7 @@ public class Aufgabe1 extends Application {
             this.anchorPaneKarte
     );
     private double startSceneX, startSceneY;
-    private double startCircleTranslateX, startCircleTranslateY;
+    private double startShapeTranslateX, startShapeTranslateY;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -340,8 +340,8 @@ public class Aufgabe1 extends Application {
             startSceneY = mouseEvent.getSceneY();
             shape.setFill(SHAPECOLOR);
 
-            startCircleTranslateX = shape.getTranslateX();
-            startCircleTranslateY = shape.getTranslateY();
+            startShapeTranslateX = shape.getTranslateX();
+            startShapeTranslateY = shape.getTranslateY();
 
         };
         EventHandler<MouseEvent> cDragged = new EventHandler<MouseEvent>() {
@@ -353,8 +353,8 @@ public class Aufgabe1 extends Application {
                 double offsetY = event.getSceneY() - startSceneY;
 
                 // berechnet die neue Translation des Objekts durch Einbezug der veränderten Mausposition
-                double stopCircleTranslateX = startCircleTranslateX + offsetX;
-                double stopCircleTranslateY = startCircleTranslateY + offsetY;
+                double stopCircleTranslateX = startShapeTranslateX + offsetX;
+                double stopCircleTranslateY = startShapeTranslateY + offsetY;
 
                 shape.setTranslateX(stopCircleTranslateX);
                 shape.setTranslateY(stopCircleTranslateY);
