@@ -152,7 +152,7 @@ public class Aufgabe1 extends Application {
      * @return das ImageView
      */
     private ImageView getImage(String imgPfad) {
-        Image img = new Image(getClass().getResourceAsStream(imgPfad));
+        Image img = new Image(getClass().getResource(imgPfad).toExternalForm());
         return new ImageView(img);
     }
 
