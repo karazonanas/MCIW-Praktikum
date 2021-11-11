@@ -135,7 +135,7 @@ public class Aufgabe1 extends Application {
 
     /**
      * ändert den Wert von this.selectedElement
-     * @param geklicktesElement das zuletzt angelicktes Element
+     * @param geklicktesElement das zuletzt angeklickte Element
      */
     private void changeSelectedElement(Shape geklicktesElement) {
         if (this.selectedElement != null) {
@@ -171,7 +171,7 @@ public class Aufgabe1 extends Application {
     }
 
     /**
-     * Erstelle ein Rechteckt
+     * Erstelle ein Rechteck
      * @param marginLeft Außenabstand links
      * @param marginTop Außenabstand oben
      * @param width Breite
@@ -188,9 +188,9 @@ public class Aufgabe1 extends Application {
 
     /**
      * Erstellt Polygone
-     * @param points Polygonpunkte
-     * @param rotate180 wichtig für den Dreieck
-     * @param dragDrop für die neu erstellte Poygone
+     * @param points Punkte des Polygons
+     * @param rotate180 wichtig für das Dreieck
+     * @param dragDrop für das neu erstellte Polygon
      * @return Polygon (Dreieck, Stern)
      */
     private Shape createPolygon(Double[] points, boolean rotate180, boolean dragDrop) {
@@ -332,7 +332,7 @@ public class Aufgabe1 extends Application {
 
     /**
      * handling Drag & Drop, um es möglich zu machen Elemente zu verschieben.
-     * @param shape das erstellte Figur
+     * @param shape die erstellte Figur
      */
     private void handleDragDrop(Shape shape) {
         EventHandler<MouseEvent> cPressed = mouseEvent -> {
