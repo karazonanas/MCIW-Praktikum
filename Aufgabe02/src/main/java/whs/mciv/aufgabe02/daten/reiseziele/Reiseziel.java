@@ -1,4 +1,4 @@
-package whs.mciv.aufgabe02.daten;
+package whs.mciv.aufgabe02.daten.reiseziele;
 
 import java.util.Objects;
 

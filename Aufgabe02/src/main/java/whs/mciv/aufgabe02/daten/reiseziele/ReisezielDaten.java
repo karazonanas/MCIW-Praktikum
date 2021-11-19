@@ -1,7 +1,6 @@
-package whs.mciv.aufgabe02.daten;
+package whs.mciv.aufgabe02.daten.reiseziele;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;

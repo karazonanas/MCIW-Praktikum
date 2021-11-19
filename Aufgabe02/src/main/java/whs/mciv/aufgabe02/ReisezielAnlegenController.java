@@ -5,7 +5,7 @@
  */
 package whs.mciv.aufgabe02;
 
-import whs.mciv.aufgabe02.daten.Reiseziel;
+import whs.mciv.aufgabe02.daten.reiseziele.Reiseziel;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;

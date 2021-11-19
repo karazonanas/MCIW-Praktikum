@@ -33,5 +33,15 @@ public class HauptfensterController implements Initializable {
         System.out.println("Reiseziel Anlegen");
         boolean wurdeAngelegt = mainApp.zeigeReisezielAnlegenDialog();
         System.out.println("Angelegt: " + wurdeAngelegt);
-    }   
+    }
+
+    @FXML
+    public void zeigeKundeAnlegenDialog(ActionEvent actionEvent) {
+        boolean wurdeAngelegt = mainApp.zeigeKundeAnlegenDialog();
+    }
+
+    @FXML
+    public void zeigeBuchungAnlegenDialog(ActionEvent actionEvent) {
+        boolean wurdeAngelegt = mainApp.zeigeBuchungAnlegenDialog();
+    }
 }

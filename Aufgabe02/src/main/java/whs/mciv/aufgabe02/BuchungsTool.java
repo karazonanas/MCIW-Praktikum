@@ -1,7 +1,7 @@
 package whs.mciv.aufgabe02;
 
-import whs.mciv.aufgabe02.daten.Reiseziel;
-import whs.mciv.aufgabe02.daten.ReisezielDaten;
+import whs.mciv.aufgabe02.daten.reiseziele.Reiseziel;
+import whs.mciv.aufgabe02.daten.reiseziele.ReisezielDaten;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +14,8 @@ public class BuchungsTool extends Application {
     private static final String HAUPTFENSTER_VIEW = "Hauptfenster.fxml";
     private static final String HAUPTFENSTER_TITLE = "Buchungssystem";
     private static final String REISEZIEL_ANLEGEN_VIEW = "ReisezielAnlegen.fxml";
+    private static final String KUNDE_ANLEGEN_VIEW = "KundeAnlegen.fxml";
+    private static final String BUCHUNG_ANLEGEN_VIEW = "BuchungAnlegen.fxml";
     private static final String REISEZIEL_ANLEGEN_TITLE = "Reiseziel anlegen";
     
     private Stage hauptfensterStage;
@@ -72,6 +74,72 @@ public class BuchungsTool extends Application {
             // Dialog anzeigen bis er geschlossen wird
             reisezielAnlegenStage.showAndWait();
             
+            // Gibt zurück, ob getätigte Angaben gespeichert wurden
+            return controller.wurdeGespeichert();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean zeigeKundeAnlegenDialog() {
+        try {
+            // Laden der view aus dem FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(KUNDE_ANLEGEN_VIEW));
+            Parent kundeAngelegenView = loader.load();
+
+            // Neue Stage erstellen
+            Stage kundeAnlegenStage = new Stage();
+            kundeAnlegenStage.setTitle(KUNDE_ANLEGEN_VIEW);
+
+            // Owner ist das Hauptfenster, damit die Modality weiß, wie sie sich verhalten soll
+            kundeAnlegenStage.initOwner(hauptfensterStage);
+            kundeAnlegenStage.initModality(Modality.WINDOW_MODAL);
+
+            // Neue Scene erstellen
+            Scene scene = new Scene(kundeAngelegenView);
+            kundeAnlegenStage.setScene(scene);
+
+            // Der Controller muss die Stage kennen, um sie selbstständig schließen zu können
+            KundeAnlegenController controller = loader.getController();
+            controller.setStage(kundeAnlegenStage);
+
+            // Dialog anzeigen bis er geschlossen wird
+            kundeAnlegenStage.showAndWait();
+
+            // Gibt zurück, ob getätigte Angaben gespeichert wurden
+            return controller.wurdeGespeichert();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean zeigeBuchungAnlegenDialog() {
+        try {
+            // Laden der view aus dem FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(BUCHUNG_ANLEGEN_VIEW));
+            Parent buchungAngelegenView = loader.load();
+
+            // Neue Stage erstellen
+            Stage buchungAnlegenStage = new Stage();
+            buchungAnlegenStage.setTitle(BUCHUNG_ANLEGEN_VIEW);
+
+            // Owner ist das Hauptfenster, damit die Modality weiß, wie sie sich verhalten soll
+            buchungAnlegenStage.initOwner(hauptfensterStage);
+            buchungAnlegenStage.initModality(Modality.WINDOW_MODAL);
+
+            // Neue Scene erstellen
+            Scene scene = new Scene(buchungAngelegenView);
+            buchungAnlegenStage.setScene(scene);
+
+            // Der Controller muss die Stage kennen, um sie selbstständig schließen zu können
+            BuchungAnlegenController controller = loader.getController();
+            controller.setStage(buchungAnlegenStage);
+
+            // Dialog anzeigen bis er geschlossen wird
+            buchungAnlegenStage.showAndWait();
+
             // Gibt zurück, ob getätigte Angaben gespeichert wurden
             return controller.wurdeGespeichert();
         } catch (IOException e) {
