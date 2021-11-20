@@ -17,7 +17,9 @@ public class BuchungsTool extends Application {
     private static final String KUNDE_ANLEGEN_VIEW = "KundeAnlegen.fxml";
     private static final String BUCHUNG_ANLEGEN_VIEW = "BuchungAnlegen.fxml";
     private static final String REISEZIEL_ANLEGEN_TITLE = "Reiseziel anlegen";
-    
+    private static final String KUNDE_ANLEGEN_TITLE = "Kunde anlegen";
+    private static final String BUCHUNG_ANLEGEN_TITLE = "Buchung anlegen";
+
     private Stage hauptfensterStage;
 
     @Override
@@ -90,7 +92,7 @@ public class BuchungsTool extends Application {
 
             // Neue Stage erstellen
             Stage kundeAnlegenStage = new Stage();
-            kundeAnlegenStage.setTitle(KUNDE_ANLEGEN_VIEW);
+            kundeAnlegenStage.setTitle(KUNDE_ANLEGEN_TITLE);
 
             // Owner ist das Hauptfenster, damit die Modality weiß, wie sie sich verhalten soll
             kundeAnlegenStage.initOwner(hauptfensterStage);
@@ -123,7 +125,7 @@ public class BuchungsTool extends Application {
 
             // Neue Stage erstellen
             Stage buchungAnlegenStage = new Stage();
-            buchungAnlegenStage.setTitle(BUCHUNG_ANLEGEN_VIEW);
+            buchungAnlegenStage.setTitle(BUCHUNG_ANLEGEN_TITLE);
 
             // Owner ist das Hauptfenster, damit die Modality weiß, wie sie sich verhalten soll
             buchungAnlegenStage.initOwner(hauptfensterStage);
