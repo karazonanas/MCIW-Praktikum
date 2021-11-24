@@ -9,12 +9,10 @@ import whs.mciv.aufgabe02.daten.reiseziele.Reiseziel;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
-public class ReisezielAnlegenController implements Initializable {
+public class ReisezielAnlegenController extends BaseController {
 
     @FXML
     private TextField id;
@@ -35,9 +33,7 @@ public class ReisezielAnlegenController implements Initializable {
     private TextField preisVollpension; 
 
     private Reiseziel reiseziel;
-    private boolean wurdeGespeichert = false;
-    private Stage stage;
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Erzeige neues Reiseziel-Objekt um die Daten des Formulars später
@@ -46,15 +42,7 @@ public class ReisezielAnlegenController implements Initializable {
         
         id.setText(reiseziel.getId());
     }
-    
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
-    
-    public boolean wurdeGespeichert() {
-        return wurdeGespeichert;
-    }
-    
+
     @FXML
     private void speichern() {
         // Das speichern ist für diese Praktikumsaufgabe noch nicht notwendig.

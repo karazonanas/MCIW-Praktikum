@@ -10,7 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class BuchungAnlegenController implements Initializable {
+public class BuchungAnlegenController extends BaseController {
 
     @FXML
     private TextField id;
@@ -40,8 +40,6 @@ public class BuchungAnlegenController implements Initializable {
     private TextField gesamtpreis;
 
     private Buchung buchung;
-    private boolean wurdeGespeichert = false;
-    private Stage stage;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -61,10 +59,6 @@ public class BuchungAnlegenController implements Initializable {
 
     public void setStage(Stage stage) {
         this.stage = stage;
-    }
-
-    public boolean wurdeGespeichert() {
-        return wurdeGespeichert;
     }
 
     @FXML
