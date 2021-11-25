@@ -62,6 +62,7 @@ public class KundeAnlegenController extends BaseController {
     }
 
     private void conditionalComboBox() {
+        bundesland.getItems().setAll(DE_LAENDER);
         land.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observableValue, Object o, Object t1) {
