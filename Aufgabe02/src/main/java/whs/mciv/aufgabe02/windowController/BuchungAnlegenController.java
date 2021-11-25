@@ -1,12 +1,12 @@
-package whs.mciv.aufgabe02;
+package whs.mciv.aufgabe02.windowController;
 
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import whs.mciv.aufgabe02.BaseController;
 import whs.mciv.aufgabe02.daten.buchung.Buchung;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 

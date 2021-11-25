@@ -9,13 +9,6 @@
     <children>
       <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="1039.0">
         <menus>
-          <Menu text="_Reiseziele">
-            <items>
-              <MenuItem text="Reiseziel_übersicht" />
-              <MenuItem onAction="#zeigeReisezielAnlegenDialog" text="Reiseziel _anlegen" />
-              <MenuItem text="Reiseziele _verwalten" />
-            </items>
-          </Menu>
           <Menu text="_Datei">
             <items>
               <MenuItem text="Datenquelle _öffnen" />
@@ -36,6 +29,13 @@
               <MenuItem text="Buchungs_übersicht" />
               <MenuItem onAction="#zeigeBuchungAnlegenDialog" text="Buchung _anlegen" />
               <MenuItem text="Kunden _verwalten" />
+            </items>
+          </Menu>
+          <Menu text="_Reiseziele">
+            <items>
+              <MenuItem text="Reiseziel_übersicht" />
+              <MenuItem onAction="#zeigeReisezielAnlegenDialog" text="Reiseziel _anlegen" />
+              <MenuItem text="Reiseziele _verwalten" />
             </items>
           </Menu>
           <Menu text="?">

@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package whs.mciv.aufgabe02;
+package whs.mciv.aufgabe02.windowController;
 
+import whs.mciv.aufgabe02.BaseController;
 import whs.mciv.aufgabe02.daten.reiseziele.Reiseziel;
 import java.net.URL;
 import java.util.ResourceBundle;

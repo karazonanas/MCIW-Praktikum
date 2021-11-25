@@ -63,7 +63,7 @@ public class BuchungsTool extends Application {
         return this.zeigeDialog(BUCHUNG_ANLEGEN_VIEW, BUCHUNG_ANLEGEN_TITLE);
     }
 
-    public boolean zeigeDialog (String view, String titel) {
+    private boolean zeigeDialog (String view, String titel) {
         try {
             // Laden der view aus dem FXML
             FXMLLoader loader = new FXMLLoader(getClass().getResource(view));
@@ -89,7 +89,7 @@ public class BuchungsTool extends Application {
             dialogStage.showAndWait();
 
             // Gibt zurück, ob getätigte Angaben gespeichert wurden
-            return controller.wurdeGespeichert;
+            return controller.wurdeGespeichert();
         } catch (IOException e) {
             e.printStackTrace();
             return false;

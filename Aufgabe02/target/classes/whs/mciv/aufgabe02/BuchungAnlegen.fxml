@@ -10,7 +10,7 @@
 <?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.DatePicker?>
 <?import java.lang.String?>
-<AnchorPane id="AnchorPane" prefHeight="575.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whs.mciv.aufgabe02.BuchungAnlegenController">
+<AnchorPane id="AnchorPane" prefHeight="575.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whs.mciv.aufgabe02.windowController.BuchungAnlegenController">
     <children>
         <Label layoutX="25.0" layoutY="25.0" text="Buchung anlegen">
             <font>

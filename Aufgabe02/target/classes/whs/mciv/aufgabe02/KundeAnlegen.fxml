@@ -10,7 +10,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.collections.FXCollections?>
 <?import java.lang.String?>
-<AnchorPane id="AnchorPane" prefHeight="725.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whs.mciv.aufgabe02.KundeAnlegenController">
+<AnchorPane id="AnchorPane" prefHeight="725.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whs.mciv.aufgabe02.windowController.KundeAnlegenController">
     <children>
         <Label layoutX="25.0" layoutY="25.0" text="Kunde anlegen">
             <font>
@@ -46,11 +46,16 @@
         <TextField fx:id="ort" layoutX="175.0" layoutY="371.0" prefHeight="25.0" prefWidth="300.0" promptText="Musterstadt"/>
 
         <Label layoutX="25.0" layoutY="425.0" text="Land *" />
-        <TextField fx:id="land" layoutX="175.0" layoutY="421.0" prefHeight="25.0" prefWidth="300.0" promptText="Deutschland"/>
-
+        <ComboBox fx:id="land" layoutX="175.0" layoutY="421.0" prefHeight="25.0" prefWidth="300.0" promptText="Deutschland">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Deutschland" />
+                    <String fx:value="Österreich" />
+                </FXCollections>
+            </items>
+        </ComboBox>
         <Label layoutX="25.0" layoutY="475.0" text="Bundesland *" />
-        <TextField fx:id="bundesland" layoutX="175.0" layoutY="471.0" prefHeight="25.0" prefWidth="300.0" promptText="NRW"/>
-
+        <ComboBox fx:id="bundesland" layoutX="175.0" layoutY="471.0" prefHeight="25.0" prefWidth="300.0"/>
         <Label layoutX="25.0" layoutY="525.0" text="Telefonnummer *" />
         <TextField fx:id="telefonnummer" layoutX="175.0" layoutY="521.0" prefHeight="25.0" prefWidth="300.0" promptText="0156987985"/>
 

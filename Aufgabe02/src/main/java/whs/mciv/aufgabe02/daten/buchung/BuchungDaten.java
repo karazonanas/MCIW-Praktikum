@@ -1,7 +1,5 @@
 package whs.mciv.aufgabe02.daten.buchung;
 
-import whs.mciv.aufgabe02.daten.reiseziele.Reiseziel;
-
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashMap;
