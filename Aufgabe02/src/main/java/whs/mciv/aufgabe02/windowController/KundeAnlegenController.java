@@ -2,6 +2,8 @@ package whs.mciv.aufgabe02.windowController;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -73,6 +75,8 @@ public class KundeAnlegenController extends BaseController {
         id.setText(kunde.getId());
         conditionalComboBox();
         conditionalCheckbox();
+
+        updateKontoinhaber();
     }
 
     private void conditionalCheckbox() {
@@ -86,6 +90,21 @@ public class KundeAnlegenController extends BaseController {
                 kontoinhaber.setDisable(t1);
             }
         });
+    }
+
+    private void updateKontoinhaber() {
+        ChangeListener<Boolean> namensAenderungChangeListener = new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldProperty, Boolean newProperty) {
+                // Wenn kein Fokus auf Feld
+                if (!newProperty && sameAsCustomer.isSelected()) {
+                    kontoinhaber.setText(vorname.getText() + " " + nachname.getText());
+                }
+            }
+        };
+
+        this.vorname.focusedProperty().addListener(namensAenderungChangeListener);
+        this.nachname.focusedProperty().addListener(namensAenderungChangeListener);
     }
 
     private void conditionalComboBox() {
