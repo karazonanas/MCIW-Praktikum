@@ -21,7 +21,7 @@
         <TextField fx:id="id" text="Buchungs-ID" disable="true" editable="false" layoutX="175.0" layoutY="71.0" prefHeight="25.0" prefWidth="300.0" />
 
         <Label layoutX="25.0" layoutY="125.0" text="Kunde *" />
-        <ComboBox fx:id="kunde" promptText="Kunde auswählen" layoutX="175.0" layoutY="121.0" prefHeight="25.0" prefWidth="300.0" />
+        <ComboBox fx:id="kundeComboBox" promptText="Kunde auswählen" layoutX="175.0" layoutY="121.0" prefHeight="25.0" prefWidth="300.0" />
 
         <Label layoutX="25.0" layoutY="175.0" text="Status" />
         <TextField fx:id="buchungsStatus" prefWidth="300.0" text="neu" disable="true" layoutX="175.0" layoutY="171.0" prefHeight="25.0" />
@@ -36,7 +36,7 @@
         <TextField fx:id="anzahlDerNaechte" text="10" promptText="10" layoutX="175.0" layoutY="321.0" prefHeight="25.0" prefWidth="300.0" />
 
         <Label layoutX="25.0" layoutY="375.0" text="Reiseziel *" />
-        <ComboBox fx:id="reiseziel" promptText="Reiseziel auswählen" layoutX="175.0" layoutY="371.0" prefHeight="25.0" prefWidth="300.0" />
+        <ComboBox fx:id="reisezielComboBox" promptText="Reiseziel auswählen" layoutX="175.0" layoutY="371.0" prefHeight="25.0" prefWidth="300.0" />
 
         <Label layoutX="25.0" layoutY="425.0" text="Verpflegung *" />
         <ComboBox fx:id="verpflegung" promptText="Verpflegung auswählen" layoutX="175.0" layoutY="421.0" prefHeight="25.0" prefWidth="300.0">
