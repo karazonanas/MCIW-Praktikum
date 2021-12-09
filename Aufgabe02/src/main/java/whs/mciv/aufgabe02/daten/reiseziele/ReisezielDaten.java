@@ -70,4 +70,8 @@ public abstract class ReisezielDaten {
         reiseziele.put(id, null);
         return id;
     }
+
+    public static HashMap<String, Reiseziel> getReiseziele() {
+        return reiseziele;
+    }
 }

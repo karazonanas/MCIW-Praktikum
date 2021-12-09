@@ -5,10 +5,14 @@ import javafx.scene.control.DatePicker;
 import whs.mciv.aufgabe02.BaseController;
 import whs.mciv.aufgabe02.daten.buchung.Buchung;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import whs.mciv.aufgabe02.daten.reiseziele.Reiseziel;
+import whs.mciv.aufgabe02.daten.reiseziele.ReisezielDaten;
 
 public class BuchungAnlegenController extends BaseController {
 
@@ -41,11 +45,19 @@ public class BuchungAnlegenController extends BaseController {
 
     private Buchung buchung;
 
+    private ArrayList<String> reisezielName = new ArrayList<>();
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Erzeige neues Buchung-Objekt um die Daten des Formulars später
         // speichern zu können. Der Buchung-Konstruktor erzeugt auch die ID.
         buchung = new Buchung();
+        HashMap<String, Reiseziel> reisezieleData = ReisezielDaten.getReiseziele();
+
+        for (Reiseziel ziel: reisezieleData.values()) {
+            reisezielName.add(ziel.getName());
+        }
+        reiseziel.getItems().setAll(reisezielName);
 
         this.id.setText(buchung.getId());
 
