@@ -162,18 +162,20 @@ public class BuchungAnlegenController extends BaseController {
     private void updateGesamtpreis(Reiseziel ausgewaehltesZiel, String ausgewaehlteVerpflegung) {
         Double neuerPreis = 0.00;
 
-        switch (ausgewaehlteVerpflegung) {
-            case "Vollpension":
-                neuerPreis = (double) (ausgewaehltesZiel.getPreisVollpension()) / 100;
-                break;
-            case "Halbpension":
-                neuerPreis = (double) (ausgewaehltesZiel.getPreisHalbpension()) / 100;
-                break;
+        if (ausgewaehlteVerpflegung != null & ausgewaehltesZiel != null && personenanzahl.getText() != null && anzahlDerNaechte.getText() != null) {
+            switch (ausgewaehlteVerpflegung) {
+                case "Vollpension":
+                    neuerPreis = (double) (ausgewaehltesZiel.getPreisVollpension()) / 100;
+                    break;
+                case "Halbpension":
+                    neuerPreis = (double) (ausgewaehltesZiel.getPreisHalbpension()) / 100;
+                    break;
+            }
+
+            neuerPreis = neuerPreis * Double.parseDouble(this.personenanzahl.getText()) * Double.parseDouble(this.anzahlDerNaechte.getText());
+
+            gesamtpreis.setText(String.format("%.2f", neuerPreis));
         }
-
-        neuerPreis = neuerPreis * Double.parseDouble(this.personenanzahl.getText()) * Double.parseDouble(this.anzahlDerNaechte.getText());
-
-        gesamtpreis.setText(String.format("%.2f", neuerPreis));
     }
 
     private void checkNumberFields() {
