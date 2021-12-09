@@ -14,7 +14,10 @@ public class Kunde {
     String bundesland;
     String telefonnummer;
     String email;
-    String bankverbindung;
+    String kontoinhaber;
+    String iban;
+    String bic;
+    String bank;
 
     public Kunde() {
         id = KundenDaten.erzeugeId();
@@ -108,12 +111,36 @@ public class Kunde {
         this.email = email;
     }
 
-    public String getBankverbindung() {
-        return bankverbindung;
+    public String getKontoinhaber() {
+        return kontoinhaber;
     }
 
-    public void setBankverbindung(String bankverbindung) {
-        this.bankverbindung = bankverbindung;
+    public void setKontoinhaber(String kontoinhaber) {
+        this.kontoinhaber = kontoinhaber;
+    }
+
+    public String getIban() {
+        return iban;
+    }
+
+    public void setIban(String iban) {
+        this.iban = iban;
+    }
+
+    public String getBic() {
+        return bic;
+    }
+
+    public void setBic(String bic) {
+        this.bic = bic;
+    }
+
+    public String getBank() {
+        return bank;
+    }
+
+    public void setBank(String bank) {
+        this.bank = bank;
     }
 
     @Override

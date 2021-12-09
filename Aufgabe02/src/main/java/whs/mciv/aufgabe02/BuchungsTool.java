@@ -1,7 +1,9 @@
 package whs.mciv.aufgabe02;
 
+import whs.mciv.aufgabe02.daten.kunde.Kunde;
 import whs.mciv.aufgabe02.daten.reiseziele.Reiseziel;
 import whs.mciv.aufgabe02.daten.reiseziele.ReisezielDaten;
+import whs.mciv.aufgabe02.daten.kunde.KundenDaten;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -27,6 +29,7 @@ public class BuchungsTool extends Application {
         hauptfensterStage = stage;
         
         erzeugeReisezielDaten();
+        erzeugeKundenDaten();
         
         zeigeHauptfenster();
     }
@@ -128,5 +131,52 @@ public class BuchungsTool extends Application {
         rz.setPreisHalbpension(20030);
         rz.setPreisVollpension(72525);
         ReisezielDaten.speichereReiseziel(rz);
+    }
+
+    private void erzeugeKundenDaten() {
+        Kunde kunde = new Kunde();
+        kunde.setAnrede("Herr");
+        kunde.setVorname("Max");
+        kunde.setNachname("Mustermann");
+        kunde.setAdresse("Musterstraße 1");
+        kunde.setOrt("Musterstadt");
+        kunde.setPlz(58594);
+        kunde.setBundesland("Nord-Rhein Westfalen");
+        kunde.setLand("Deutschland");
+        kunde.setIban("DE304561148550030484496");
+        kunde.setBank("Sparkasse Gelsenkirchen");
+        kunde.setBic("WELADED1GEL");
+        kunde.setEmail("no@mail.de");
+        KundenDaten.speichereKunde(kunde);
+
+        Kunde kunde2 = new Kunde();
+        kunde2.setAnrede("Herr");
+        kunde2.setVorname("Stephan");
+        kunde2.setNachname("Wannemaker");
+        kunde2.setAdresse("Ollenhauer Str. 38");
+        kunde2.setOrt("Stuttgart Asemwald");
+        kunde2.setPlz(70599);
+        kunde2.setBundesland("Baden-Württemberg");
+        kunde2.setLand("Deutschland");
+        kunde2.setIban("DE12500105177264191851");
+        kunde2.setBank("Sparkasse Gelsenkirchen");
+        kunde2.setBic("WELADED1GEL");
+        kunde2.setEmail("no2@mail.de");
+        KundenDaten.speichereKunde(kunde2);
+
+        Kunde kunde3 = new Kunde();
+        kunde3.setAnrede("Frau");
+        kunde3.setVorname("Christin");
+        kunde3.setNachname("Kuhn");
+        kunde3.setAdresse("Kieler Strasse 43");
+        kunde3.setOrt("Engelsberg");
+        kunde3.setPlz(84549);
+        kunde3.setBundesland("Bayern");
+        kunde3.setLand("Deutschland");
+        kunde3.setIban("DE46500105175887234626");
+        kunde3.setBank("Sparkasse Gelsenkirchen");
+        kunde3.setBic("WELADED1GEL");
+        kunde3.setEmail("no3@mail.de");
+        KundenDaten.speichereKunde(kunde3);
     }
 }
