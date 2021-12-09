@@ -1,5 +1,7 @@
 package whs.mciv.aufgabe02.windowController;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
@@ -64,12 +66,7 @@ public class BuchungAnlegenController extends BaseController {
         this.setzeReiseziele();
         this.setzeKundenDaten();
 
-        // Setze Verpflegung
-//        List<String> verpflegungAuswahl = new ArrayList<String>();
-//        verpflegungAuswahl.add("Halbpension");
-//        verpflegungAuswahl.add("Vollpension");
-//        ObservableList obList = FXCollections.observableList(verpflegungAuswahl);
-//        this.verpflegung.setItems(obList);
+        this.changeReiseziel();
     }
 
     private void setzeKundenDaten() {
@@ -112,6 +109,45 @@ public class BuchungAnlegenController extends BaseController {
                 return reisezielComboBox.getItems().stream().filter(reiseziel -> reiseziel.getId().equals(string)).findFirst().orElse(null);
             }
         });
+    }
+
+    private void changeReiseziel() {
+        this.reisezielComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Reiseziel>() {
+            @Override
+            public void changed(ObservableValue<? extends Reiseziel> observableValue, Reiseziel reiseziel, Reiseziel ausgewaehltesZiel) {
+                if (ausgewaehltesZiel != null && verpflegung.getSelectionModel().selectedItemProperty().get() != null) {
+                    String ausgewaehlteVerpflegung = (String) verpflegung.getSelectionModel().selectedItemProperty().get();
+
+                    updateGesamtpreis(ausgewaehltesZiel, ausgewaehlteVerpflegung);
+                }
+            }
+        });
+
+        this.verpflegung.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String ausgewaehlteVerpflegung) {
+                if (ausgewaehlteVerpflegung != null && reisezielComboBox.getSelectionModel().selectedItemProperty().get() != null) {
+                    Reiseziel ausgewaehltesZiel = (Reiseziel) reisezielComboBox.getSelectionModel().selectedItemProperty().get();
+
+                    updateGesamtpreis(ausgewaehltesZiel, ausgewaehlteVerpflegung);
+                }
+            }
+        });
+    }
+
+    private void updateGesamtpreis(Reiseziel ausgewaehltesZiel, String ausgewaehlteVerpflegung) {
+        Double neuerPreis = 0.00;
+
+        switch (ausgewaehlteVerpflegung) {
+            case "Vollpension":
+                neuerPreis = (double) (ausgewaehltesZiel.getPreisVollpension()) / 100;
+                break;
+            case "Halbpension":
+                neuerPreis = (double) (ausgewaehltesZiel.getPreisHalbpension()) / 100;
+                break;
+        }
+
+        gesamtpreis.setText(String.format("%.2f", neuerPreis));
     }
 
     public void setStage(Stage stage) {
