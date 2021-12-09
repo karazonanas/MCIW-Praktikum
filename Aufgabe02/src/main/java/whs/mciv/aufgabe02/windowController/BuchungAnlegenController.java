@@ -66,7 +66,8 @@ public class BuchungAnlegenController extends BaseController {
         this.setzeReiseziele();
         this.setzeKundenDaten();
 
-        this.changeReiseziel();
+        this.changeReisezielUndVerpflegung();
+        this.checkNumberFields();
     }
 
     private void setzeKundenDaten() {
@@ -111,7 +112,7 @@ public class BuchungAnlegenController extends BaseController {
         });
     }
 
-    private void changeReiseziel() {
+    private void changeReisezielUndVerpflegung() {
         this.reisezielComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Reiseziel>() {
             @Override
             public void changed(ObservableValue<? extends Reiseziel> observableValue, Reiseziel reiseziel, Reiseziel ausgewaehltesZiel) {
@@ -133,6 +134,29 @@ public class BuchungAnlegenController extends BaseController {
                 }
             }
         });
+
+        ChangeListener<Boolean> anzahlGeandertChangeListener = new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldProperty, Boolean newProperty) {
+                // Wenn kein Fokus auf Feld
+                if (!newProperty) {
+                    String ausgewaehlteVerpflegung = (String) verpflegung.getSelectionModel().selectedItemProperty().get();
+                    Reiseziel ausgewaehltesZiel = (Reiseziel) reisezielComboBox.getSelectionModel().selectedItemProperty().get();
+
+                    // Setze Zahl, wenn Feld leer ist und verlassen wird
+                    if (personenanzahl.getText().equals("") || personenanzahl.getText().equals("0")) {
+                        personenanzahl.setText("1");
+                    }
+                    if (anzahlDerNaechte.getText().equals("") || anzahlDerNaechte.getText().equals("0")) {
+                        anzahlDerNaechte.setText("1");
+                    }
+
+                    updateGesamtpreis(ausgewaehltesZiel, ausgewaehlteVerpflegung);
+                }
+            }
+        };
+        this.personenanzahl.focusedProperty().addListener(anzahlGeandertChangeListener);
+        this.anzahlDerNaechte.focusedProperty().addListener(anzahlGeandertChangeListener);
     }
 
     private void updateGesamtpreis(Reiseziel ausgewaehltesZiel, String ausgewaehlteVerpflegung) {
@@ -147,7 +171,31 @@ public class BuchungAnlegenController extends BaseController {
                 break;
         }
 
+        neuerPreis = neuerPreis * Double.parseDouble(this.personenanzahl.getText()) * Double.parseDouble(this.anzahlDerNaechte.getText());
+
         gesamtpreis.setText(String.format("%.2f", neuerPreis));
+    }
+
+    private void checkNumberFields() {
+        // Anzahl der Reisenden
+        this.personenanzahl.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    personenanzahl.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+
+        // Anzahl der Nächte
+        this.anzahlDerNaechte.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    anzahlDerNaechte.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
     }
 
     public void setStage(Stage stage) {

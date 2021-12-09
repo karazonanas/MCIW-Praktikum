@@ -32,7 +32,7 @@
         <Label layoutX="25.0" layoutY="275.0" text="Anreisedatum *" />
         <DatePicker fx:id="anreisedatum" promptText="Anreisedatum" layoutX="175.0" layoutY="271.0" prefHeight="25.0" prefWidth="300.0" />
 
-        <Label layoutX="25.0" layoutY="325.0" text="Anzahl der Nächte *" />
+        <Label layoutX="25.0" layoutY="325.0" text="Anzahl der Übernachtungen *" />
         <TextField fx:id="anzahlDerNaechte" text="10" promptText="10" layoutX="175.0" layoutY="321.0" prefHeight="25.0" prefWidth="300.0" />
 
         <Label layoutX="25.0" layoutY="375.0" text="Reiseziel *" />
