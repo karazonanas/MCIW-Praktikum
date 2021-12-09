@@ -21,7 +21,7 @@
         <TextField fx:id="id" text="Buchungs-ID" disable="true" editable="false" layoutX="175.0" layoutY="71.0" prefHeight="25.0" prefWidth="300.0" />
 
         <Label layoutX="25.0" layoutY="125.0" text="Kunde *" />
-        <ComboBox fx:id="kunde" promptText="Kunde" layoutX="175.0" layoutY="121.0" prefHeight="25.0" prefWidth="300.0" />
+        <ComboBox fx:id="kunde" promptText="Kunde auswählen" layoutX="175.0" layoutY="121.0" prefHeight="25.0" prefWidth="300.0" />
 
         <Label layoutX="25.0" layoutY="175.0" text="Status" />
         <TextField fx:id="buchungsStatus" prefWidth="300.0" text="neu" disable="true" layoutX="175.0" layoutY="171.0" prefHeight="25.0" />

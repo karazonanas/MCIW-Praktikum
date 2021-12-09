@@ -14,6 +14,10 @@ public abstract class KundenDaten {
         return Collections.unmodifiableSet(new HashSet<>(kunden.values().stream().filter(k -> k != null).collect(Collectors.toList())));
     }
 
+    public static HashMap<String, Kunde> getKunden() {
+        return kunden;
+    }
+
     public static Kunde getKunde (String kundenId) {
         return kunden.get(kundenId);
     }
