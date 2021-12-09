@@ -3,6 +3,7 @@ package whs.mciv.aufgabe02.windowController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import whs.mciv.aufgabe02.BaseController;
@@ -47,7 +48,19 @@ public class KundeAnlegenController extends BaseController {
     private TextField email;
 
     @FXML
-    private TextField bankverbindung;
+    private TextField kontoinhaber;
+
+    @FXML
+    private CheckBox sameAsCustomer;
+
+    @FXML
+    private TextField iban;
+
+    @FXML
+    private TextField bic;
+
+    @FXML
+    private TextField bank;
 
     private Kunde kunde;
 
@@ -59,6 +72,20 @@ public class KundeAnlegenController extends BaseController {
         this.kunde = new Kunde();
         id.setText(kunde.getId());
         conditionalComboBox();
+        conditionalCheckbox();
+    }
+
+    private void conditionalCheckbox() {
+        sameAsCustomer.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+                if (t1) {
+                    kontoinhaber.setText(vorname.getText() + " " + nachname.getText());
+                }
+                kontoinhaber.setEditable(!t1);
+                kontoinhaber.setDisable(t1);
+            }
+        });
     }
 
     private void conditionalComboBox() {

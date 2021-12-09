@@ -10,7 +10,8 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.collections.FXCollections?>
 <?import java.lang.String?>
-<AnchorPane id="AnchorPane" prefHeight="725.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whs.mciv.aufgabe02.windowController.KundeAnlegenController">
+<?import javafx.scene.control.CheckBox?>
+<AnchorPane id="AnchorPane" prefHeight="875.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whs.mciv.aufgabe02.windowController.KundeAnlegenController">
     <children>
         <Label layoutX="25.0" layoutY="25.0" text="Kunde anlegen">
             <font>
@@ -62,11 +63,21 @@
         <Label layoutX="25.0" layoutY="575.0" text="E-Mail" />
         <TextField fx:id="email" layoutX="175.0" layoutY="571.0" prefHeight="25.0" prefWidth="300.0" promptText="muster@mail.de"/>
 
-        <Label layoutX="25.0" layoutY="625.0" text="Bankverbindung *" />
-        <TextField fx:id="bankverbindung" layoutX="175.0" layoutY="621.0" prefHeight="25.0" prefWidth="300.0"
-                   promptText="DE241654654321635464"/>
+        <Label layoutX="25.0" layoutY="625.0" text="Kontoinhaber *" />
+        <TextField fx:id="kontoinhaber" layoutX="175.0" layoutY="621.0" prefHeight="25.0" prefWidth="200.0"
+                   promptText="Max Mustermann"/>
+        <CheckBox layoutX="400" layoutY="625.0" fx:id="sameAsCustomer" text="wie Kunde"/>
+        <Label layoutX="25.0" layoutY="675.0" text="IBAN *" />
+        <TextField fx:id="iban" layoutX="175.0" layoutY="671.0" prefHeight="25.0" prefWidth="300.0"
+                   promptText="DE12324687964562"/>
+        <Label layoutX="25.0" layoutY="725.0" text="BIC *" />
+        <TextField fx:id="bic" layoutX="175.0" layoutY="721.0" prefHeight="25.0" prefWidth="300.0"
+                   promptText="DUQ8996"/>
+        <Label layoutX="25.0" layoutY="775.0" text="Bank *" />
+        <TextField fx:id="bank" layoutX="175.0" layoutY="771.0" prefHeight="25.0" prefWidth="300.0"
+                   promptText="Sparkasse Musterstadt"/>
 
-        <Button layoutX="297.0" layoutY="675.0" mnemonicParsing="false" onAction="#speichern" text="Speichern" />
-        <Button layoutX="396.0" layoutY="675.0" mnemonicParsing="false" onAction="#abbrechen" text="Abbrechen" />
+        <Button layoutX="297.0" layoutY="825.0" mnemonicParsing="false" onAction="#speichern" text="Speichern" />
+        <Button layoutX="396.0" layoutY="825.0" mnemonicParsing="false" onAction="#abbrechen" text="Abbrechen" />
     </children>
 </AnchorPane>
