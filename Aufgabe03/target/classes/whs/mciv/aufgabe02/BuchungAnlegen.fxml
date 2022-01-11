@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.DatePicker?>
+<?import java.lang.String?>
+<AnchorPane id="AnchorPane" prefHeight="575.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whs.mciv.aufgabe02.windowController.BuchungAnlegenController">
+    <children>
+        <Label layoutX="25.0" layoutY="25.0" text="Buchung anlegen">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="25.0" layoutY="75.0" text="Buchungs-ID" />
+        <TextField fx:id="id" text="Buchungs-ID" disable="true" editable="false" layoutX="195.0" layoutY="71.0" prefHeight="25.0" prefWidth="300.0" />
+
+        <Label layoutX="25.0" layoutY="125.0" text="Kunde *" />
+        <ComboBox fx:id="kundeComboBox" promptText="Kunde auswählen" layoutX="195.0" layoutY="121.0" prefHeight="25.0" prefWidth="300.0" />
+
+        <Label layoutX="25.0" layoutY="175.0" text="Status" />
+        <TextField fx:id="buchungsStatus" prefWidth="300.0" text="neu" disable="true" layoutX="195.0" layoutY="171.0" prefHeight="25.0" />
+
+        <Label layoutX="25.0" layoutY="225.0" text="Anzahl der Reisenden *" />
+        <TextField fx:id="personenanzahl" text="2" promptText="2" layoutX="195.0" layoutY="221.0" prefHeight="25.0" prefWidth="300.0" />
+
+        <Label layoutX="25.0" layoutY="275.0" text="Anreisedatum *" />
+        <DatePicker fx:id="anreisedatum" promptText="Anreisedatum" layoutX="195.0" layoutY="271.0" prefHeight="25.0" prefWidth="300.0" />
+
+        <Label layoutX="25.0" layoutY="325.0" text="Anzahl der Übernachtungen *" />
+        <TextField fx:id="anzahlDerNaechte" text="10" promptText="10" layoutX="195.0" layoutY="321.0" prefHeight="25.0" prefWidth="300.0" />
+
+        <Label layoutX="25.0" layoutY="375.0" text="Reiseziel *" />
+        <ComboBox fx:id="reisezielComboBox" promptText="Reiseziel auswählen" layoutX="195.0" layoutY="371.0" prefHeight="25.0" prefWidth="300.0" />
+
+        <Label layoutX="25.0" layoutY="425.0" text="Verpflegung *" />
+        <ComboBox fx:id="verpflegung" promptText="Verpflegung auswählen" layoutX="195.0" layoutY="421.0" prefHeight="25.0" prefWidth="300.0">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Halbpension" />
+                    <String fx:value="Vollpension" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <Label layoutX="25.0" layoutY="475.0" text="Gesamtpreis (in EUR)" />
+        <TextField fx:id="gesamtpreis" text="0.00" promptText="150.00" disable="true" layoutX="195.0" layoutY="471.0" prefHeight="25.0" prefWidth="300.0" />
+
+        <Button layoutX="297.0" layoutY="525.0" mnemonicParsing="false" onAction="#speichern" text="Speichern" />
+        <Button layoutX="396.0" layoutY="525.0" mnemonicParsing="false" onAction="#abbrechen" text="Abbrechen" />
+    </children>
+</AnchorPane>
