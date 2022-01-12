@@ -208,6 +208,13 @@ public class KundeAnlegenController extends BaseController {
             iban.requestFocus();
             fehler.setText("Bitte IBAN eingeben");
             return ! formValid;
+        } else {
+            if (!iban.getText().matches(FilterIban.ibanRegexFinal)) {
+                Toolkit.getDefaultToolkit().beep();
+                iban.requestFocus();
+                fehler.setText("Die IBAN ist nicht valide!");
+                return ! formValid;
+            }
         }
         if (bic.getText().isEmpty()) {
             Toolkit.getDefaultToolkit().beep();
