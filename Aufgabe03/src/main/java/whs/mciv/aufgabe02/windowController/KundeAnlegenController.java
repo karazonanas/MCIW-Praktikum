@@ -203,6 +203,9 @@ public class KundeAnlegenController extends BaseController {
             fehler.setText("Bitte Kontoinhaber eingeben");
             return ! formValid;
         }
+        /*
+         * @ToDo: Frage nach, ob IBAN, BIC und Bank Pflichtfelder sind
+         */
         if (iban.getText().isEmpty()) {
             Toolkit.getDefaultToolkit().beep();
             iban.requestFocus();
