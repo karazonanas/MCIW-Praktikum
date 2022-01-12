@@ -215,7 +215,7 @@ public class KundeAnlegenController extends BaseController {
             if (!iban.getText().matches(FilterIban.ibanRegexFinal)) {
                 Toolkit.getDefaultToolkit().beep();
                 iban.requestFocus();
-                fehler.setText("Die IBAN ist nicht valide!");
+                fehler.setText("Die IBAN ist nicht gültig!");
                 return ! formValid;
             }
         }

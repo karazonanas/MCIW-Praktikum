@@ -4,13 +4,12 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
+import javafx.util.converter.LocalDateTimeStringConverter;
 import whs.mciv.aufgabe02.BaseController;
 import whs.mciv.aufgabe02.daten.buchung.Buchung;
 import whs.mciv.aufgabe02.daten.kunde.Kunde;
@@ -20,6 +19,8 @@ import whs.mciv.aufgabe02.daten.reiseziele.ReisezielDaten;
 import whs.mciv.aufgabe02.filter.FilterDatum;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -55,6 +56,9 @@ public class BuchungAnlegenController extends BaseController {
     @FXML
     private Label fehler;
 
+    @FXML
+    private Button speichern, abbrechen;
+
     private Buchung buchung;
 
     private ArrayList<String> reisezielName = new ArrayList<>();
@@ -69,8 +73,12 @@ public class BuchungAnlegenController extends BaseController {
         this.id.setText(buchung.getId());
 
         anreisedatum.setDayCellFactory(new FilterDatum());
-        anreisedatum.set
-
+        speichern.setOnAction((ActionEvent event) -> {
+            boolean formIsValid = validateForm();
+            if (formIsValid) {
+                speichern();
+            }
+        });
         this.setzeReiseziele();
         this.setzeKundenDaten();
 
@@ -208,19 +216,29 @@ public class BuchungAnlegenController extends BaseController {
         });
     }
 
+    private boolean validateForm() {
+        String datum = anreisedatum.getEditor().getText();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.mm.yyyy", Locale.GERMAN);
+        LocalDate date = LocalDate.parse(datum, formatter);
+        System.out.println(date);
+
+
+//        if (new LocalDateTimeStringConverter()) {
+//            anreisedatum.requestFocus();
+//            fehler.setText("Datum liegt in der Zukunft");
+//            anreisedatum.getEditor().selectAll();
+//            return false;
+//        }
+
+        return true;
+    }
+
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
     @FXML
     private void speichern() {
-
-        if (anreisedatum.getValue().isBefore(anreisedatum.now())) {
-            anreisedatum.requestFocus();
-            fehler.setText("Datum liegt in der Zukunft");
-            datum.getEditor().selectAll();
-            return false;
-        }
 
         // Das speichern ist für diese Praktikumsaufgabe noch nicht notwendig.
         wurdeGespeichert = true;
