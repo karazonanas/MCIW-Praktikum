@@ -19,5 +19,6 @@ public class FilterDatum implements Callback<DatePicker, DateCell> {
             }
         };
 
-        return dc;    }
+        return dc;
+    }
 }

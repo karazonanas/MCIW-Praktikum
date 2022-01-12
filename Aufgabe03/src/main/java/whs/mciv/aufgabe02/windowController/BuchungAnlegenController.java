@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
@@ -51,6 +52,9 @@ public class BuchungAnlegenController extends BaseController {
     @FXML
     private TextField gesamtpreis;
 
+    @FXML
+    private Label fehler;
+
     private Buchung buchung;
 
     private ArrayList<String> reisezielName = new ArrayList<>();
@@ -65,6 +69,7 @@ public class BuchungAnlegenController extends BaseController {
         this.id.setText(buchung.getId());
 
         anreisedatum.setDayCellFactory(new FilterDatum());
+        anreisedatum.set
 
         this.setzeReiseziele();
         this.setzeKundenDaten();
@@ -209,6 +214,14 @@ public class BuchungAnlegenController extends BaseController {
 
     @FXML
     private void speichern() {
+
+        if (anreisedatum.getValue().isBefore(anreisedatum.now())) {
+            anreisedatum.requestFocus();
+            fehler.setText("Datum liegt in der Zukunft");
+            datum.getEditor().selectAll();
+            return false;
+        }
+
         // Das speichern ist für diese Praktikumsaufgabe noch nicht notwendig.
         wurdeGespeichert = true;
         stage.close();
