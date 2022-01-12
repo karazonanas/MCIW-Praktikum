@@ -78,6 +78,19 @@ public class BuchungAnlegenController extends BaseController {
         this.id.setText(buchung.getId());
 
         anreisedatum.setDayCellFactory(new FilterDatum());
+        anreisedatum.setOnAction((ActionEvent event) -> {
+            // Check format on change with datepicker
+            checkAnreisedatum();
+        });
+
+        ChangeListener<Boolean> anreiseDatumChangeListener = (observableValue, oldProperty, newProperty) -> {
+            // Check format if the field has no focus anymore
+            if (!newProperty) {
+                checkAnreisedatum();
+            }
+        };
+        anreisedatum.focusedProperty().addListener(anreiseDatumChangeListener);
+
         speichern.setOnAction((ActionEvent event) -> {
             boolean formIsValid = validateForm();
             if (formIsValid) {
@@ -89,6 +102,31 @@ public class BuchungAnlegenController extends BaseController {
 
         this.changeReisezielUndVerpflegung();
         this.checkNumberFields();
+    }
+
+    private void checkAnreisedatum() {
+        LocalDate date;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy", Locale.GERMAN);
+
+        try {
+            fehler.setText("");
+            date = LocalDate.parse(anreisedatum.getEditor().getText(), formatter);
+
+            if (date.isBefore(LocalDate.now())) {
+                fehler.setText("Das Datum liegt in der Vergangenheit");
+                Toolkit.getDefaultToolkit().beep();
+            }
+
+            if (date.isAfter(LocalDate.now().minusDays(1)) && date.isBefore(LocalDate.now().plusDays(2))) {
+                /*
+                 * @ToDo: Gebe Warnung aus, keinen Fehler! Erstelle neues Feld
+                 */
+                fehler.setText("Die Reise startet in weniger als zwei Tagen");
+            }
+        } catch (DateTimeParseException e) {
+            fehler.setText("Das Datum muss dem Format DD/MM/YYYY entsprechen");
+            Toolkit.getDefaultToolkit().beep();
+        }
     }
 
     private void setzeKundenDaten() {
@@ -221,11 +259,10 @@ public class BuchungAnlegenController extends BaseController {
         });
     }
 
-    private boolean validateForm() {
-        // get input date of field
-        String datum = anreisedatum.getEditor().getText();
 
-        // Check format
+    private boolean validateForm() {
+        // Check format of date
+        String datum = anreisedatum.getEditor().getText();
         LocalDate date;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy", Locale.GERMAN);
 
