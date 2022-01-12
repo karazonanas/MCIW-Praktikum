@@ -91,6 +91,32 @@ public class BuchungAnlegenController extends BaseController {
         };
         anreisedatum.focusedProperty().addListener(anreiseDatumChangeListener);
 
+        ChangeListener<Boolean> personenzahlChangeListener = (observableValue, oldProperty, newProperty) -> {
+            // Check format if the field has no focus anymore
+            if (!newProperty) {
+                if (Integer.parseInt(personenanzahl.getText()) > 30) {
+                    /*
+                    @ToDo: Zeige Warnung, keinen Fehler
+                     */
+                    fehler.setText("Die Reise beinhaltet mehr als 30 Teilnehmer!");
+                }
+            }
+        };
+        personenanzahl.focusedProperty().addListener(personenzahlChangeListener);
+
+        ChangeListener<Boolean> anzahlDerNaechteChangeListener = (observableValue, oldProperty, newProperty) -> {
+            // Check format if the field has no focus anymore
+            if (!newProperty) {
+                if (Integer.parseInt(anzahlDerNaechte.getText()) > 30) {
+                    /*
+                    @ToDo: Zeige Warnung, keinen Fehler
+                     */
+                    fehler.setText("Die Anzahl der Nächte ist größer als 30!");
+                }
+            }
+        };
+        anzahlDerNaechte.focusedProperty().addListener(anzahlDerNaechteChangeListener);
+
         speichern.setOnAction((ActionEvent event) -> {
             boolean formIsValid = validateForm();
             if (formIsValid) {
