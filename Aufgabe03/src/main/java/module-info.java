@@ -4,6 +4,7 @@ module whs.mciv.aufgabe02 {
 
     requires org.controlsfx.controls;
     requires javafx.graphics;
+    requires java.desktop;
 
     opens whs.mciv.aufgabe02 to javafx.fxml;
     exports whs.mciv.aufgabe02;

@@ -4,22 +4,23 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import whs.mciv.aufgabe02.BaseController;
 import whs.mciv.aufgabe02.daten.buchung.Buchung;
-import java.net.URL;
-import java.util.*;
-import java.util.stream.Collectors;
-
-import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import whs.mciv.aufgabe02.daten.kunde.Kunde;
 import whs.mciv.aufgabe02.daten.kunde.KundenDaten;
 import whs.mciv.aufgabe02.daten.reiseziele.Reiseziel;
 import whs.mciv.aufgabe02.daten.reiseziele.ReisezielDaten;
+import whs.mciv.aufgabe02.filter.FilterDatum;
+
+import java.net.URL;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class BuchungAnlegenController extends BaseController {
 
@@ -62,6 +63,8 @@ public class BuchungAnlegenController extends BaseController {
         // speichern zu können. Der Buchung-Konstruktor erzeugt auch die ID.
         buchung = new Buchung();
         this.id.setText(buchung.getId());
+
+        anreisedatum.setDayCellFactory(new FilterDatum());
 
         this.setzeReiseziele();
         this.setzeKundenDaten();
