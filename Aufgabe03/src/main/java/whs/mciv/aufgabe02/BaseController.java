@@ -14,6 +14,8 @@ import java.net.URL;
 import java.util.*;
 
 public abstract class BaseController implements Initializable {
+    public static char MESSAGE_FEHLER = 'f';
+    public static char MESSAGE_WARNUNG = 'w';
 
     @FXML
     protected Label fehler, warnung;
@@ -58,12 +60,19 @@ public abstract class BaseController implements Initializable {
         });
     }
 
-    protected void setMessage(char c, String message) {
+    /**
+     * Gebe eine Warnung oder einen Fehler als Nachricht aus
+     *
+     * @param errorType Typ des Fehlers (MESSAGE_WARNUNG|MESSAGE_FEHLER)
+     * @param message Fehler-Meldung
+     */
+    protected void setMessage(char errorType, String message) {
         fehler.setText("");
         warnung.setText("");
-        if (c == 'w') {
+        
+        if (errorType == MESSAGE_WARNUNG) {
             warnung.setText(message);
-        } else if (c == 'f') {
+        } else if (errorType == MESSAGE_FEHLER) {
             fehler.setText(message);
         }
     }
@@ -76,7 +85,7 @@ public abstract class BaseController implements Initializable {
                 if (field.getText().isEmpty()) {
                     Toolkit.getDefaultToolkit().beep();
                     field.requestFocus();
-                    setMessage('f', "Bitte " + key + " eingeben");
+                    setMessage(BaseController.MESSAGE_FEHLER, "Bitte " + key + " eingeben");
                     return false;
                 }
             } else if (item.contextMenuProperty().getBean().getClass().getName().equals("javafx.scene.control.ComboBox")) {
@@ -84,7 +93,7 @@ public abstract class BaseController implements Initializable {
                 if (comboBox.getSelectionModel().isEmpty()) {
                  Toolkit.getDefaultToolkit().beep();
                  comboBox.requestFocus();
-                 setMessage('f', "Bitte " + key + "auswählen");
+                 setMessage(BaseController.MESSAGE_FEHLER, "Bitte " + key + "auswählen");
                  return false;
                 }
             }
