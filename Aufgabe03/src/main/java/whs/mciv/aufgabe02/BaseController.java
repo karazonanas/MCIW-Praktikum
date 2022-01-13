@@ -14,8 +14,6 @@ import java.net.URL;
 import java.util.*;
 
 public abstract class BaseController implements Initializable {
-    public static char MESSAGE_FEHLER = 'f';
-    public static char MESSAGE_WARNUNG = 'w';
 
     protected final String BEENDEN_HINWEIS = "Sie haben das Formular bearbeitet, möchten Sie wirklich Ihre Eingaben verwerfen?";
     protected final String BEENDEN_TITEL = "Beenden";
@@ -66,15 +64,19 @@ public abstract class BaseController implements Initializable {
      * @param errorType Typ des Fehlers (MESSAGE_WARNUNG|MESSAGE_FEHLER)
      * @param message Fehler-Meldung
      */
-    protected void setMessage(char errorType, String message) {
-        fehler.setText("");
-        warnung.setText("");
+    protected void setMessage(Alert.AlertType errorType, String message) {
+        Alert.AlertType alertType = Alert.AlertType.NONE;
+        String titel = "";
 
-        if (errorType == MESSAGE_WARNUNG) {
-            warnung.setText(message);
-        } else if (errorType == MESSAGE_FEHLER) {
-            fehler.setText(message);
+        if (errorType == Alert.AlertType.WARNING) {
+            titel = "Warnung";
+        } else if (errorType == Alert.AlertType.ERROR) {
+            titel = "Fehler";
         }
+        Alert meldung = new Alert(alertType, message, ButtonType.OK);
+        meldung.setHeaderText("");
+        meldung.setTitle(titel);
+        meldung.show();
     }
 
     protected boolean validateForm(LinkedHashMap<String, Control> form) {
@@ -85,7 +87,7 @@ public abstract class BaseController implements Initializable {
                 if (field.getText().isEmpty()) {
                     Toolkit.getDefaultToolkit().beep();
                     field.requestFocus();
-                    setMessage(BaseController.MESSAGE_FEHLER, "Bitte " + key + " eingeben");
+                    setMessage(Alert.AlertType.ERROR, "Bitte " + key + " eingeben");
                     return false;
                 }
             } else if (item.contextMenuProperty().getBean().getClass().getName().equals("javafx.scene.control.ComboBox")) {
@@ -93,7 +95,7 @@ public abstract class BaseController implements Initializable {
                 if (comboBox.getSelectionModel().isEmpty()) {
                  Toolkit.getDefaultToolkit().beep();
                  comboBox.requestFocus();
-                 setMessage(BaseController.MESSAGE_FEHLER, "Bitte " + key + "auswählen");
+                 setMessage(Alert.AlertType.ERROR, "Bitte " + key + "auswählen");
                  return false;
                 }
             }

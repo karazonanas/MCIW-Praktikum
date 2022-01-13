@@ -148,7 +148,7 @@ public class KundeAnlegenController extends BaseController {
             if (! iban.getText().matches(FilterIban.IBAN_REGEX_FINAL)) {
                 Toolkit.getDefaultToolkit().beep();
                 iban.requestFocus();
-                setMessage(BaseController.MESSAGE_FEHLER,"Die IBAN ist nicht gültig!");
+                setMessage(Alert.AlertType.ERROR,"Die IBAN ist nicht gültig!");
                 return false;
             }
             if (plz.getText().length() == 5 && ! land.getSelectionModel().selectedItemProperty().get().equals("Deutschland") ||
@@ -156,7 +156,7 @@ public class KundeAnlegenController extends BaseController {
                 Toolkit.getDefaultToolkit().beep();
                 plz.requestFocus();
                 plzFehler.setText("PLZ und Land stimmen nicht überein");
-                setMessage(BaseController.MESSAGE_FEHLER,"Bitte überprüfen Sie Ihre Eingaben");
+                setMessage(Alert.AlertType.ERROR,"Bitte überprüfen Sie Ihre Eingaben");
                 return false;
             }
         }
