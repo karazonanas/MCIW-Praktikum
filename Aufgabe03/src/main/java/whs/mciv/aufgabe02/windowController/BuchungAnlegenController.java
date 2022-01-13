@@ -298,6 +298,7 @@ public class BuchungAnlegenController extends BaseController {
         return anreisedatum.getEditor().getText().isEmpty() &&
                 reisezielComboBox.getSelectionModel().isEmpty() &&
                 verpflegung.getSelectionModel().isEmpty() &&
+                kundeComboBox.getSelectionModel().isEmpty() &&
                 anzahlDerNaechte.getText().equals("10") &&
                 personenanzahl.getText().equals("2");
     }
