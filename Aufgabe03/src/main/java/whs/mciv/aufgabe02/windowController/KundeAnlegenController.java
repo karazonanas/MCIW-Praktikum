@@ -72,8 +72,8 @@ public class KundeAnlegenController extends BaseController {
 
     private Kunde kunde;
 
-    private final String DE_LAENDER[] = {"Baden-Württemberg", "Bayern", "Berlin", "Brandenburg", "Bremen", "Hamburg", "Hessen", "Mecklenburg-Vorpommern", "Niedersachsen", "Nordrhein-Westfalen", "Rheinland-Pfalz", "Saarland", "Sachsen", "Sachsen-Anhalt", "Schleswig-Holstein" ,"Thüringen"};
-    private final String OS_LAENDER[] = {"Burgenland", "Kärnten", "Niederösterreich", "Oberösterreich", "Salzburg", "Steiermark", "Tirol", "Vorarlberg", "Wien"};
+    private final String[] DE_LAENDER = {"Baden-Württemberg", "Bayern", "Berlin", "Brandenburg", "Bremen", "Hamburg", "Hessen", "Mecklenburg-Vorpommern", "Niedersachsen", "Nordrhein-Westfalen", "Rheinland-Pfalz", "Saarland", "Sachsen", "Sachsen-Anhalt", "Schleswig-Holstein" ,"Thüringen"};
+    private final String[] OS_LAENDER = {"Burgenland", "Kärnten", "Niederösterreich", "Oberösterreich", "Salzburg", "Steiermark", "Tirol", "Vorarlberg", "Wien"};
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -145,7 +145,7 @@ public class KundeAnlegenController extends BaseController {
 //         * @ToDo: Frage nach, ob IBAN, BIC und Bank Pflichtfelder sind
 //         */
         if (formValid) {
-            if (! iban.getText().matches(FilterIban.ibanRegexFinal)) {
+            if (! iban.getText().matches(FilterIban.IBAN_REGEX_FINAL)) {
                 Toolkit.getDefaultToolkit().beep();
                 iban.requestFocus();
                 setMessage(BaseController.MESSAGE_FEHLER,"Die IBAN ist nicht gültig!");

@@ -54,7 +54,7 @@ public class ReisezielAnlegenController extends BaseController {
 
     @FXML
     public void speichern() {
-        // Das speichern ist für diese Praktikumsaufgabe noch nicht notwendig.
+        // Das Speichern ist für diese Praktikumsaufgabe noch nicht notwendig.
         wurdeGespeichert = true;
         stage.close();
     }

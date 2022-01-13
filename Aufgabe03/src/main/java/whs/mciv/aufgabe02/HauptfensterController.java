@@ -22,10 +22,10 @@ import javafx.scene.control.ButtonType;
 public class HauptfensterController implements Initializable {
 
     private BuchungsTool mainApp;
-    private final String BEENDENHINWEIS = "Sollen wirklich die Anwendung und alle zugehörigen Fenster geschlossen werden?";
-    private final String BEENDENTITEL = "Anwendung Beenden";
-    private final String DEVINFO = "Buchungssystem WHS\nVersion 1.0.3 \nEntwickelt von Anas Karazon und Enes Erk";
-    private final String DEVINFOTITEL = "Info";
+    private final String BEENDEN_HINWEIS = "Möchten Sie wirklich die Anwendung und alle dazugehörigen Fenster schließen?";
+    private final String BEENDEN_TITEL = "Ja, Anwendung beenden";
+    private final String DEV_INFO = "Buchungssystem WHS\nVersion 1.0.3 \nEntwickelt von Anas Karazon und Enes Erk";
+    private final String DEV_INFO_TITEL = "Info";
     
     public void setMainApp(BuchungsTool mainApp){
         this.mainApp = mainApp;
@@ -55,9 +55,9 @@ public class HauptfensterController implements Initializable {
 
     @FXML
     private void beenden() {
-        Alert meldung = new Alert(Alert.AlertType.WARNING,BEENDENHINWEIS, ButtonType.YES, ButtonType.NO);
+        Alert meldung = new Alert(Alert.AlertType.WARNING, BEENDEN_HINWEIS, ButtonType.YES, ButtonType.NO);
         meldung.setHeaderText("");
-        meldung.setTitle(BEENDENTITEL);
+        meldung.setTitle(BEENDEN_TITEL);
         Optional<ButtonType> beenden = meldung.showAndWait();
         if (beenden.isPresent()) {
             if (Objects.equals(beenden.get().getButtonData().toString(), "YES")) {
@@ -68,9 +68,9 @@ public class HauptfensterController implements Initializable {
 
     @FXML
     private void showDevInfo() {
-        Alert meldung = new Alert(Alert.AlertType.INFORMATION,DEVINFO, ButtonType.OK);
+        Alert meldung = new Alert(Alert.AlertType.INFORMATION, DEV_INFO, ButtonType.OK);
         meldung.setHeaderText("");
-        meldung.setTitle(DEVINFOTITEL);
+        meldung.setTitle(DEV_INFO_TITEL);
         meldung.show();
     }
 }

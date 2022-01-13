@@ -17,6 +17,9 @@ public abstract class BaseController implements Initializable {
     public static char MESSAGE_FEHLER = 'f';
     public static char MESSAGE_WARNUNG = 'w';
 
+    protected final String BEENDEN_HINWEIS = "Sie haben das Formular bearbeitet, möchten Sie wirklich Ihre Eingaben verwerfen?";
+    protected final String BEENDEN_TITEL = "Beenden";
+
     @FXML
     protected Label fehler, warnung;
 
@@ -25,9 +28,6 @@ public abstract class BaseController implements Initializable {
 
     protected Stage stage;
     protected boolean wurdeGespeichert = false;
-
-    protected final String BEENDENHINWEIS = "Sie haben den Formular bearbeitet, möchten Sie wirklich Ihre Eingaben verwerfen";
-    protected final String BEENDENTITEL = "Beenden";
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -41,9 +41,9 @@ public abstract class BaseController implements Initializable {
             if (formIsEmpty) {
                 abbrechen();
             } else {
-                Alert meldung = new Alert(Alert.AlertType.WARNING,BEENDENHINWEIS, ButtonType.YES, ButtonType.NO);
+                Alert meldung = new Alert(Alert.AlertType.WARNING, BEENDEN_HINWEIS, ButtonType.YES, ButtonType.NO);
                 meldung.setHeaderText("");
-                meldung.setTitle(BEENDENTITEL);
+                meldung.setTitle(BEENDEN_TITEL);
                 Optional<ButtonType> beenden = meldung.showAndWait();
                 if (beenden.isPresent()) {
                     if (Objects.equals(beenden.get().getButtonData().toString(), "YES")) {
@@ -69,7 +69,7 @@ public abstract class BaseController implements Initializable {
     protected void setMessage(char errorType, String message) {
         fehler.setText("");
         warnung.setText("");
-        
+
         if (errorType == MESSAGE_WARNUNG) {
             warnung.setText(message);
         } else if (errorType == MESSAGE_FEHLER) {

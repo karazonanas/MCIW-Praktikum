@@ -8,8 +8,8 @@ import java.util.function.UnaryOperator;
 public class FilterPlz implements UnaryOperator<TextFormatter.Change> {
 
     char land;
-    public static final String DEFAULTREGEX = "[0-9]{0,5}";
-    public static final String OREGEX = "[0-9]{0,4}";
+    public static final String DEFAULT_REGEX = "[0-9]{0,5}";
+    public static final String O_REGEX = "[0-9]{0,4}";
 
     public FilterPlz (char land) {
         this.land = land;
@@ -21,8 +21,13 @@ public class FilterPlz implements UnaryOperator<TextFormatter.Change> {
         String regexPlz;
 
         switch (land) {
-            case 'o': regexPlz = OREGEX;break;
-            default: regexPlz = DEFAULTREGEX;break;
+            case 'o':
+                regexPlz = O_REGEX;
+                break;
+            case 'd':
+            default:
+                regexPlz = DEFAULT_REGEX;
+                break;
         }
 
         String neu = tfc.getControlNewText();
@@ -30,7 +35,7 @@ public class FilterPlz implements UnaryOperator<TextFormatter.Change> {
             Toolkit.getDefaultToolkit().beep();
         }
 
-        if (!neu.matches(DEFAULTREGEX)) {
+        if (!neu.matches(DEFAULT_REGEX)) {
             return null;
         }
         return tfc;
