@@ -23,7 +23,7 @@ public class KundeAnlegenController extends BaseController {
     private TextField id;
 
     @FXML
-    private ComboBox anrede;
+    private ComboBox<String> anrede;
 
     @FXML
     private TextField vorname;
@@ -41,10 +41,10 @@ public class KundeAnlegenController extends BaseController {
     private TextField ort;
 
     @FXML
-    private ComboBox land;
+    private ComboBox<String> land;
 
     @FXML
-    private ComboBox bundesland;
+    private ComboBox<String> bundesland;
 
     @FXML
     private TextField telefonnummer;
@@ -149,7 +149,7 @@ public class KundeAnlegenController extends BaseController {
                 Toolkit.getDefaultToolkit().beep();
                 iban.requestFocus();
                 setMessage(BaseController.MESSAGE_FEHLER,"Die IBAN ist nicht gültig!");
-                return ! formValid;
+                return false;
             }
             if (plz.getText().length() == 5 && ! land.getSelectionModel().selectedItemProperty().get().equals("Deutschland") ||
                     plz.getText().length() == 4 && ! land.getSelectionModel().selectedItemProperty().get().equals("Österreich")) {
@@ -157,7 +157,7 @@ public class KundeAnlegenController extends BaseController {
                 plz.requestFocus();
                 plzFehler.setText("PLZ und Land stimmen nicht überein");
                 setMessage(BaseController.MESSAGE_FEHLER,"Bitte überprüfen Sie Ihre Eingaben");
-                return ! formValid;
+                return false;
             }
         }
         return formValid;
