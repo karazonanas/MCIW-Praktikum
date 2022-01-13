@@ -138,20 +138,8 @@ public class KundeAnlegenController extends BaseController {
 
     public boolean validateForm() {
 
-        LinkedHashMap<String, Control> form = new LinkedHashMap<>();
-        form.put("Vorname", vorname);
-        form.put("Nachname", nachname);
-        form.put("Telefonnummer", telefonnummer);
-        form.put("Straße und Hausnummer", adresse);
-        form.put("PLZ", plz);
-        form.put("Ort", ort);
-        form.put("Land", land);
-        form.put("Bundesland", bundesland);
-        form.put("Kontoinhaber", kontoinhaber);
-        form.put("IBAN", iban);
-        form.put("BIC", bic);
-        form.put("Bank", bank);
-        boolean formValid = validateForm2(form);
+        LinkedHashMap<String, Control> form = createForm();
+        boolean formValid = validateForm(form);
 
 //        /*
 //         * @ToDo: Frage nach, ob IBAN, BIC und Bank Pflichtfelder sind
@@ -176,20 +164,26 @@ public class KundeAnlegenController extends BaseController {
     }
 
     public boolean isFormEmpty() {
-        return anrede.getSelectionModel().isEmpty() &&
-                vorname.getText().isEmpty() &&
-                nachname.getText().isEmpty() &&
-                adresse.getText().isEmpty() &&
-                plz.getText().isEmpty() &&
-                ort.getText().isEmpty() &&
-                land.getSelectionModel().selectedItemProperty().get().equals("Deutschland")&&
-                bundesland.getSelectionModel().isEmpty() &&
-                telefonnummer.getText().isEmpty() &&
-                email.getText().isEmpty() &&
-                kontoinhaber.getText().isEmpty() &&
-                iban.getText().isEmpty() &&
-                bic.getText().isEmpty() &&
-                bank.getText().isEmpty();
+        LinkedHashMap<String, Control> form = createForm();
+        return isFormEmpty(form) &&
+                land.getSelectionModel().selectedItemProperty().get().equals("Deutschland");
+    }
+
+    private LinkedHashMap<String, Control> createForm() {
+        LinkedHashMap<String, Control> form = new LinkedHashMap<>();
+        form.put("Vorname", vorname);
+        form.put("Nachname", nachname);
+        form.put("Telefonnummer", telefonnummer);
+        form.put("Straße und Hausnummer", adresse);
+        form.put("PLZ", plz);
+        form.put("Ort", ort);
+        form.put("Bundesland", bundesland);
+        form.put("Kontoinhaber", kontoinhaber);
+        form.put("IBAN", iban);
+        form.put("BIC", bic);
+        form.put("Bank", bank);
+
+        return form;
     }
 
     @FXML
