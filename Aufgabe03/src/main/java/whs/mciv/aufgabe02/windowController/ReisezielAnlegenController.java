@@ -44,8 +44,13 @@ public class ReisezielAnlegenController extends BaseController {
         id.setText(reiseziel.getId());
     }
 
+    /**
+     * Controller-spezifisch: Überprüfe, ob Formular bearbeitet wurde
+     *
+     * @return wahr, wenn das Formular bearbeitet wurde
+     */
     @Override
-    public boolean isFormEmpty() {
+    public boolean wasFormEdited() {
         /*
         TODO
         */

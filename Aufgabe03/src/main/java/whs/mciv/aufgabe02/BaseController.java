@@ -37,7 +37,7 @@ public abstract class BaseController implements Initializable {
     protected void initButtons() {
 //        fehler.setMaxSize(300,14);
         abbrechen.setOnAction((ActionEvent event) -> {
-            boolean formIsEmpty = isFormEmpty();
+            boolean formIsEmpty = wasFormEdited();
             if (formIsEmpty) {
                 abbrechen();
             } else {
@@ -101,7 +101,12 @@ public abstract class BaseController implements Initializable {
         return true;
     }
 
-    protected boolean isFormEmpty(LinkedHashMap<String, Control> form) {
+    /**
+     * Überprüfe, ob Formular bearbeitet wurde
+     *
+     * @return wahr, wenn das Formular bearbeitet wurde
+     */
+    protected boolean wasFormEdited(LinkedHashMap<String, Control> form) {
         for (String key : form.keySet()) {
             Control item = form.get(key);
             if (item.contextMenuProperty().getBean().getClass().getName().equals("javafx.scene.control.TextField")) {
@@ -119,7 +124,12 @@ public abstract class BaseController implements Initializable {
         return true;
     }
 
-    public abstract boolean isFormEmpty();
+    /**
+     * Controller-spezifisch: Überprüfe, ob Formular bearbeitet wurde
+     *
+     * @return wahr, wenn das Formular bearbeitet wurde
+     */
+    public abstract boolean wasFormEdited();
 
     @FXML
     public abstract void abbrechen();

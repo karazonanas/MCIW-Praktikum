@@ -163,9 +163,14 @@ public class KundeAnlegenController extends BaseController {
         return formValid;
     }
 
-    public boolean isFormEmpty() {
+    /**
+     * Controller-spezifisch: Überprüfe, ob Formular bearbeitet wurde
+     *
+     * @return wahr, wenn das Formular bearbeitet wurde
+     */
+    public boolean wasFormEdited() {
         LinkedHashMap<String, Control> form = createForm();
-        return isFormEmpty(form) &&
+        return wasFormEdited(form) &&
                 land.getSelectionModel().selectedItemProperty().get().equals("Deutschland");
     }
 

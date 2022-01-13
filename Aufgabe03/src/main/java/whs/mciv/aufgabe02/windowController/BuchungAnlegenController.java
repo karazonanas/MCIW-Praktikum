@@ -290,7 +290,12 @@ public class BuchungAnlegenController extends BaseController {
         return true;
     }
 
-    public boolean isFormEmpty() {
+    /**
+     * Controller-spezifisch Überprüfe, ob Formular bearbeitet wurde
+     *
+     * @return wahr, wenn das Formular bearbeitet wurde
+     */
+    public boolean wasFormEdited() {
         return anreisedatum.getEditor().getText().isEmpty() &&
                 reisezielComboBox.getSelectionModel().isEmpty() &&
                 verpflegung.getSelectionModel().isEmpty() &&
