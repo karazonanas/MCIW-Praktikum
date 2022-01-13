@@ -2,11 +2,8 @@ package whs.mciv.aufgabe02.windowController;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import whs.mciv.aufgabe02.BaseController;
@@ -15,7 +12,6 @@ import whs.mciv.aufgabe02.filter.FilterEmail;
 import whs.mciv.aufgabe02.filter.FilterIban;
 import whs.mciv.aufgabe02.filter.FilterPhoneNumber;
 import whs.mciv.aufgabe02.filter.FilterPlz;
-
 import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -44,10 +40,10 @@ public class KundeAnlegenController extends BaseController {
     private TextField ort;
 
     @FXML
-    private ComboBox land;     //eventuell ComboBox verwenden?
+    private ComboBox land;
 
     @FXML
-    private ComboBox bundesland; //eventuell ComboBox verwenden?
+    private ComboBox bundesland;
 
     @FXML
     private TextField telefonnummer;
@@ -71,10 +67,7 @@ public class KundeAnlegenController extends BaseController {
     private TextField bank;
 
     @FXML
-    private Button speichern, abbrechen;
-
-    @FXML
-    private Label fehler, plzFehler;
+    private Label plzFehler;
 
     private Kunde kunde;
 
@@ -91,12 +84,7 @@ public class KundeAnlegenController extends BaseController {
         email.setTextFormatter(new TextFormatter<>(new FilterEmail()));
         telefonnummer.setTextFormatter(new TextFormatter<>(new FilterPhoneNumber()));
         iban.setTextFormatter(new TextFormatter<>(new FilterIban()));
-        speichern.setOnAction((ActionEvent event) -> {
-            boolean formIsValid = validateForm();
-            if (formIsValid) {
-                speichern();
-            }
-        });
+        initButtons();
         updateKontoinhaber();
     }
 
@@ -147,7 +135,7 @@ public class KundeAnlegenController extends BaseController {
         });
     }
 
-    private boolean validateForm() {
+    public boolean validateForm() {
         boolean formValid = true;
         if (vorname.getText().isEmpty()) {
             Toolkit.getDefaultToolkit().beep();
@@ -242,14 +230,31 @@ public class KundeAnlegenController extends BaseController {
         return formValid;
     }
 
+    public boolean isFormEmpty() {
+        return anrede.getSelectionModel().isEmpty() &&
+                vorname.getText().isEmpty() &&
+                nachname.getText().isEmpty() &&
+                adresse.getText().isEmpty() &&
+                plz.getText().isEmpty() &&
+                ort.getText().isEmpty() &&
+                land.getSelectionModel().selectedItemProperty().get().equals("Deutschland")&&
+                bundesland.getSelectionModel().isEmpty() &&
+                telefonnummer.getText().isEmpty() &&
+                email.getText().isEmpty() &&
+                kontoinhaber.getText().isEmpty() &&
+                iban.getText().isEmpty() &&
+                bic.getText().isEmpty() &&
+                bank.getText().isEmpty();
+    }
+
     @FXML
-    private void speichern() {
+    public void speichern() {
         wurdeGespeichert = true;
         stage.close();
     }
 
     @FXML
-    private void abbrechen() {
+    public void abbrechen() {
         wurdeGespeichert = false;
         stage.close();
     }

@@ -7,8 +7,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
@@ -58,12 +56,6 @@ public class BuchungAnlegenController extends BaseController {
     @FXML
     private TextField gesamtpreis;
 
-    @FXML
-    private Label fehler;
-
-    @FXML
-    private Button speichern, abbrechen;
-
     private Buchung buchung;
 
     private ArrayList<String> reisezielName = new ArrayList<>();
@@ -95,10 +87,7 @@ public class BuchungAnlegenController extends BaseController {
             // Check format if the field has no focus anymore
             if (!newProperty) {
                 if (Integer.parseInt(personenanzahl.getText()) > 30) {
-                    /*
-                    @ToDo: Zeige Warnung, keinen Fehler
-                     */
-                    fehler.setText("Die Reise beinhaltet mehr als 30 Teilnehmer!");
+                    warnung.setText("Die Reise beinhaltet mehr als 30 Teilnehmer!");
                 }
             }
         };
@@ -108,21 +97,14 @@ public class BuchungAnlegenController extends BaseController {
             // Check format if the field has no focus anymore
             if (!newProperty) {
                 if (Integer.parseInt(anzahlDerNaechte.getText()) > 30) {
-                    /*
-                    @ToDo: Zeige Warnung, keinen Fehler
-                     */
-                    fehler.setText("Die Anzahl der Nächte ist größer als 30!");
+                    warnung.setText("Die Anzahl der Nächte ist größer als 30!");
                 }
             }
         };
         anzahlDerNaechte.focusedProperty().addListener(anzahlDerNaechteChangeListener);
 
-        speichern.setOnAction((ActionEvent event) -> {
-            boolean formIsValid = validateForm();
-            if (formIsValid) {
-                speichern();
-            }
-        });
+        initButtons();
+
         this.setzeReiseziele();
         this.setzeKundenDaten();
 
@@ -286,7 +268,7 @@ public class BuchungAnlegenController extends BaseController {
     }
 
 
-    private boolean validateForm() {
+    public boolean validateForm() {
         // Check format of date
         String datum = anreisedatum.getEditor().getText();
         LocalDate date;
@@ -316,20 +298,26 @@ public class BuchungAnlegenController extends BaseController {
         return true;
     }
 
+    public boolean isFormEmpty() {
+        return anreisedatum.getEditor().getText().isEmpty() &&
+                reisezielComboBox.getSelectionModel().isEmpty() &&
+                verpflegung.getSelectionModel().isEmpty() &&
+                anzahlDerNaechte.getText().equals("10") &&
+                personenanzahl.getText().equals("2");
+    }
+
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
     @FXML
-    private void speichern() {
-
-        // Das speichern ist für diese Praktikumsaufgabe noch nicht notwendig.
+    public void speichern() {
         wurdeGespeichert = true;
         stage.close();
     }
 
     @FXML
-    private void abbrechen() {
+    public void abbrechen() {
         wurdeGespeichert = false;
         stage.close();
     }

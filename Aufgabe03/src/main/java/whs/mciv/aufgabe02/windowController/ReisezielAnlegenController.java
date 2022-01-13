@@ -44,15 +44,31 @@ public class ReisezielAnlegenController extends BaseController {
         id.setText(reiseziel.getId());
     }
 
+    @Override
+    public boolean isFormEmpty() {
+        /*
+        TODO
+        */
+        return false;
+    }
+
     @FXML
-    private void speichern() {
+    public void speichern() {
         // Das speichern ist für diese Praktikumsaufgabe noch nicht notwendig.
         wurdeGespeichert = true;
         stage.close();
     }
-    
+
+    @Override
+    public boolean validateForm() {
+        /*
+        TODO
+        */
+        return false;
+    }
+
     @FXML
-    private void abbrechen() {
+    public void abbrechen() {
         wurdeGespeichert = false;
         stage.close();
     }
