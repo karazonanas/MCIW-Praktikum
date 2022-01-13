@@ -87,7 +87,7 @@ public class BuchungAnlegenController extends BaseController {
             // Check format if the field has no focus anymore
             if (!newProperty) {
                 if (Integer.parseInt(personenanzahl.getText()) > 30) {
-                    warnung.setText("Die Reise beinhaltet mehr als 30 Teilnehmer!");
+                    setMessage('w',"Die Reise beinhaltet mehr als 30 Teilnehmer!");
                 }
             }
         };
@@ -97,7 +97,7 @@ public class BuchungAnlegenController extends BaseController {
             // Check format if the field has no focus anymore
             if (!newProperty) {
                 if (Integer.parseInt(anzahlDerNaechte.getText()) > 30) {
-                    warnung.setText("Die Anzahl der Nächte ist größer als 30!");
+                    setMessage('w',"Die Anzahl der Nächte ist größer als 30!");
                 }
             }
         };
@@ -117,22 +117,18 @@ public class BuchungAnlegenController extends BaseController {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy", Locale.GERMAN);
 
         try {
-            fehler.setText("");
             date = LocalDate.parse(anreisedatum.getEditor().getText(), formatter);
 
             if (date.isBefore(LocalDate.now())) {
-                fehler.setText("Das Datum liegt in der Vergangenheit");
+                setMessage('f',"Das Datum liegt in der Vergangenheit");
                 Toolkit.getDefaultToolkit().beep();
             }
 
             if (date.isAfter(LocalDate.now().minusDays(1)) && date.isBefore(LocalDate.now().plusDays(2))) {
-                /*
-                 * @ToDo: Gebe Warnung aus, keinen Fehler! Erstelle neues Feld
-                 */
-                fehler.setText("Die Reise startet in weniger als zwei Tagen");
+                setMessage('w',"Die Reise startet in weniger als zwei Tagen");
             }
         } catch (DateTimeParseException e) {
-            fehler.setText("Das Datum muss dem Format DD/MM/YYYY entsprechen");
+            setMessage('f',"Datum muss dem Format DD/MM/YYYY entsprechen");
             Toolkit.getDefaultToolkit().beep();
         }
     }
@@ -281,7 +277,7 @@ public class BuchungAnlegenController extends BaseController {
             /*
              * @ToDo: Text ist zu lang für Fehlermeldung-Feld
              */
-            fehler.setText("Das Datum muss dem Format DD/MM/YYYY entsprechen");
+            setMessage('f',"Datum muss dem Format DD/MM/YYYY entsprechen");
             anreisedatum.getEditor().selectAll();
             Toolkit.getDefaultToolkit().beep();
             return false;
@@ -289,7 +285,7 @@ public class BuchungAnlegenController extends BaseController {
 
         if (date.isBefore(LocalDate.now())) {
             anreisedatum.requestFocus();
-            fehler.setText("Das Datum liegt in der Vergangenheit");
+            setMessage('f',"Das Datum liegt in der Vergangenheit");
             anreisedatum.getEditor().selectAll();
             Toolkit.getDefaultToolkit().beep();
             return false;

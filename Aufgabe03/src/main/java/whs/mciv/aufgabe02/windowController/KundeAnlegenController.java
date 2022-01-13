@@ -14,6 +14,7 @@ import whs.mciv.aufgabe02.filter.FilterPhoneNumber;
 import whs.mciv.aufgabe02.filter.FilterPlz;
 import java.awt.*;
 import java.net.URL;
+import java.util.LinkedHashMap;
 import java.util.ResourceBundle;
 
 public class KundeAnlegenController extends BaseController {
@@ -136,96 +137,40 @@ public class KundeAnlegenController extends BaseController {
     }
 
     public boolean validateForm() {
-        boolean formValid = true;
-        if (vorname.getText().isEmpty()) {
-            Toolkit.getDefaultToolkit().beep();
-            vorname.requestFocus();
-            fehler.setText("Bitte Vorname eingeben");
-            return ! formValid;
-        }
-        if (nachname.getText().isEmpty()) {
-            Toolkit.getDefaultToolkit().beep();
-            nachname.requestFocus();
-            fehler.setText("Bitte Nachname eingeben");
-            return ! formValid;
-        }
-        if (telefonnummer.getText().isEmpty()) {
-            Toolkit.getDefaultToolkit().beep();
-            telefonnummer.requestFocus();
-            fehler.setText("Bitte Telefonnummer eingeben");
-            return ! formValid;
-        }
-        if (adresse.getText().isEmpty()) {
-            Toolkit.getDefaultToolkit().beep();
-            adresse.requestFocus();
-            fehler.setText("Bitte Straße und Hausnummer eingeben");
-            return ! formValid;
-        }
-        if (plz.getText().isEmpty()) {
-            Toolkit.getDefaultToolkit().beep();
-            plz.requestFocus();
-            fehler.setText("Bitte Postleitzahl eingeben");
-            return ! formValid;
-        }
-        if (ort.getText().isEmpty()) {
-            Toolkit.getDefaultToolkit().beep();
-            ort.requestFocus();
-            fehler.setText("Bitte Ort eingeben");
-            return ! formValid;
-        }
-        if (land.getSelectionModel().isEmpty()) {
-            Toolkit.getDefaultToolkit().beep();
-            land.requestFocus();
-            fehler.setText("Bitte Land auswählen");
-            return ! formValid;
-        }
-        if (bundesland.getSelectionModel().isEmpty()) {
-            Toolkit.getDefaultToolkit().beep();
-            bundesland.requestFocus();
-            fehler.setText("Bitte Bundesland auswählen");
-            return ! formValid;
-        }
-        if (kontoinhaber.getText().isEmpty()) {
-            Toolkit.getDefaultToolkit().beep();
-            kontoinhaber.requestFocus();
-            fehler.setText("Bitte Kontoinhaber eingeben");
-            return ! formValid;
-        }
-        /*
-         * @ToDo: Frage nach, ob IBAN, BIC und Bank Pflichtfelder sind
-         */
-        if (iban.getText().isEmpty()) {
-            Toolkit.getDefaultToolkit().beep();
-            iban.requestFocus();
-            fehler.setText("Bitte IBAN eingeben");
-            return ! formValid;
-        } else {
-            if (!iban.getText().matches(FilterIban.ibanRegexFinal)) {
+
+        LinkedHashMap<String, Control> form = new LinkedHashMap<>();
+        form.put("Vorname", vorname);
+        form.put("Nachname", nachname);
+        form.put("Telefonnummer", telefonnummer);
+        form.put("Straße und Hausnummer", adresse);
+        form.put("PLZ", plz);
+        form.put("Ort", ort);
+        form.put("Land", land);
+        form.put("Bundesland", bundesland);
+        form.put("Kontoinhaber", kontoinhaber);
+        form.put("IBAN", iban);
+        form.put("BIC", bic);
+        form.put("Bank", bank);
+        boolean formValid = validateForm2(form);
+
+//        /*
+//         * @ToDo: Frage nach, ob IBAN, BIC und Bank Pflichtfelder sind
+//         */
+        if (formValid) {
+            if (! iban.getText().matches(FilterIban.ibanRegexFinal)) {
                 Toolkit.getDefaultToolkit().beep();
                 iban.requestFocus();
-                fehler.setText("Die IBAN ist nicht gültig!");
+                setMessage('f',"Die IBAN ist nicht gültig!");
                 return ! formValid;
             }
-        }
-        if (bic.getText().isEmpty()) {
-            Toolkit.getDefaultToolkit().beep();
-            bic.requestFocus();
-            fehler.setText("Bitte BIC eingeben");
-            return ! formValid;
-        }
-        if (bank.getText().isEmpty()) {
-            Toolkit.getDefaultToolkit().beep();
-            bank.requestFocus();
-            fehler.setText("Bitte Bank eingeben");
-            return ! formValid;
-        }
-        if (plz.getText().length() == 5 && land.getSelectionModel().selectedItemProperty().get() != "Deutschland" ||
-        plz.getText().length() == 4 && land.getSelectionModel().selectedItemProperty().get() != "Österreich") {
-            Toolkit.getDefaultToolkit().beep();
-            plz.requestFocus();
-            plzFehler.setText("PLZ und Land stimmen nicht überein");
-            fehler.setText("Bitte überprüfen Sie Ihre Eingaben");
-            return ! formValid;
+            if (plz.getText().length() == 5 && ! land.getSelectionModel().selectedItemProperty().get().equals("Deutschland") ||
+                    plz.getText().length() == 4 && ! land.getSelectionModel().selectedItemProperty().get().equals("Österreich")) {
+                Toolkit.getDefaultToolkit().beep();
+                plz.requestFocus();
+                plzFehler.setText("PLZ und Land stimmen nicht überein");
+                setMessage('f',"Bitte überprüfen Sie Ihre Eingaben");
+                return ! formValid;
+            }
         }
         return formValid;
     }

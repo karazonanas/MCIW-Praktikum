@@ -3,15 +3,15 @@ package whs.mciv.aufgabe02;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
+import java.awt.*;
 import java.net.URL;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public abstract class BaseController implements Initializable {
 
@@ -33,6 +33,7 @@ public abstract class BaseController implements Initializable {
     }
 
     protected void initButtons() {
+//        fehler.setMaxSize(300,14);
         abbrechen.setOnAction((ActionEvent event) -> {
             boolean formIsEmpty = isFormEmpty();
             if (formIsEmpty) {
@@ -55,6 +56,40 @@ public abstract class BaseController implements Initializable {
                 speichern();
             }
         });
+    }
+
+    protected void setMessage(char c, String message) {
+        fehler.setText("");
+        warnung.setText("");
+        if (c == 'w') {
+            warnung.setText(message);
+        } else if (c == 'f') {
+            fehler.setText(message);
+        }
+    }
+
+    protected boolean validateForm2(LinkedHashMap<String, Control> form) {
+        for (String key : form.keySet()) {
+            Control item = form.get(key);
+            if (item.contextMenuProperty().getBean().getClass().getName().equals("javafx.scene.control.TextField")) {
+                TextField field = (TextField) item;
+                if (field.getText().isEmpty()) {
+                    Toolkit.getDefaultToolkit().beep();
+                    field.requestFocus();
+                    setMessage('f', "Bitte " + key + " eingeben");
+                    return false;
+                }
+            } else if (item.contextMenuProperty().getBean().getClass().getName().equals("javafx.scene.control.ComboBox")) {
+                ComboBox comboBox = (ComboBox) item;
+                if (comboBox.getSelectionModel().isEmpty()) {
+                 Toolkit.getDefaultToolkit().beep();
+                 comboBox.requestFocus();
+                 setMessage('f', "Bitte " + key + "auswählen");
+                 return false;
+                }
+            }
+        }
+        return true;
     }
 
     public abstract boolean isFormEmpty();
