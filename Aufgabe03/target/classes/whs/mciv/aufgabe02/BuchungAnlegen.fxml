@@ -50,15 +50,5 @@
         <Button fx:id="speichern" layoutX="297.0" layoutY="525.0" mnemonicParsing="false" text="Speichern" />
         <Button fx:id="abbrechen" layoutX="396.0" layoutY="525.0" mnemonicParsing="false" onAction="#abbrechen" text="Abbrechen" />
       <Label layoutX="25.0" layoutY="529.0" text="* Pflichtfeld" />
-      <Label fx:id="fehler" layoutX="195.0" layoutY="26.0" textFill="RED">
-         <font>
-            <Font name="System Bold" size="16.0" />
-         </font>
-      </Label>
-      <Label fx:id="warnung" layoutX="195.0" layoutY="26.0" textFill="#cdc600">
-         <font>
-            <Font name="System Bold" size="16.0" />
-         </font>
-      </Label>
     </children>
 </AnchorPane>

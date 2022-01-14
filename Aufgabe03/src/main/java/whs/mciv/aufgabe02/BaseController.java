@@ -5,12 +5,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
 import java.awt.*;
-import java.net.URL;
 import java.util.*;
 
 public abstract class BaseController implements Initializable {
@@ -19,18 +16,10 @@ public abstract class BaseController implements Initializable {
     protected final String BEENDEN_TITEL = "Beenden";
 
     @FXML
-    protected Label fehler, warnung;
-
-    @FXML
     protected Button speichern, abbrechen;
 
     protected Stage stage;
     protected boolean wurdeGespeichert = false;
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-    }
 
     protected void initButtons() {
 //        fehler.setMaxSize(300,14);
@@ -79,6 +68,11 @@ public abstract class BaseController implements Initializable {
         meldung.show();
     }
 
+    /**
+     * Überprüfe, ob alle Pflichtfelder ausgefüllt sind
+     * @param form alle Pflichtfelder
+     * @return wahr, wenn alle Felder ausgefüllt sind.
+     */
     protected boolean validateForm(LinkedHashMap<String, Control> form) {
         for (String key : form.keySet()) {
             Control item = form.get(key);

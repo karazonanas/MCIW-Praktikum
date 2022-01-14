@@ -67,9 +67,6 @@ public class KundeAnlegenController extends BaseController {
     @FXML
     private TextField bank;
 
-    @FXML
-    private Label plzFehler;
-
     private Kunde kunde;
 
     private final String[] DE_LAENDER = {"Baden-Württemberg", "Bayern", "Berlin", "Brandenburg", "Bremen", "Hamburg", "Hessen", "Mecklenburg-Vorpommern", "Niedersachsen", "Nordrhein-Westfalen", "Rheinland-Pfalz", "Saarland", "Sachsen", "Sachsen-Anhalt", "Schleswig-Holstein" ,"Thüringen"};
@@ -155,8 +152,7 @@ public class KundeAnlegenController extends BaseController {
                     plz.getText().length() == 4 && ! land.getSelectionModel().selectedItemProperty().get().equals("Österreich")) {
                 Toolkit.getDefaultToolkit().beep();
                 plz.requestFocus();
-                plzFehler.setText("PLZ und Land stimmen nicht überein");
-                setMessage(Alert.AlertType.ERROR,"Bitte überprüfen Sie Ihre Eingaben");
+                setMessage(Alert.AlertType.ERROR,"Bitte überprüfen Sie Ihre Eingaben, PLZ und Land stimmen nicht überein");
                 return false;
             }
         }

@@ -78,20 +78,5 @@
       <Line endX="151.0" layoutX="249.0" layoutY="632.0" startX="-100.0" stroke="#aeaeae" strokeWidth="0.5" />
       <Line endX="151.0" layoutX="249.0" layoutY="355.0" startX="-100.0" stroke="#aeaeae" strokeWidth="0.5" />
       <Label layoutX="29.0" layoutY="874.0" text="* Pflichtfeld" />
-      <Label fx:id="fehler" layoutX="220.0" layoutY="25.0" textFill="RED">
-         <font>
-            <Font name="System Bold" size="16.0" />
-         </font>
-      </Label>
-      <Label fx:id="plzFehler" layoutX="250.0" layoutY="434.0" prefHeight="25.0" prefWidth="227.0" textFill="RED">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </Label>
-      <Label fx:id="warnung" layoutX="220.0" layoutY="25.0" textFill="#cdc600">
-         <font>
-            <Font name="System Bold" size="16.0" />
-         </font>
-      </Label>
     </children>
 </AnchorPane>
