@@ -14,6 +14,7 @@ public abstract class BaseController implements Initializable {
 
     protected final String BEENDEN_HINWEIS = "Sie haben das Formular bearbeitet, möchten Sie wirklich Ihre Eingaben verwerfen?";
     protected final String BEENDEN_TITEL = "Beenden";
+    private final String[] HASDEFAULTVALUE = {"Land"};
 
     @FXML
     protected Button speichern, abbrechen;
@@ -22,7 +23,6 @@ public abstract class BaseController implements Initializable {
     protected boolean wurdeGespeichert = false;
 
     protected void initButtons() {
-//        fehler.setMaxSize(300,14);
         abbrechen.setOnAction((ActionEvent event) -> {
             boolean formIsEmpty = wasFormEdited();
             if (formIsEmpty) {
@@ -53,7 +53,7 @@ public abstract class BaseController implements Initializable {
      * @param errorType Typ des Fehlers (MESSAGE_WARNUNG|MESSAGE_FEHLER)
      * @param message Fehler-Meldung
      */
-    protected void setMessage(Alert.AlertType errorType, String message) {
+    public static void setMessage(Alert.AlertType errorType, String message) {
         Alert.AlertType alertType = Alert.AlertType.NONE;
         String titel = "";
 
@@ -86,7 +86,7 @@ public abstract class BaseController implements Initializable {
                 }
             } else if (item.contextMenuProperty().getBean().getClass().getName().equals("javafx.scene.control.ComboBox")) {
                 ComboBox comboBox = (ComboBox) item;
-                if (comboBox.getSelectionModel().isEmpty()) {
+                if (comboBox.getSelectionModel().isEmpty() && key.equals("Land")) {
                  Toolkit.getDefaultToolkit().beep();
                  comboBox.requestFocus();
                  setMessage(Alert.AlertType.ERROR, "Bitte " + key + "auswählen");
@@ -112,7 +112,7 @@ public abstract class BaseController implements Initializable {
                 }
             } else if (item.contextMenuProperty().getBean().getClass().getName().equals("javafx.scene.control.ComboBox")) {
                 ComboBox comboBox = (ComboBox) item;
-                if (! comboBox.getSelectionModel().isEmpty()) {
+                if (! comboBox.getSelectionModel().isEmpty() && ! Arrays.stream(HASDEFAULTVALUE).anyMatch(key::equals)) {
                     return false;
                 }
             }

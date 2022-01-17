@@ -128,8 +128,8 @@ public class BuchungAnlegenController extends BaseController {
                 setMessage(Alert.AlertType.ERROR,"Die Reise startet in weniger als zwei Tagen");
             }
         } catch (DateTimeParseException e) {
-            setMessage(Alert.AlertType.ERROR,"Das Datum muss dem Format DD/MM/YYYY entsprechen");
-            Toolkit.getDefaultToolkit().beep();
+//            setMessage(Alert.AlertType.ERROR,"Das Datum muss dem Format DD/MM/YYYY entsprechen");
+//            Toolkit.getDefaultToolkit().beep();
         }
     }
 
@@ -270,9 +270,6 @@ public class BuchungAnlegenController extends BaseController {
             date = LocalDate.parse(datum, formatter);
         } catch (DateTimeParseException e) {
             anreisedatum.requestFocus();
-            /*
-             * @ToDo: Text ist zu lang für Fehlermeldung-Feld
-             */
             setMessage(Alert.AlertType.ERROR,"Das Datum muss dem Format DD/MM/YYYY entsprechen");
             anreisedatum.getEditor().selectAll();
             Toolkit.getDefaultToolkit().beep();

@@ -1,6 +1,8 @@
 package whs.mciv.aufgabe02.filter;
 
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextFormatter;
+import whs.mciv.aufgabe02.BaseController;
 
 import java.awt.*;
 import java.util.function.UnaryOperator;
@@ -32,6 +34,7 @@ public class FilterPlz implements UnaryOperator<TextFormatter.Change> {
 
         String neu = tfc.getControlNewText();
         if (!neu.matches(regexPlz)) {
+            BaseController.setMessage(Alert.AlertType.ERROR, "PLZ ist nicht richtig");
             Toolkit.getDefaultToolkit().beep();
         }
 

@@ -127,7 +127,7 @@ public class KundeAnlegenController extends BaseController {
                         case "Österreich": bundesland.getItems().setAll(OS_LAENDER);
                             plz.setTextFormatter(new TextFormatter<>(new FilterPlz('o')));break;
                     }
-
+                    plz.requestFocus();
                 }
             }
         });
@@ -166,8 +166,7 @@ public class KundeAnlegenController extends BaseController {
      */
     public boolean wasFormEdited() {
         LinkedHashMap<String, Control> form = createForm();
-        return wasFormEdited(form) &&
-                land.getSelectionModel().selectedItemProperty().get().equals("Deutschland");
+        return wasFormEdited(form);
     }
 
     private LinkedHashMap<String, Control> createForm() {
@@ -179,10 +178,7 @@ public class KundeAnlegenController extends BaseController {
         form.put("PLZ", plz);
         form.put("Ort", ort);
         form.put("Bundesland", bundesland);
-        form.put("Kontoinhaber", kontoinhaber);
-        form.put("IBAN", iban);
-        form.put("BIC", bic);
-        form.put("Bank", bank);
+        form.put("Land", land);
 
         return form;
     }
