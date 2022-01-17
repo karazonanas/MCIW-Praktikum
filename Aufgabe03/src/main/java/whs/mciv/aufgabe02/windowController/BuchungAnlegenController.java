@@ -112,6 +112,9 @@ public class BuchungAnlegenController extends BaseController {
         this.checkNumberFields();
     }
 
+    /**
+     * @ToDO: Bitte nochmal diese Methode überprüfen, sie läuft nicht fehlerfrei Z:132
+     */
     private void checkAnreisedatum() {
         LocalDate date;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy", Locale.GERMAN);
@@ -122,15 +125,17 @@ public class BuchungAnlegenController extends BaseController {
             if (date.isBefore(LocalDate.now())) {
                 setMessage(Alert.AlertType.ERROR,"Das Datum liegt in der Vergangenheit");
                 Toolkit.getDefaultToolkit().beep();
+                anreisedatum.requestFocus();
             }
 
             if (date.isAfter(LocalDate.now().minusDays(1)) && date.isBefore(LocalDate.now().plusDays(2))) {
-                setMessage(Alert.AlertType.ERROR,"Die Reise startet in weniger als zwei Tagen");
+                setMessage(Alert.AlertType.WARNING,"Die Reise startet in weniger als zwei Tagen");
             }
         } catch (DateTimeParseException e) {
             if (! anreisedatum.getEditor().getText().isEmpty()) {
                 setMessage(Alert.AlertType.ERROR,"Das Datum muss dem Format DD/MM/YYYY entsprechen");
                 Toolkit.getDefaultToolkit().beep();
+                anreisedatum.requestFocus();
             }
         }
     }
@@ -287,6 +292,18 @@ public class BuchungAnlegenController extends BaseController {
         }
 
         return true;
+    }
+
+    private LinkedHashMap<String, Control> createForm() {
+        LinkedHashMap<String, Control> form = new LinkedHashMap<>();
+        form.put("Kunde", kundeComboBox);
+        form.put("personenanzahl", personenanzahl);
+        form.put("Anreisedatum", anreisedatum);
+        form.put("anzahlDerNaechte",anzahlDerNaechte);
+        form.put("Reiseziel", reisezielComboBox);
+        form.put("verpflegung", verpflegung);
+
+        return form;
     }
 
     /**

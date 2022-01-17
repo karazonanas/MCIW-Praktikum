@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
 import java.awt.*;
 import java.util.*;
 
@@ -14,7 +15,7 @@ public abstract class BaseController implements Initializable {
 
     protected final String BEENDEN_HINWEIS = "Sie haben das Formular bearbeitet, möchten Sie wirklich Ihre Eingaben verwerfen?";
     protected final String BEENDEN_TITEL = "Beenden";
-    private final String[] HASDEFAULTVALUE = {"Land"};
+    private final String[] HASDEFAULTVALUE = {"Land", "personenanzahl", "anzahlDerNaechte"};
 
     @FXML
     protected Button speichern, abbrechen;
@@ -51,7 +52,7 @@ public abstract class BaseController implements Initializable {
      * Gebe eine Warnung oder einen Fehler als Nachricht aus
      *
      * @param errorType Typ des Fehlers (MESSAGE_WARNUNG|MESSAGE_FEHLER)
-     * @param message Fehler-Meldung
+     * @param message   Fehler-Meldung
      */
     public static void setMessage(Alert.AlertType errorType, String message) {
         Alert.AlertType alertType = Alert.AlertType.NONE;
@@ -70,6 +71,7 @@ public abstract class BaseController implements Initializable {
 
     /**
      * Überprüfe, ob alle Pflichtfelder ausgefüllt sind
+     *
      * @param form alle Pflichtfelder
      * @return wahr, wenn alle Felder ausgefüllt sind.
      */
@@ -87,10 +89,10 @@ public abstract class BaseController implements Initializable {
             } else if (item.contextMenuProperty().getBean().getClass().getName().equals("javafx.scene.control.ComboBox")) {
                 ComboBox comboBox = (ComboBox) item;
                 if (comboBox.getSelectionModel().isEmpty() && key.equals("Land")) {
-                 Toolkit.getDefaultToolkit().beep();
-                 comboBox.requestFocus();
-                 setMessage(Alert.AlertType.ERROR, "Bitte " + key + "auswählen");
-                 return false;
+                    Toolkit.getDefaultToolkit().beep();
+                    comboBox.requestFocus();
+                    setMessage(Alert.AlertType.ERROR, "Bitte " + key + "auswählen");
+                    return false;
                 }
             }
         }
@@ -104,16 +106,18 @@ public abstract class BaseController implements Initializable {
      */
     protected boolean wasFormEdited(LinkedHashMap<String, Control> form) {
         for (String key : form.keySet()) {
-            Control item = form.get(key);
-            if (item.contextMenuProperty().getBean().getClass().getName().equals("javafx.scene.control.TextField")) {
-                TextField field = (TextField) item;
-                if (! field.getText().isEmpty()) {
-                    return false;
-                }
-            } else if (item.contextMenuProperty().getBean().getClass().getName().equals("javafx.scene.control.ComboBox")) {
-                ComboBox comboBox = (ComboBox) item;
-                if (! comboBox.getSelectionModel().isEmpty() && ! Arrays.stream(HASDEFAULTVALUE).anyMatch(key::equals)) {
-                    return false;
+            if (!Arrays.stream(HASDEFAULTVALUE).anyMatch(key::equals)) {
+                Control item = form.get(key);
+                if (item.contextMenuProperty().getBean().getClass().getName().equals("javafx.scene.control.TextField")) {
+                    TextField field = (TextField) item;
+                    if (!field.getText().isEmpty()) {
+                        return false;
+                    }
+                } else if (item.contextMenuProperty().getBean().getClass().getName().equals("javafx.scene.control.ComboBox")) {
+                    ComboBox comboBox = (ComboBox) item;
+                    if (!comboBox.getSelectionModel().isEmpty()) {
+                        return false;
+                    }
                 }
             }
         }
