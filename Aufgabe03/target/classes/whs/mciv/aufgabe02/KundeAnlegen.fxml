@@ -75,8 +75,8 @@
 
         <Button fx:id="speichern" layoutX="304.0" layoutY="870.0" mnemonicParsing="false" text="Speichern" />
         <Button fx:id="abbrechen" layoutX="403.0" layoutY="870.0" mnemonicParsing="false" text="Abbrechen" />
-      <Line endX="151.0" layoutX="249.0" layoutY="632.0" startX="-100.0" stroke="#aeaeae" strokeWidth="0.5" />
-      <Line endX="151.0" layoutX="249.0" layoutY="355.0" startX="-100.0" stroke="#aeaeae" strokeWidth="0.5" />
+      <Line endX="300.0" layoutX="100.0" layoutY="633.5" stroke="#aeaeae" strokeWidth="0.5" />
+      <Line endX="300.0" layoutX="100.0" layoutY="363.0" stroke="#aeaeae" strokeWidth="0.5" />
       <Label layoutX="29.0" layoutY="874.0" text="* Pflichtfeld" />
     </children>
 </AnchorPane>

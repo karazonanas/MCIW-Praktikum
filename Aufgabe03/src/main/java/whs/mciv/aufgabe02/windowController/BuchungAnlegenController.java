@@ -77,7 +77,7 @@ public class BuchungAnlegenController extends BaseController {
 
         ChangeListener<Boolean> anreiseDatumChangeListener = (observableValue, oldProperty, newProperty) -> {
             // Check format if the field has no focus anymore
-            if (!newProperty) {
+            if (! newProperty) {
                 checkAnreisedatum();
             }
         };
@@ -268,40 +268,45 @@ public class BuchungAnlegenController extends BaseController {
 
 
     public boolean validateForm() {
-        // Check format of date
-        String datum = anreisedatum.getEditor().getText();
-        LocalDate date;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy", Locale.GERMAN);
+        LinkedHashMap<String, Control> form = createForm();
+        boolean formValid = validateForm(form);
 
-        try {
-            date = LocalDate.parse(datum, formatter);
-        } catch (DateTimeParseException e) {
-            anreisedatum.requestFocus();
-            setMessage(Alert.AlertType.ERROR,"Das Datum muss dem Format DD/MM/YYYY entsprechen");
-            anreisedatum.getEditor().selectAll();
-            Toolkit.getDefaultToolkit().beep();
-            return false;
+        if (formValid) {
+            // Check format of date
+            String datum = anreisedatum.getEditor().getText();
+            LocalDate date;
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy", Locale.GERMAN);
+
+            try {
+                date = LocalDate.parse(datum, formatter);
+            } catch (DateTimeParseException e) {
+                anreisedatum.requestFocus();
+                setMessage(Alert.AlertType.ERROR, "Das Datum muss dem Format DD/MM/YYYY entsprechen");
+                anreisedatum.getEditor().selectAll();
+                Toolkit.getDefaultToolkit().beep();
+                return false;
+            }
+
+            if (date.isBefore(LocalDate.now())) {
+                anreisedatum.requestFocus();
+                setMessage(Alert.AlertType.ERROR, "Das Datum liegt in der Vergangenheit");
+                anreisedatum.getEditor().selectAll();
+                Toolkit.getDefaultToolkit().beep();
+                return false;
+            }
         }
 
-        if (date.isBefore(LocalDate.now())) {
-            anreisedatum.requestFocus();
-            setMessage(Alert.AlertType.ERROR,"Das Datum liegt in der Vergangenheit");
-            anreisedatum.getEditor().selectAll();
-            Toolkit.getDefaultToolkit().beep();
-            return false;
-        }
-
-        return true;
+        return formValid;
     }
 
     private LinkedHashMap<String, Control> createForm() {
         LinkedHashMap<String, Control> form = new LinkedHashMap<>();
         form.put("Kunde", kundeComboBox);
-        form.put("personenanzahl", personenanzahl);
+        form.put("Anzahl der Reisenden", personenanzahl);
         form.put("Anreisedatum", anreisedatum);
-        form.put("anzahlDerNaechte",anzahlDerNaechte);
+        form.put("Anzahl der Übernachtungen",anzahlDerNaechte);
         form.put("Reiseziel", reisezielComboBox);
-        form.put("verpflegung", verpflegung);
+        form.put("Verpflegung", verpflegung);
 
         return form;
     }
@@ -312,12 +317,9 @@ public class BuchungAnlegenController extends BaseController {
      * @return wahr, wenn das Formular bearbeitet wurde
      */
     public boolean wasFormEdited() {
-        return anreisedatum.getEditor().getText().isEmpty() &&
-                reisezielComboBox.getSelectionModel().isEmpty() &&
-                verpflegung.getSelectionModel().isEmpty() &&
-                kundeComboBox.getSelectionModel().isEmpty() &&
-                anzahlDerNaechte.getText().equals("10") &&
-                personenanzahl.getText().equals("2");
+        LinkedHashMap<String, Control> form = createForm();
+
+        return wasFormEdited(form);
     }
 
     public void setStage(Stage stage) {

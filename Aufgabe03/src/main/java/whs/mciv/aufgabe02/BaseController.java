@@ -15,7 +15,7 @@ public abstract class BaseController implements Initializable {
 
     protected final String BEENDEN_HINWEIS = "Sie haben das Formular bearbeitet, möchten Sie wirklich Ihre Eingaben verwerfen?";
     protected final String BEENDEN_TITEL = "Beenden";
-    private final String[] HASDEFAULTVALUE = {"Land", "personenanzahl", "anzahlDerNaechte"};
+    private final String[] HASDEFAULTVALUE = {"Land", "Anzahl der Reisenden", "Anzahl der Übernachtungen"};
 
     @FXML
     protected Button speichern, abbrechen;
@@ -77,22 +77,33 @@ public abstract class BaseController implements Initializable {
      */
     protected boolean validateForm(LinkedHashMap<String, Control> form) {
         for (String key : form.keySet()) {
-            Control item = form.get(key);
-            if (item.contextMenuProperty().getBean().getClass().getName().equals("javafx.scene.control.TextField")) {
-                TextField field = (TextField) item;
-                if (field.getText().isEmpty()) {
-                    Toolkit.getDefaultToolkit().beep();
-                    field.requestFocus();
-                    setMessage(Alert.AlertType.ERROR, "Bitte " + key + " eingeben");
-                    return false;
-                }
-            } else if (item.contextMenuProperty().getBean().getClass().getName().equals("javafx.scene.control.ComboBox")) {
-                ComboBox comboBox = (ComboBox) item;
-                if (comboBox.getSelectionModel().isEmpty() && key.equals("Land")) {
-                    Toolkit.getDefaultToolkit().beep();
-                    comboBox.requestFocus();
-                    setMessage(Alert.AlertType.ERROR, "Bitte " + key + "auswählen");
-                    return false;
+            if (! Arrays.stream(HASDEFAULTVALUE).anyMatch(key::equals)) {
+                Control item = form.get(key);
+                if (item.contextMenuProperty().getBean().getClass().getName().equals("javafx.scene.control.TextField")) {
+                    TextField field = (TextField) item;
+                    if (field.getText().isEmpty()) {
+                        System.out.println("test");
+                        Toolkit.getDefaultToolkit().beep();
+                        field.requestFocus();
+                        setMessage(Alert.AlertType.ERROR, "Bitte " + key + " eingeben");
+                        return false;
+                    }
+                } else if (item.contextMenuProperty().getBean().getClass().getName().equals("javafx.scene.control.ComboBox")) {
+                    ComboBox comboBox = (ComboBox) item;
+                    if (comboBox.getSelectionModel().isEmpty()) {
+                        Toolkit.getDefaultToolkit().beep();
+                        comboBox.requestFocus();
+                        setMessage(Alert.AlertType.ERROR, "Bitte " + key + " auswählen");
+                        return false;
+                    }
+                } else if (item.contextMenuProperty().getBean().getClass().getName().equals("javafx.scene.control.DatePicker")) {
+                    DatePicker datePicker = (DatePicker) item;
+                    if (datePicker.getEditor().getText().isEmpty()) {
+                        Toolkit.getDefaultToolkit().beep();
+                        datePicker.requestFocus();
+                        setMessage(Alert.AlertType.ERROR, "Bitte " + key + " auswählen");
+                        return false;
+                    }
                 }
             }
         }
