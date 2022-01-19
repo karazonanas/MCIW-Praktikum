@@ -4,7 +4,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import whs.mciv.aufgabe02.BaseController;
 import whs.mciv.aufgabe02.daten.kunde.Kunde;
@@ -76,8 +75,8 @@ public class KundeAnlegenController extends BaseController {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.kunde = new Kunde();
         id.setText(kunde.getId());
-        conditionalComboBox();
-        conditionalCheckbox();
+        landConditionalComboBox();
+        sameAsCustomerConditionalCheckbox();
         plz.setTextFormatter(new TextFormatter<>(new FilterPlz('d')));
         email.setTextFormatter(new TextFormatter<>(new FilterEmail()));
         telefonnummer.setTextFormatter(new TextFormatter<>(new FilterPhoneNumber()));
@@ -86,7 +85,10 @@ public class KundeAnlegenController extends BaseController {
         updateKontoinhaber();
     }
 
-    private void conditionalCheckbox() {
+    /**
+     * Listener für "gleich wie Kunde" Checkbox
+     */
+    private void sameAsCustomerConditionalCheckbox() {
         sameAsCustomer.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
@@ -99,6 +101,9 @@ public class KundeAnlegenController extends BaseController {
         });
     }
 
+    /**
+     * Listener: Aktualisiere den Kontoinhaber
+     */
     private void updateKontoinhaber() {
         ChangeListener<Boolean> namensAenderungChangeListener = new ChangeListener<Boolean>() {
             @Override
@@ -114,7 +119,10 @@ public class KundeAnlegenController extends BaseController {
         this.nachname.focusedProperty().addListener(namensAenderungChangeListener);
     }
 
-    private void conditionalComboBox() {
+    /**
+     * Aktualisiere Bundesländer / Land
+     */
+    private void landConditionalComboBox() {
         bundesland.getItems().setAll(DE_LAENDER);
         land.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
@@ -133,6 +141,11 @@ public class KundeAnlegenController extends BaseController {
         });
     }
 
+    /**
+     * Validiere Formular
+     *
+     * @return wahr, wenn alles richtig ist
+     */
     public boolean validateForm() {
 
         LinkedHashMap<String, Control> form = createForm();
