@@ -14,28 +14,28 @@
             </font>
         </Label>
         <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="75.0" prefHeight="17.0" prefWidth="160.0" text="Buchungs-ID" />
-        <TextField fx:id="id" disable="true" editable="false" layoutX="195.0" layoutY="71.0" prefHeight="25.0" prefWidth="130.0" text="Buchungs-ID" />
+        <TextField id="id" fx:id="id" disable="true" editable="false" layoutX="195.0" layoutY="71.0" prefHeight="25.0" prefWidth="130.0" text="Buchungs-ID" />
 
         <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="125.0" prefHeight="17.0" prefWidth="160.0" text="Kunde *" />
-        <ComboBox fx:id="kundeComboBox" layoutX="195.0" layoutY="121.0" prefHeight="25.0" prefWidth="200.0" promptText="Kunde auswählen" />
+        <ComboBox id="kundeComboBox" fx:id="kundeComboBox" layoutX="195.0" layoutY="121.0" prefHeight="25.0" prefWidth="200.0" promptText="Kunde auswählen" />
 
         <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="175.0" prefHeight="17.0" prefWidth="160.0" text="Status" />
-        <TextField fx:id="buchungsStatus" disable="true" layoutX="195.0" layoutY="171.0" prefHeight="25.0" prefWidth="69.0" text="neu" />
+        <TextField id="buchungsStatus" fx:id="buchungsStatus" disable="true" layoutX="195.0" layoutY="171.0" prefHeight="25.0" prefWidth="69.0" text="Neu" />
 
         <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="225.0" prefHeight="17.0" prefWidth="160.0" text="Anzahl der Reisenden *" />
-        <TextField fx:id="personenanzahl" layoutX="195.0" layoutY="221.0" prefHeight="25.0" prefWidth="69.0" promptText="2" text="2" />
+        <TextField id="personenanzahl" fx:id="personenanzahl" alignment="CENTER_RIGHT" layoutX="195.0" layoutY="221.0" prefHeight="25.0" prefWidth="69.0" promptText="2" text="2" />
 
         <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="275.0" prefHeight="17.0" prefWidth="160.0" text="Anreisedatum *" />
-        <DatePicker fx:id="anreisedatum" layoutX="195.0" layoutY="271.0" prefHeight="25.0" prefWidth="200.0" promptText="Anreisedatum" />
+        <DatePicker id="anreisedatum" fx:id="anreisedatum" layoutX="195.0" layoutY="271.0" prefHeight="25.0" prefWidth="200.0" promptText="Anreisedatum" />
 
         <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="325.0" prefHeight="17.0" prefWidth="160.0" text="Anzahl der Übernachtungen *" />
-        <TextField fx:id="anzahlDerNaechte" layoutX="195.0" layoutY="321.0" prefHeight="25.0" prefWidth="69.0" promptText="10" text="10" />
+        <TextField id="anzahlDerNaechte" fx:id="anzahlDerNaechte" alignment="CENTER_RIGHT" layoutX="195.0" layoutY="321.0" prefHeight="25.0" prefWidth="69.0" promptText="10" text="10" />
 
         <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="375.0" prefHeight="17.0" prefWidth="160.0" text="Reiseziel *" />
-        <ComboBox fx:id="reisezielComboBox" layoutX="195.0" layoutY="371.0" prefHeight="25.0" prefWidth="200.0" promptText="Reiseziel auswählen" />
+        <ComboBox id="reisezielComboBox" fx:id="reisezielComboBox" layoutX="195.0" layoutY="371.0" prefHeight="25.0" prefWidth="200.0" promptText="Reiseziel auswählen" />
 
         <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="425.0" prefHeight="17.0" prefWidth="160.0" text="Verpflegung *" />
-        <ComboBox fx:id="verpflegung" layoutX="195.0" layoutY="421.0" prefHeight="25.0" prefWidth="200.0" promptText="Verpflegung auswählen">
+        <ComboBox id="verpflegung" fx:id="verpflegung" layoutX="195.0" layoutY="421.0" prefHeight="25.0" prefWidth="200.0" promptText="Verpflegung auswählen">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="Halbpension" />
@@ -45,10 +45,13 @@
         </ComboBox>
 
         <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="475.0" prefHeight="17.0" prefWidth="160.0" text="Gesamtpreis (in EUR)" />
-        <TextField fx:id="gesamtpreis" disable="true" layoutX="291.0" layoutY="471.0" prefHeight="25.0" prefWidth="69.0" promptText="150.00" text="0.00" />
+        <TextField id="gesamtpreis" fx:id="gesamtpreis" alignment="CENTER_RIGHT" disable="true" editable="false" layoutX="299.0" layoutY="471.0" prefHeight="25.0" prefWidth="96.0" promptText="150.00" style="-fx-background-color: transparent;" text="0.00 €">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></TextField>
 
-        <Button fx:id="speichern" layoutX="325.0" layoutY="525.0" mnemonicParsing="false" text="Speichern" />
-        <Button fx:id="abbrechen" layoutX="221.0" layoutY="525.0" mnemonicParsing="false" onAction="#abbrechen" text="Abbrechen" />
+        <Button id="speichern" fx:id="speichern" layoutX="325.0" layoutY="525.0" mnemonicParsing="false" text="Speichern" />
+        <Button id="abbrechen" fx:id="abbrechen" layoutX="221.0" layoutY="525.0" mnemonicParsing="false" onAction="#abbrechen" text="Abbrechen" />
       <Label layoutX="25.0" layoutY="529.0" text="* Pflichtfeld" />
 <!--      <Spinner  accessibleRole="HYPERLINK" cache="true" disable="true" layoutX="195.0" layoutY="471.0" prefHeight="25.0" prefWidth="69.0" />-->
     </children>

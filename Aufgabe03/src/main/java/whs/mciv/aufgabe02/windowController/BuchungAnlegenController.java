@@ -62,6 +62,8 @@ public class BuchungAnlegenController extends BaseController {
 
     private ArrayList<String> kundenNamen = new ArrayList<>();
 
+    private String anreiseDatumOldValue = null;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Erzeige neues Buchung-Objekt um die Daten des Formulars später
@@ -70,15 +72,16 @@ public class BuchungAnlegenController extends BaseController {
         this.id.setText(buchung.getId());
 
         anreisedatum.setDayCellFactory(new FilterDatum());
-        anreisedatum.setOnAction((ActionEvent event) -> {
-            // Check format on change with datepicker
-            checkAnreisedatum();
-        });
-
         ChangeListener<Boolean> anreiseDatumChangeListener = (observableValue, oldProperty, newProperty) -> {
             // Check format if the field has no focus anymore
-            if (! newProperty) {
-                checkAnreisedatum();
+            if (!newProperty && anreisedatum.getEditor().getText() != null && !anreisedatum.getEditor().getText().equals(anreiseDatumOldValue)) {
+                LocalDate parsedDate = checkAnreisedatum();
+
+                if (parsedDate != null) {
+                    anreisedatum.setValue(parsedDate);
+                } else {
+                    anreisedatum.getEditor().setText(anreiseDatumOldValue);
+                }
             }
         };
         anreisedatum.focusedProperty().addListener(anreiseDatumChangeListener);
@@ -113,9 +116,11 @@ public class BuchungAnlegenController extends BaseController {
     }
 
     /**
-     * @ToDO: Bitte nochmal diese Methode überprüfen, sie läuft nicht fehlerfrei Z:132
+     * Überprüfe das Anreisedatum
+     *
+     * @return das geparste LocalDate oder null
      */
-    private void checkAnreisedatum() {
+    private LocalDate checkAnreisedatum() {
         LocalDate date;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy", Locale.GERMAN);
 
@@ -131,6 +136,9 @@ public class BuchungAnlegenController extends BaseController {
             if (date.isAfter(LocalDate.now().minusDays(1)) && date.isBefore(LocalDate.now().plusDays(2))) {
                 setMessage(Alert.AlertType.WARNING,"Die Reise startet in weniger als zwei Tagen");
             }
+            anreiseDatumOldValue = anreisedatum.getEditor().getText();
+
+            return date;
         } catch (DateTimeParseException e) {
             if (! anreisedatum.getEditor().getText().isEmpty()) {
                 setMessage(Alert.AlertType.ERROR,"Das Datum muss dem Format DD/MM/YYYY entsprechen");
@@ -138,8 +146,13 @@ public class BuchungAnlegenController extends BaseController {
                 anreisedatum.requestFocus();
             }
         }
+
+        return null;
     }
 
+    /**
+     * Fülle die ComboBox für Kunden mit Kundendaten
+     */
     private void setzeKundenDaten() {
         ObservableList<Kunde> kundenDaten = FXCollections.observableArrayList();
         Collection<Kunde> alleKunden = KundenDaten.getAllKunden();
@@ -161,6 +174,9 @@ public class BuchungAnlegenController extends BaseController {
         });
     }
 
+    /**
+     * Fülle die ComboBox für Reiseziele mit Reisezielen
+     */
     private void setzeReiseziele() {
         ObservableList<Reiseziel> reisezielDaten = FXCollections.observableArrayList();
         Collection<Reiseziel> alleReiseziele = ReisezielDaten.getAllReiseziele();
@@ -182,6 +198,9 @@ public class BuchungAnlegenController extends BaseController {
         });
     }
 
+    /**
+     * Listener, wenn Reiseziel oder Verpflegung geändert wurden, um den Preis zu aktualisieren
+     */
     private void changeReisezielUndVerpflegung() {
         this.reisezielComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Reiseziel>() {
             @Override
@@ -229,6 +248,12 @@ public class BuchungAnlegenController extends BaseController {
         this.anzahlDerNaechte.focusedProperty().addListener(anzahlGeandertChangeListener);
     }
 
+    /**
+     * Aktualisiere den Gesamtpreis
+     *
+     * @param ausgewaehltesZiel das ausgewähle Reiseziel
+     * @param ausgewaehlteVerpflegung die ausgewählte Verpflegung
+     */
     private void updateGesamtpreis(Reiseziel ausgewaehltesZiel, String ausgewaehlteVerpflegung) {
         double neuerPreis = 0.00;
 
@@ -240,10 +265,13 @@ public class BuchungAnlegenController extends BaseController {
 
             neuerPreis = neuerPreis * Double.parseDouble(this.personenanzahl.getText()) * Double.parseDouble(this.anzahlDerNaechte.getText());
 
-            gesamtpreis.setText(String.format("%.2f", neuerPreis));
+            gesamtpreis.setText(String.format("%,.2f", neuerPreis) + " €");
         }
     }
 
+    /**
+     * Überprüfe Zahlen-Eingabefelder
+     */
     private void checkNumberFields() {
         // Anzahl der Reisenden
         this.personenanzahl.textProperty().addListener(new ChangeListener<String>() {
@@ -266,7 +294,11 @@ public class BuchungAnlegenController extends BaseController {
         });
     }
 
-
+    /**
+     * Validiere das Formular
+     *
+     * @return true, wenn alles richtig eingegeben wurde
+     */
     public boolean validateForm() {
         LinkedHashMap<String, Control> form = createForm();
         boolean formValid = validateForm(form);
@@ -299,6 +331,11 @@ public class BuchungAnlegenController extends BaseController {
         return formValid;
     }
 
+    /**
+     * Erstelle HashMap für das Formular
+     *
+     * @return HashMap mit allen Feldern
+     */
     private LinkedHashMap<String, Control> createForm() {
         LinkedHashMap<String, Control> form = new LinkedHashMap<>();
         form.put("Kunde", kundeComboBox);
