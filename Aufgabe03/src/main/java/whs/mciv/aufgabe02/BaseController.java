@@ -81,7 +81,6 @@ public abstract class BaseController implements Initializable {
                 if (item.contextMenuProperty().getBean().getClass().getName().equals("javafx.scene.control.TextField")) {
                     TextField field = (TextField) item;
                     if (field.getText().isEmpty()) {
-                        System.out.println("test");
                         Toolkit.getDefaultToolkit().beep();
                         field.requestFocus();
                         setMessage(Alert.AlertType.ERROR, "Bitte " + key + " eingeben");
