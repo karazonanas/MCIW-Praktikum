@@ -151,15 +151,31 @@ public class KundeAnlegenController extends BaseController {
         LinkedHashMap<String, Control> form = createForm();
         boolean formValid = validateForm(form);
 
-//        /*
-//         * @ToDo: Frage nach, ob IBAN, BIC und Bank Pflichtfelder sind
-//         */
         if (formValid) {
-            if (! iban.getText().matches(FilterIban.IBAN_REGEX_FINAL)) {
-                Toolkit.getDefaultToolkit().beep();
-                iban.requestFocus();
-                setMessage(Alert.AlertType.ERROR,"Die IBAN ist nicht gültig!");
-                return false;
+            if (!iban.getText().isEmpty() || !bank.getText().isEmpty() || !bic.getText().isEmpty()) {
+                if (iban.getText().isEmpty() || bank.getText().isEmpty() || bic.getText().isEmpty()) {
+                    Toolkit.getDefaultToolkit().beep();
+                    setMessage(Alert.AlertType.ERROR, "Sie haben unvollständige Bankdaten angegeben:\n" +
+                            (iban.getText().isEmpty() ? "- Es wurde keine IBAN angegeben\n" : "") +
+                            (bank.getText().isEmpty() ? "- Der Name der Bank fehlt\n" : "") +
+                            (bic.getText().isEmpty() ? "- Der BIC wurde nicht angegeben" : "")
+                    );
+                    return false;
+                }
+                if (!iban.getText().matches(FilterIban.IBAN_REGEX_FINAL)) {
+                    Toolkit.getDefaultToolkit().beep();
+                    iban.requestFocus();
+                    setMessage(Alert.AlertType.ERROR, "Die IBAN ist nicht gültig!");
+                    return false;
+                }
+
+                // Der BIC besteht aus mindestens 8 Zeichen
+                if (bic.getText().length() < 8) {
+                    Toolkit.getDefaultToolkit().beep();
+                    bic.requestFocus();
+                    setMessage(Alert.AlertType.ERROR, "Der BIC ist nicht gültig!");
+                    return false;
+                }
             }
             if (plz.getText().length() == 5 && ! land.getSelectionModel().selectedItemProperty().get().equals("Deutschland") ||
                     plz.getText().length() == 4 && ! land.getSelectionModel().selectedItemProperty().get().equals("Österreich")) {
