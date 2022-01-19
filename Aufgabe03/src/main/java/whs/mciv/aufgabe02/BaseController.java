@@ -10,7 +10,6 @@ import javafx.stage.Stage;
 
 import java.awt.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public abstract class BaseController implements Initializable {
 
@@ -76,7 +75,7 @@ public abstract class BaseController implements Initializable {
      * @return wahr, wenn alle Felder ausgefüllt sind.
      */
     protected boolean validateForm(LinkedHashMap<String, Control> form) {
-        LinkedHashMap<String, String> missingValues = new LinkedHashMap<>();
+        LinkedHashSet<String> missingValues = new LinkedHashSet<String>();
         boolean allValuesAreValid = true;
 
         resetStylingOfElements();
@@ -87,7 +86,7 @@ public abstract class BaseController implements Initializable {
                 if (item.contextMenuProperty().getBean().getClass().getName().equals("javafx.scene.control.TextField")) {
                     TextField field = (TextField) item;
                     if (field.getText().isEmpty()) {
-                        missingValues.put(key, "- " + key + "\n");
+                        missingValues.add(key);
                         field.setStyle("-fx-border-color: red;");
 
                         allValuesAreValid = false;
@@ -95,7 +94,7 @@ public abstract class BaseController implements Initializable {
                 } else if (item.contextMenuProperty().getBean().getClass().getName().equals("javafx.scene.control.ComboBox")) {
                     ComboBox comboBox = (ComboBox) item;
                     if (comboBox.getSelectionModel().isEmpty()) {
-                        missingValues.put(key, "- " + key + "\n");
+                        missingValues.add(key);
                         comboBox.setStyle("-fx-border-color: red;");
 
                         allValuesAreValid = false;
@@ -103,7 +102,7 @@ public abstract class BaseController implements Initializable {
                 } else if (item.contextMenuProperty().getBean().getClass().getName().equals("javafx.scene.control.DatePicker")) {
                     DatePicker datePicker = (DatePicker) item;
                     if (datePicker.getEditor().getText().isEmpty()) {
-                        missingValues.put(key, "- " + key + "\n");
+                        missingValues.add(key);
                         datePicker.setStyle("-fx-border-color: red;");
 
                         allValuesAreValid = false;
@@ -114,8 +113,8 @@ public abstract class BaseController implements Initializable {
 
         if (!allValuesAreValid) {
             Toolkit.getDefaultToolkit().beep();
-            setMessage(Alert.AlertType.ERROR, "Es wurden nicht alle erforderlichen Felder ausgefüllt:\n" + missingValues.values().stream().collect(Collectors.joining()));
-            Optional<String> firstInvalidElement = missingValues.keySet().stream().findFirst();
+            setMessage(Alert.AlertType.ERROR, "Es wurden nicht alle erforderlichen Felder ausgefüllt: \n - " + String.join("\n - ", missingValues));
+            Optional<String> firstInvalidElement = missingValues.stream().findFirst();
 
             firstInvalidElement.ifPresent(s -> form.get(s).requestFocus());
 
