@@ -51,22 +51,21 @@ public abstract class BaseController implements Initializable {
     /**
      * Gebe eine Warnung oder einen Fehler als Nachricht aus
      *
-     * @param errorType Typ des Fehlers (MESSAGE_WARNUNG|MESSAGE_FEHLER)
+     * @param alertType Typ des Fehlers (MESSAGE_WARNUNG|MESSAGE_FEHLER)
      * @param message   Fehler-Meldung
      */
-    public static void setMessage(Alert.AlertType errorType, String message) {
-        Alert.AlertType alertType = Alert.AlertType.NONE;
+    public static void setMessage(Alert.AlertType alertType, String message) {
         String titel = "";
 
-        if (errorType == Alert.AlertType.WARNING) {
+        if (alertType == Alert.AlertType.WARNING) {
             titel = "Warnung";
-        } else if (errorType == Alert.AlertType.ERROR) {
+        } else if (alertType == Alert.AlertType.ERROR) {
             titel = "Fehler";
         }
         Alert meldung = new Alert(alertType, message, ButtonType.OK);
         meldung.setHeaderText("");
         meldung.setTitle(titel);
-        meldung.show();
+        meldung.showAndWait();
     }
 
     /**
