@@ -69,7 +69,7 @@
         <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="712.0" prefHeight="17.0" prefWidth="141.0" text="IBAN" />
         <TextField fx:id="iban" layoutX="175.0" layoutY="708.0" prefHeight="25.0" prefWidth="300.0" promptText="DE97500105179828567293" />
         <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="762.0" prefHeight="17.0" prefWidth="141.0" text="BIC" />
-        <TextField fx:id="bic" layoutX="175.0" layoutY="758.0" prefHeight="25.0" prefWidth="300.0" promptText="DUQ8996" />
+        <TextField fx:id="bic" layoutX="175.0" layoutY="758.0" prefHeight="25.0" prefWidth="300.0" promptText="COBADEFFXXX" />
         <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="812.0" prefHeight="17.0" prefWidth="141.0" text="Bank" />
         <TextField fx:id="bank" layoutX="175.0" layoutY="808.0" prefHeight="25.0" prefWidth="300.0" promptText="Sparkasse Musterstadt" />
 
