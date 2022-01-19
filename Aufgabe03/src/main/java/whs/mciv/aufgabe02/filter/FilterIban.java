@@ -1,5 +1,7 @@
 package whs.mciv.aufgabe02.filter;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextFormatter;
 
 import java.awt.*;
@@ -17,6 +19,11 @@ public class FilterIban implements UnaryOperator<TextFormatter.Change> {
 
             if (! neu.matches(IBAN_REGEX)) {
                 Toolkit.getDefaultToolkit().beep();
+
+                Alert meldung = new Alert(Alert.AlertType.WARNING, "Eine IBAN fängt mit zwei Buchstaben an und besteht anschließend aus 19 Zahlen.", ButtonType.OK);
+                meldung.setHeaderText("");
+                meldung.setTitle("IBAN ist fehlerhaft eingeben");
+                meldung.showAndWait();
                 return null;
             }
             return change;
