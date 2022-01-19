@@ -349,6 +349,18 @@ public class BuchungAnlegenController extends BaseController {
     }
 
     /**
+     * Setze Styling der Felder zurück
+     */
+    protected void resetStylingOfElements() {
+        kundeComboBox.setStyle("");
+        personenanzahl.setStyle("");
+        anreisedatum.setStyle("");
+        anzahlDerNaechte.setStyle("");
+        reisezielComboBox.setStyle("");
+        verpflegung.setStyle("");
+    }
+
+    /**
      * Controller-spezifisch Überprüfe, ob Formular bearbeitet wurde
      *
      * @return wahr, wenn das Formular bearbeitet wurde

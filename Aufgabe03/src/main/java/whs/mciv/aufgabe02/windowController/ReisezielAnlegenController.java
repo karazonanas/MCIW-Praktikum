@@ -57,6 +57,17 @@ public class ReisezielAnlegenController extends BaseController {
         return false;
     }
 
+    /**
+     * Setze Styling der Felder zurück
+     */
+    protected void resetStylingOfElements() {
+        name.setStyle("");
+        beschreibung.setStyle("");
+        land.setStyle("");
+        preisHalbpension.setStyle("");
+        preisVollpension.setStyle("");
+    }
+
     @FXML
     public void speichern() {
         // Das Speichern ist für diese Praktikumsaufgabe noch nicht notwendig.

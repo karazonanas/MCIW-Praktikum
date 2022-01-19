@@ -13,6 +13,7 @@ import whs.mciv.aufgabe02.filter.FilterPhoneNumber;
 import whs.mciv.aufgabe02.filter.FilterPlz;
 import java.awt.*;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.ResourceBundle;
 
@@ -142,30 +143,98 @@ public class KundeAnlegenController extends BaseController {
     }
 
     /**
+     * Setze Styling der Felder zurück
+     */
+    protected void resetStylingOfElements() {
+        anrede.setStyle("");
+        vorname.setStyle("");
+        nachname.setStyle("");
+        telefonnummer.setStyle("");
+        adresse.setStyle("");
+        plz.setStyle("");
+        ort.setStyle("");
+        land.setStyle("");
+        bundesland.setStyle("");
+        iban.setStyle("");
+        bic.setStyle("");
+        bank.setStyle("");
+    }
+
+    /**
      * Validiere Formular
      *
      * @return wahr, wenn alles richtig ist
      */
     public boolean validateForm() {
-
         LinkedHashMap<String, Control> form = createForm();
         boolean formValid = validateForm(form);
 
         if (formValid) {
-            if (!iban.getText().isEmpty() || !bank.getText().isEmpty() || !bic.getText().isEmpty()) {
-                if (iban.getText().isEmpty() || bank.getText().isEmpty() || bic.getText().isEmpty()) {
+            if (land.getSelectionModel().selectedItemProperty().get().equals("Deutschland") && plz.getText().length() != 5) {
+                Toolkit.getDefaultToolkit().beep();
+                plz.requestFocus();
+                setMessage(Alert.AlertType.ERROR, "Die PLZ einer deutschen Adresse besteht aus fünf Zahlen.");
+                plz.setStyle("-fx-border-color: red;");
+
+                return false;
+
+            }
+
+            if (land.getSelectionModel().selectedItemProperty().get().equals("Österreich") && plz.getText().length() != 4) {
+                Toolkit.getDefaultToolkit().beep();
+                plz.requestFocus();
+                setMessage(Alert.AlertType.ERROR, "Die PLZ einer österreichischen Adresse besteht aus vier Zahlen.");
+                plz.setStyle("-fx-border-color: red;");
+
+                return false;
+            }
+
+            if (!iban.getText().isEmpty() || !bic.getText().isEmpty() || !bank.getText().isEmpty() || !sameAsCustomer.isSelected()) {
+                if (iban.getText().isEmpty() || bic.getText().isEmpty() || bank.getText().isEmpty() || kontoinhaber.getText().isEmpty()) {
+                    ArrayList<String> errorMessages = new ArrayList<>();
+
+                    if (kontoinhaber.getText().isEmpty()) {
+                        kontoinhaber.setStyle("-fx-border-color: red;");
+                        errorMessages.add("- Es wurde kein Kontoinhaber angegeben\n");
+                    }
+                    if (iban.getText().isEmpty()) {
+                        if (errorMessages.isEmpty()) {
+                            iban.requestFocus();
+                        }
+
+                        iban.setStyle("-fx-border-color: red;");
+                        errorMessages.add( "- Es wurde keine IBAN angegeben\n");
+                    } else if (!iban.getText().matches(FilterIban.IBAN_REGEX_FINAL)) {
+                        if (errorMessages.isEmpty()) {
+                            iban.requestFocus();
+                        }
+
+                        iban.requestFocus();
+                        errorMessages.add("- Die IBAN ist nicht gültig\n");
+                        iban.setStyle("-fx-border-color: red;");
+                    }
+
+                    if (bic.getText().isEmpty()) {
+                        if (errorMessages.isEmpty()) {
+                            bic.requestFocus();
+                        }
+
+                        bic.setStyle("-fx-border-color: red;");
+                        errorMessages.add("- Der BIC wurde nicht angegeben\n");
+                    }
+
+                    if (bank.getText().isEmpty()) {
+                        if (errorMessages.isEmpty()) {
+                            bank.requestFocus();
+                        }
+
+                        bank.setStyle("-fx-border-color: red;");
+                        errorMessages.add("- Der Name der Bank fehlt\n");
+                    }
+
                     Toolkit.getDefaultToolkit().beep();
-                    setMessage(Alert.AlertType.ERROR, "Sie haben unvollständige Bankdaten angegeben:\n" +
-                            (iban.getText().isEmpty() ? "- Es wurde keine IBAN angegeben\n" : "") +
-                            (bank.getText().isEmpty() ? "- Der Name der Bank fehlt\n" : "") +
-                            (bic.getText().isEmpty() ? "- Der BIC wurde nicht angegeben" : "")
-                    );
-                    return false;
-                }
-                if (!iban.getText().matches(FilterIban.IBAN_REGEX_FINAL)) {
-                    Toolkit.getDefaultToolkit().beep();
-                    iban.requestFocus();
-                    setMessage(Alert.AlertType.ERROR, "Die IBAN ist nicht gültig!");
+                    setMessage(Alert.AlertType.ERROR, "Sie haben unvollständige oder fehlerhafte Bankdaten angegeben:\n" + String.join("", errorMessages));
+
                     return false;
                 }
 
@@ -174,15 +243,10 @@ public class KundeAnlegenController extends BaseController {
                     Toolkit.getDefaultToolkit().beep();
                     bic.requestFocus();
                     setMessage(Alert.AlertType.ERROR, "Der BIC ist nicht gültig!");
+                    bic.setStyle("-fx-border-color: red;");
+
                     return false;
                 }
-            }
-            if (plz.getText().length() == 5 && ! land.getSelectionModel().selectedItemProperty().get().equals("Deutschland") ||
-                    plz.getText().length() == 4 && ! land.getSelectionModel().selectedItemProperty().get().equals("Österreich")) {
-                Toolkit.getDefaultToolkit().beep();
-                plz.requestFocus();
-                setMessage(Alert.AlertType.ERROR,"Bitte überprüfen Sie Ihre Eingaben, PLZ und Land stimmen nicht überein");
-                return false;
             }
         }
         return formValid;
@@ -198,6 +262,11 @@ public class KundeAnlegenController extends BaseController {
         return wasFormEdited(form);
     }
 
+    /**
+     * Erstelle Formular-Felder
+     *
+     * @return LinkedHashMap mit Feldern
+     */
     private LinkedHashMap<String, Control> createForm() {
         LinkedHashMap<String, Control> form = new LinkedHashMap<>();
         form.put("Vorname", vorname);

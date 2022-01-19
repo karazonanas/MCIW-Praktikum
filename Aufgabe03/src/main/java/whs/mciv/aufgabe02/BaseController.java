@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 
 import java.awt.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public abstract class BaseController implements Initializable {
 
@@ -75,37 +76,52 @@ public abstract class BaseController implements Initializable {
      * @return wahr, wenn alle Felder ausgefüllt sind.
      */
     protected boolean validateForm(LinkedHashMap<String, Control> form) {
+        LinkedHashMap<String, String> missingValues = new LinkedHashMap<>();
+        boolean allValuesAreValid = true;
+
+        resetStylingOfElements();
+
         for (String key : form.keySet()) {
             if (! Arrays.stream(HASDEFAULTVALUE).anyMatch(key::equals)) {
                 Control item = form.get(key);
                 if (item.contextMenuProperty().getBean().getClass().getName().equals("javafx.scene.control.TextField")) {
                     TextField field = (TextField) item;
                     if (field.getText().isEmpty()) {
-                        System.out.println("test");
-                        Toolkit.getDefaultToolkit().beep();
-                        field.requestFocus();
-                        setMessage(Alert.AlertType.ERROR, "Bitte " + key + " eingeben");
-                        return false;
+                        missingValues.put(key, "- " + key + "\n");
+                        field.setStyle("-fx-border-color: red;");
+
+                        allValuesAreValid = false;
                     }
                 } else if (item.contextMenuProperty().getBean().getClass().getName().equals("javafx.scene.control.ComboBox")) {
                     ComboBox comboBox = (ComboBox) item;
                     if (comboBox.getSelectionModel().isEmpty()) {
-                        Toolkit.getDefaultToolkit().beep();
-                        comboBox.requestFocus();
-                        setMessage(Alert.AlertType.ERROR, "Bitte " + key + " auswählen");
-                        return false;
+                        missingValues.put(key, "- " + key + "\n");
+                        comboBox.setStyle("-fx-border-color: red;");
+
+                        allValuesAreValid = false;
                     }
                 } else if (item.contextMenuProperty().getBean().getClass().getName().equals("javafx.scene.control.DatePicker")) {
                     DatePicker datePicker = (DatePicker) item;
                     if (datePicker.getEditor().getText().isEmpty()) {
-                        Toolkit.getDefaultToolkit().beep();
-                        datePicker.requestFocus();
-                        setMessage(Alert.AlertType.ERROR, "Bitte " + key + " auswählen");
-                        return false;
+                        missingValues.put(key, "- " + key + "\n");
+                        datePicker.setStyle("-fx-border-color: red;");
+
+                        allValuesAreValid = false;
                     }
                 }
             }
         }
+
+        if (!allValuesAreValid) {
+            Toolkit.getDefaultToolkit().beep();
+            setMessage(Alert.AlertType.ERROR, "Es wurden nicht alle erforderlichen Felder ausgefüllt:\n" + missingValues.values().stream().collect(Collectors.joining()));
+            Optional<String> firstInvalidElement = missingValues.keySet().stream().findFirst();
+
+            firstInvalidElement.ifPresent(s -> form.get(s).requestFocus());
+
+            return false;
+        }
+
         return true;
     }
 
@@ -140,6 +156,11 @@ public abstract class BaseController implements Initializable {
      * @return wahr, wenn das Formular bearbeitet wurde
      */
     public abstract boolean wasFormEdited();
+
+    /**
+     * Setze Styling der Felder zurück
+     */
+    protected abstract void resetStylingOfElements();
 
     @FXML
     public abstract void abbrechen();
