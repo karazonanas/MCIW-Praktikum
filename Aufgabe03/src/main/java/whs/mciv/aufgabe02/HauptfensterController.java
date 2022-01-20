@@ -23,7 +23,7 @@ public class HauptfensterController implements Initializable {
 
     private BuchungsTool mainApp;
     private final String BEENDEN_HINWEIS = "Möchten Sie wirklich die Anwendung und alle dazugehörigen Fenster schließen?";
-    private final String BEENDEN_TITEL = "Ja, Anwendung beenden";
+    private final String BEENDEN_TITEL = "Anwendung beenden";
     private final String DEV_INFO = "Buchungssystem WHS\nVersion 1.0.3 \nEntwickelt von Anas Karazon und Enes Erk";
     private final String DEV_INFO_TITEL = "Info";
     
