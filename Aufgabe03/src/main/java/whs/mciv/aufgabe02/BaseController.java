@@ -26,6 +26,8 @@ public abstract class BaseController implements Initializable {
     protected void initButtons() {
         abbrechen.setOnAction((ActionEvent event) -> {
             boolean formIsEmpty = wasFormEdited();
+
+
             if (formIsEmpty) {
                 abbrechen();
             } else {
@@ -36,6 +38,8 @@ public abstract class BaseController implements Initializable {
                 if (beenden.isPresent()) {
                     if (Objects.equals(beenden.get().getButtonData().toString(), "YES")) {
                         abbrechen();
+                    } else {
+                        callIfAbbrechenAborted();
                     }
                 }
             }
@@ -46,6 +50,13 @@ public abstract class BaseController implements Initializable {
                 speichern();
             }
         });
+    }
+
+    /**
+     * Wird aufgerufen, wenn das Formular nicht abgebrochen/geschlossen werden soll
+     */
+    protected void callIfAbbrechenAborted() {
+        // ToDo: Whats should be done?
     }
 
     /**

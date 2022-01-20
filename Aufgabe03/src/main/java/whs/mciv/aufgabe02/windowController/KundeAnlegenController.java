@@ -79,10 +79,24 @@ public class KundeAnlegenController extends BaseController {
 
         landConditionalComboBox();
         sameAsCustomerConditionalCheckbox();
+
         plz.setTextFormatter(new TextFormatter<>(new FilterPlz('d')));
-        email.setTextFormatter(new TextFormatter<>(new FilterEmail()));
         telefonnummer.setTextFormatter(new TextFormatter<>(new FilterPhoneNumber()));
         iban.setTextFormatter(new TextFormatter<>(new FilterIban()));
+        email.setTextFormatter(new TextFormatter<>(new FilterEmail()));
+
+        abbrechen.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+                if (t1) {
+                    System.out.println("entferne");
+                    email.setTextFormatter(null);
+                } else {
+                    System.out.println("nein");
+                }
+            }
+        });
+
         initButtons();
         updateKontoinhaber();
     }
@@ -162,6 +176,14 @@ public class KundeAnlegenController extends BaseController {
                 }
             }
         });
+    }
+
+    /**
+     * Wird aufgerufen, wenn das Formular nicht abgebrochen/geschlossen werden soll
+     */
+    @Override
+    protected void callIfAbbrechenAborted() {
+        email.setTextFormatter(new TextFormatter<>(new FilterEmail()));
     }
 
     /**
@@ -284,6 +306,12 @@ public class KundeAnlegenController extends BaseController {
      */
     public boolean wasFormEdited() {
         LinkedHashMap<String, Control> form = createForm();
+
+        form.put("E-Mail", email);
+        form.put("IBAN", iban);
+        form.put("BIC", bic);
+        form.put("Bank", bank);
+
         return wasFormEdited(form);
     }
 
