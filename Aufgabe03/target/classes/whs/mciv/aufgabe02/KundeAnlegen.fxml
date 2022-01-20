@@ -62,8 +62,7 @@
         <ComboBox fx:id="bundesland" layoutX="175.0" layoutY="529.0" prefHeight="25.0" prefWidth="173.0" promptText="Bundesland auswählen" />
 
         <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="636.0" prefHeight="17.0" prefWidth="141.0" text="Kontoinhaber" />
-        <CheckBox fx:id="sameAsCustomer" contentDisplay="CENTER" layoutX="175.0" layoutY="600.0" prefHeight="17.0" prefWidth="173.0"
-                  text="Abweichender Kontoinhaber?" />
+        <CheckBox fx:id="sameAsCustomer" contentDisplay="CENTER" layoutX="175.0" layoutY="600.0" prefHeight="17.0" prefWidth="200.0" text="Abweichender Kontoinhaber?" />
         <TextField fx:id="kontoinhaber" disable="true" layoutX="175.0" layoutY="632.0" prefHeight="25.0" prefWidth="200.0" promptText="Max Mustermann" />
         <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="686.0" prefHeight="17.0" prefWidth="141.0" text="IBAN" />
         <TextField fx:id="iban" layoutX="175.0" layoutY="682.0" prefHeight="25.0" prefWidth="200.0" promptText="DE97500105179828567293" />
