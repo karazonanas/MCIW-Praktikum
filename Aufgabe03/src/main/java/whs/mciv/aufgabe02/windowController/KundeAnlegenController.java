@@ -305,6 +305,7 @@ public class KundeAnlegenController extends BaseController {
     public boolean wasFormEdited() {
         LinkedHashMap<String, Control> form = createForm();
 
+        form.put("Anrede", anrede);
         form.put("E-Mail", email);
         form.put("IBAN", iban);
         form.put("BIC", bic);
