@@ -89,10 +89,8 @@ public class KundeAnlegenController extends BaseController {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
                 if (t1) {
-                    System.out.println("entferne");
                     email.setTextFormatter(null);
                 } else {
-                    System.out.println("nein");
                 }
             }
         });
