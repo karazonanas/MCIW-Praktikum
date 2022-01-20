@@ -94,10 +94,12 @@ public class KundeAnlegenController extends BaseController {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
                 if (t1) {
+                    kontoinhaber.setText("");
+                } else {
                     kontoinhaber.setText(vorname.getText() + " " + nachname.getText());
                 }
-                kontoinhaber.setEditable(!t1);
-                kontoinhaber.setDisable(t1);
+                kontoinhaber.setEditable(t1);
+                kontoinhaber.setDisable(!t1);
             }
         });
     }
@@ -110,7 +112,7 @@ public class KundeAnlegenController extends BaseController {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldProperty, Boolean newProperty) {
                 // Wenn kein Fokus auf Feld
-                if (!newProperty && sameAsCustomer.isSelected()) {
+                if (!newProperty && ! sameAsCustomer.isSelected()) {
                     kontoinhaber.setText(vorname.getText() + " " + nachname.getText());
                 }
             }

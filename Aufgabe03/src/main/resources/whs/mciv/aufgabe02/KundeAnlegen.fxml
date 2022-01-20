@@ -7,18 +7,18 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="908.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whs.mciv.aufgabe02.windowController.KundeAnlegenController">
+<AnchorPane id="AnchorPane" prefHeight="882.0" prefWidth="405.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whs.mciv.aufgabe02.windowController.KundeAnlegenController">
     <children>
         <Label layoutX="25.0" layoutY="25.0" text="Kunde anlegen">
             <font>
                 <Font name="System Bold" size="18.0" />
             </font>
         </Label>
-        <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="75.0" text="Kunde-ID" />
-        <TextField fx:id="id" disable="true" editable="false" layoutX="175.0" layoutY="71.0" prefHeight="25.0" prefWidth="150.0" text="Kunde-ID" />
+        <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="75.0" prefHeight="17.0" prefWidth="141.0" text="Kunde-ID" />
+        <TextField fx:id="id" disable="true" editable="false" layoutX="175.0" layoutY="71.0" prefHeight="25.0" prefWidth="114.0" text="Kunde-ID" />
 
         <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="125.0" prefHeight="17.0" prefWidth="141.0" text="Anrede" />
-        <ComboBox fx:id="anrede" layoutX="175.0" layoutY="121.0" prefWidth="150.0" promptText="Auswählen">
+        <ComboBox fx:id="anrede" layoutX="175.0" layoutY="121.0" prefHeight="25.0" prefWidth="114.0" promptText="Auswählen">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="Herr" />
@@ -28,28 +28,26 @@
             </items>
         </ComboBox>
         <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="175.0" prefHeight="17.0" prefWidth="141.0" text="Vorname *" />
-        <TextField fx:id="vorname" layoutX="175.0" layoutY="171.0" prefHeight="25.0" prefWidth="300.0" promptText="Max" />
+        <TextField fx:id="vorname" layoutX="175.0" layoutY="171.0" prefHeight="25.0" prefWidth="114.0" promptText="Max" />
 
         <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="225.0" prefHeight="17.0" prefWidth="141.0" text="Nachname *" />
-        <TextField fx:id="nachname" layoutX="175.0" layoutY="221.0" prefHeight="25.0" prefWidth="300.0" promptText="Mustermann" />
+        <TextField fx:id="nachname" layoutX="175.0" layoutY="221.0" prefHeight="25.0" prefWidth="114.0" promptText="Mustermann" />
 
         <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="271.0" prefHeight="17.0" prefWidth="141.0" text="Telefonnummer *" />
-        <TextField fx:id="telefonnummer" layoutX="175.0" layoutY="267.0" prefHeight="25.0" prefWidth="300.0" promptText="0156987985" />
+        <TextField fx:id="telefonnummer" layoutX="175.0" layoutY="267.0" prefHeight="25.0" prefWidth="173.0" promptText="+49(158)26354548-268" />
 
         <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="321.0" prefHeight="17.0" prefWidth="141.0" text="E-Mail" />
-        <TextField fx:id="email" layoutX="175.0" layoutY="317.0" prefHeight="25.0" prefWidth="300.0" promptText="muster@mail.de" />
+        <TextField fx:id="email" layoutX="175.0" layoutY="317.0" prefHeight="25.0" prefWidth="173.0" promptText="muster@mail.de" />
 
         <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="388.0" text="Straße und Hausnummer *" />
-        <TextField fx:id="adresse" layoutX="175.0" layoutY="384.0" prefHeight="25.0" prefWidth="300.0" promptText="MusterStr. 30" />
+        <TextField fx:id="adresse" layoutX="175.0" layoutY="384.0" prefHeight="25.0" prefWidth="173.0" promptText="MusterStr. 30" />
 
         <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="438.0" prefHeight="17.0" prefWidth="141.0" text="Postleitzahl *" />
         <TextField fx:id="plz" alignment="CENTER_RIGHT" layoutX="175.0" layoutY="434.0" prefHeight="25.0" prefWidth="51.0" promptText="78962" />
+        <TextField fx:id="ort" layoutX="234.0" layoutY="434.0" prefHeight="25.0" prefWidth="114.0" promptText="Musterstadt" />
 
-        <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="488.0" prefHeight="17.0" prefWidth="141.0" text="Ort *" />
-        <TextField fx:id="ort" layoutX="175.0" layoutY="484.0" prefHeight="25.0" prefWidth="200.0" promptText="Musterstadt" />
-
-        <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="538.0" prefHeight="17.0" prefWidth="141.0" text="Land *" />
-        <ComboBox fx:id="land" layoutX="175.0" layoutY="534.0" prefHeight="25.0" prefWidth="150.0" promptText="Deutschland">
+        <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="483.0" prefHeight="17.0" prefWidth="141.0" text="Land *" />
+        <ComboBox fx:id="land" layoutX="175.0" layoutY="479.0" prefHeight="25.0" prefWidth="173.0" promptText="Deutschland">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="Deutschland" />
@@ -60,23 +58,23 @@
                 <String fx:value="Deutschland" />
             </value>
         </ComboBox>
-        <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="588.0" prefHeight="17.0" prefWidth="141.0" text="Bundesland *" />
-        <ComboBox fx:id="bundesland" layoutX="175.0" layoutY="584.0" prefHeight="25.0" prefWidth="200.0" promptText="Bundesland auswählen" />
+        <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="533.0" prefHeight="17.0" prefWidth="141.0" text="Bundesland *" />
+        <ComboBox fx:id="bundesland" layoutX="175.0" layoutY="529.0" prefHeight="25.0" prefWidth="173.0" promptText="Bundesland auswählen" />
 
-        <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="662.0" prefHeight="17.0" prefWidth="141.0" text="Kontoinhaber" />
-        <TextField fx:id="kontoinhaber" disable="true" layoutX="175.0" layoutY="658.0" prefHeight="25.0" prefWidth="200.0" promptText="Max Mustermann" />
-        <CheckBox fx:id="sameAsCustomer" layoutX="400.0" layoutY="662.0" selected="true" text="wie Kunde" />
-        <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="712.0" prefHeight="17.0" prefWidth="141.0" text="IBAN" />
-        <TextField fx:id="iban" layoutX="175.0" layoutY="708.0" prefHeight="25.0" prefWidth="300.0" promptText="DE97500105179828567293" />
-        <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="762.0" prefHeight="17.0" prefWidth="141.0" text="BIC" />
-        <TextField fx:id="bic" layoutX="175.0" layoutY="758.0" prefHeight="25.0" prefWidth="300.0" promptText="COBADEFFXXX" />
-        <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="812.0" prefHeight="17.0" prefWidth="141.0" text="Bank" />
-        <TextField fx:id="bank" layoutX="175.0" layoutY="808.0" prefHeight="25.0" prefWidth="300.0" promptText="Sparkasse Musterstadt" />
+        <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="636.0" prefHeight="17.0" prefWidth="141.0" text="Kontoinhaber" />
+        <CheckBox fx:id="sameAsCustomer" contentDisplay="CENTER" layoutX="175.0" layoutY="600.0" prefHeight="17.0" prefWidth="200.0" text="Abweichender Kontoinhaber?" />
+        <TextField fx:id="kontoinhaber" disable="true" layoutX="175.0" layoutY="632.0" prefHeight="25.0" prefWidth="200.0" promptText="Max Mustermann" />
+        <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="686.0" prefHeight="17.0" prefWidth="141.0" text="IBAN" />
+        <TextField fx:id="iban" layoutX="175.0" layoutY="682.0" prefHeight="25.0" prefWidth="200.0" promptText="DE97500105179828567293" />
+        <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="736.0" prefHeight="17.0" prefWidth="141.0" text="BIC" />
+        <TextField fx:id="bic" layoutX="175.0" layoutY="732.0" prefHeight="25.0" prefWidth="114.0" promptText="COBADEFFXXX" />
+        <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="786.0" prefHeight="17.0" prefWidth="141.0" text="Bank" />
+        <TextField fx:id="bank" layoutX="175.0" layoutY="782.0" prefHeight="25.0" prefWidth="200.0" promptText="Sparkasse Musterstadt" />
 
-        <Button fx:id="speichern" layoutX="304.0" layoutY="870.0" mnemonicParsing="false" text="Speichern" />
-        <Button fx:id="abbrechen" layoutX="403.0" layoutY="870.0" mnemonicParsing="false" text="Abbrechen" />
-      <Line endX="300.0" layoutX="100.0" layoutY="633.5" stroke="#aeaeae" strokeWidth="0.5" />
-      <Line endX="300.0" layoutX="100.0" layoutY="363.0" stroke="#aeaeae" strokeWidth="0.5" />
-      <Label layoutX="29.0" layoutY="874.0" text="* Pflichtfeld" />
+        <Button fx:id="speichern" layoutX="201.0" layoutY="839.0" mnemonicParsing="false" text="Speichern" />
+        <Button fx:id="abbrechen" layoutX="299.0" layoutY="839.0" mnemonicParsing="false" text="Abbrechen" />
+      <Line endX="300.0" layoutX="50.0" layoutY="581.0" stroke="#aeaeae" strokeWidth="0.5" />
+      <Line endX="300.0" layoutX="50.0" layoutY="363.0" stroke="#aeaeae" strokeWidth="0.5" />
+      <Label layoutX="25.0" layoutY="822.0" text="* Pflichtfeld" />
     </children>
 </AnchorPane>
