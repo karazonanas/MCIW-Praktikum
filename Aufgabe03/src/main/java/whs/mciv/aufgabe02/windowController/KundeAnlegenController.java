@@ -231,11 +231,11 @@ public class KundeAnlegenController extends BaseController {
                 return false;
             }
 
-            if (!iban.getText().isEmpty() || !bic.getText().isEmpty() || !bank.getText().isEmpty() || !sameAsCustomer.isSelected()) {
+            if (!iban.getText().isEmpty() || !bic.getText().isEmpty() || !bank.getText().isEmpty() || sameAsCustomer.isSelected()) {
                 if (iban.getText().isEmpty() || bic.getText().isEmpty() || bank.getText().isEmpty() || kontoinhaber.getText().isEmpty()) {
                     ArrayList<String> errorMessages = new ArrayList<>();
 
-                    if (kontoinhaber.getText().isEmpty()) {
+                    if (kontoinhaber.getText().isEmpty() && sameAsCustomer.isSelected()) {
                         kontoinhaber.setStyle("-fx-border-color: red;");
                         errorMessages.add("- Es wurde kein Kontoinhaber angegeben\n");
                     }
