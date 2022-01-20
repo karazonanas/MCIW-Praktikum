@@ -5,6 +5,7 @@ import javafx.scene.control.TextFormatter;
 import whs.mciv.aufgabe02.BaseController;
 
 import java.awt.*;
+import java.util.Objects;
 import java.util.function.UnaryOperator;
 
 public class FilterPlz implements UnaryOperator<TextFormatter.Change> {
@@ -21,26 +22,36 @@ public class FilterPlz implements UnaryOperator<TextFormatter.Change> {
     public TextFormatter.Change apply(TextFormatter.Change tfc) {
 
         String regexPlz;
+        int numberLimit;
+        String country;
 
         switch (land) {
             case 'o':
                 regexPlz = O_REGEX;
+                numberLimit = 4;
+                country = "Österreich";
                 break;
             case 'd':
             default:
                 regexPlz = DEFAULT_REGEX;
+                numberLimit = 5;
+                country = "Deutschland";
                 break;
         }
 
         String neu = tfc.getControlNewText();
-        if (!neu.matches(regexPlz)) {
-            BaseController.setMessage(Alert.AlertType.ERROR, "PLZ ist nicht richtig");
+
+        if (!neu.matches(regexPlz) && !Objects.equals(tfc.getControlText(), tfc.getControlNewText())) {
             Toolkit.getDefaultToolkit().beep();
+            BaseController.setMessage(Alert.AlertType.ERROR, "Die Postleitzahl in " + country + " muss aus " + numberLimit + " Zahlen bestehen!");
+
+            return null;
         }
 
         if (!neu.matches(DEFAULT_REGEX)) {
             return null;
         }
+
         return tfc;
     }
 }

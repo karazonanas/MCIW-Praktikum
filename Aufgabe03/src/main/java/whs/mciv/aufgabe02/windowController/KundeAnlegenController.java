@@ -76,12 +76,25 @@ public class KundeAnlegenController extends BaseController {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.kunde = new Kunde();
         id.setText(kunde.getId());
+
         landConditionalComboBox();
         sameAsCustomerConditionalCheckbox();
+
         plz.setTextFormatter(new TextFormatter<>(new FilterPlz('d')));
-        email.setTextFormatter(new TextFormatter<>(new FilterEmail()));
         telefonnummer.setTextFormatter(new TextFormatter<>(new FilterPhoneNumber()));
         iban.setTextFormatter(new TextFormatter<>(new FilterIban()));
+        email.setTextFormatter(new TextFormatter<>(new FilterEmail()));
+
+        abbrechen.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+                if (t1) {
+                    email.setTextFormatter(null);
+                } else {
+                }
+            }
+        });
+
         initButtons();
         updateKontoinhaber();
     }
@@ -127,6 +140,8 @@ public class KundeAnlegenController extends BaseController {
      */
     private void landConditionalComboBox() {
         bundesland.getItems().setAll(DE_LAENDER);
+        plz.setStyle("");
+
         land.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observableValue, Object o, Object t1) {
@@ -134,14 +149,39 @@ public class KundeAnlegenController extends BaseController {
                     String ausgewaehlteLand = (String) t1;
                     switch (ausgewaehlteLand) {
                         case "Deutschland": bundesland.getItems().setAll(DE_LAENDER);
-                            plz.setTextFormatter(new TextFormatter<>(new FilterPlz('d')));break;
+                            plz.setTextFormatter(new TextFormatter<>(new FilterPlz('d')));
+
+                            if (!plz.getText().matches(FilterPlz.DEFAULT_REGEX)) {
+                                Toolkit.getDefaultToolkit().beep();
+                                setMessage(Alert.AlertType.WARNING, "Sie haben das Land geändert, jedoch stimmt die PLZ nicht überein. In Deutschland besteht eine PLZ aus 5 Zahlen.");
+                                plz.setStyle("-fx-border-color: orange;");
+                            }
+
+                            break;
                         case "Österreich": bundesland.getItems().setAll(OS_LAENDER);
-                            plz.setTextFormatter(new TextFormatter<>(new FilterPlz('o')));break;
+                            plz.setTextFormatter(new TextFormatter<>(new FilterPlz('o')));
+
+                            if (!plz.getText().matches(FilterPlz.O_REGEX)) {
+                                Toolkit.getDefaultToolkit().beep();
+                                setMessage(Alert.AlertType.WARNING, "Sie haben das Land geändert, jedoch stimmt die PLZ nicht überein. In Österreich besteht eine PLZ aus 4 Zahlen.");
+                                plz.setStyle("-fx-border-color: orange;");
+                            }
+
+                            break;
                     }
+
                     plz.requestFocus();
                 }
             }
         });
+    }
+
+    /**
+     * Wird aufgerufen, wenn das Formular nicht abgebrochen/geschlossen werden soll
+     */
+    @Override
+    protected void callIfAbbrechenAborted() {
+        email.setTextFormatter(new TextFormatter<>(new FilterEmail()));
     }
 
     /**
@@ -199,6 +239,7 @@ public class KundeAnlegenController extends BaseController {
                         kontoinhaber.setStyle("-fx-border-color: red;");
                         errorMessages.add("- Es wurde kein Kontoinhaber angegeben\n");
                     }
+
                     if (iban.getText().isEmpty()) {
                         if (errorMessages.isEmpty()) {
                             iban.requestFocus();
@@ -206,7 +247,8 @@ public class KundeAnlegenController extends BaseController {
 
                         iban.setStyle("-fx-border-color: red;");
                         errorMessages.add( "- Es wurde keine IBAN angegeben\n");
-                    } else if (!iban.getText().matches(FilterIban.IBAN_REGEX_FINAL)) {
+                    }
+                    else if (!iban.getText().matches(FilterIban.IBAN_REGEX_FINAL)) {
                         if (errorMessages.isEmpty()) {
                             iban.requestFocus();
                         }
@@ -251,6 +293,7 @@ public class KundeAnlegenController extends BaseController {
                 }
             }
         }
+
         return formValid;
     }
 
@@ -261,6 +304,12 @@ public class KundeAnlegenController extends BaseController {
      */
     public boolean wasFormEdited() {
         LinkedHashMap<String, Control> form = createForm();
+
+        form.put("E-Mail", email);
+        form.put("IBAN", iban);
+        form.put("BIC", bic);
+        form.put("Bank", bank);
+
         return wasFormEdited(form);
     }
 
