@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="645.0" prefWidth="1039.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whs.mciv.aufgabe04.HauptfensterController">
+    <children>
+      <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="1039.0">
+        <menus>
+          <Menu text="_Datei">
+            <items>
+              <MenuItem text="Datenquelle _öffnen" />
+              <MenuItem text="Datenbank _exportieren" />
+              <MenuItem text="Ei_nstellungen" />
+              <MenuItem onAction="#beenden" text="_Beenden" />
+            </items>
+          </Menu>
+          <Menu text="_Kunden">
+            <items>
+              <MenuItem text="Kunden_übersicht" />
+              <MenuItem onAction="#zeigeKundeAnlegenDialog" text="Kunde _anlegen" />
+              <MenuItem text="Kunden _verwalten" />
+            </items>
+          </Menu>
+          <Menu text="_Buchung">
+            <items>
+              <MenuItem text="Buchungs_übersicht" />
+              <MenuItem onAction="#zeigeBuchungAnlegenDialog" text="Buchung _anlegen" />
+              <MenuItem text="Kunden _verwalten" />
+            </items>
+          </Menu>
+          <Menu text="_Reiseziele">
+            <items>
+              <MenuItem text="Reiseziel_übersicht" />
+              <MenuItem onAction="#zeigeReisezielAnlegenDialog" text="Reiseziel _anlegen" />
+              <MenuItem text="Reiseziele _verwalten" />
+            </items>
+          </Menu>
+          <Menu text="?">
+            <items>
+              <MenuItem text="_Info" onAction="#showDevInfo"/>
+              <MenuItem text="_Hilfe" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+    </children>
+</AnchorPane>
