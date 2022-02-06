@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package whs.mciv.aufgabe04.windowController;
+package whs.mciv.aufgabe04.windowController.formulare;
 
 import whs.mciv.aufgabe04.BaseController;
 import whs.mciv.aufgabe04.daten.reiseziele.Reiseziel;
@@ -13,7 +13,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
-public class ReisezielAnlegenController extends BaseController {
+public class ReisezielAnlegenController extends FormularController {
 
     @FXML
     private TextField id;

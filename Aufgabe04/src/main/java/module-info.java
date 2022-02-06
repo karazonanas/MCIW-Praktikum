@@ -8,6 +8,10 @@ module whs.mciv.aufgabe02 {
 
     opens whs.mciv.aufgabe04 to javafx.fxml;
     exports whs.mciv.aufgabe04;
-    exports whs.mciv.aufgabe04.windowController;
-    opens whs.mciv.aufgabe04.windowController to javafx.fxml;
+//    exports whs.mciv.aufgabe04.windowController.formulare;
+//    opens whs.mciv.aufgabe04.windowController to javafx.fxml;
+    exports whs.mciv.aufgabe04.windowController.formulare;
+    opens whs.mciv.aufgabe04.windowController.formulare to javafx.fxml;
+    exports whs.mciv.aufgabe04.windowController.uebersichten;
+    opens whs.mciv.aufgabe04.windowController.uebersichten to javafx.fxml;
 }

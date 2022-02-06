@@ -54,6 +54,16 @@ public class HauptfensterController implements Initializable {
     }
 
     @FXML
+    public void zeigeKundeUebersichtDialog(ActionEvent actionEvent) {
+        boolean wurdeAngelegt = mainApp.zeigeKundeUebersichtDialog();
+    }
+
+    @FXML
+    public void zeigeBuchungUebersichtDialog(ActionEvent actionEvent) {
+        boolean wurdeAngelegt = mainApp.zeigeBuchungUebersichtDialog();
+    }
+
+    @FXML
     private void beenden() {
         Alert meldung = new Alert(Alert.AlertType.WARNING, BEENDEN_HINWEIS, ButtonType.YES, ButtonType.NO);
         meldung.setHeaderText("");
@@ -68,9 +78,6 @@ public class HauptfensterController implements Initializable {
 
     @FXML
     private void showDevInfo() {
-        Alert meldung = new Alert(Alert.AlertType.INFORMATION, DEV_INFO, ButtonType.OK);
-        meldung.setHeaderText("");
-        meldung.setTitle(DEV_INFO_TITEL);
-        meldung.show();
+        BaseController.setMessage(Alert.AlertType.INFORMATION, DEV_INFO);
     }
 }

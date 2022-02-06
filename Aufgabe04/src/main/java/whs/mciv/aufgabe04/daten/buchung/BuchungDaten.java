@@ -19,7 +19,7 @@ public abstract class BuchungDaten {
      * Abfragen aller gespeicherter Buchungen.
      * @return Alle gespeicherten Buchungen
      */
-    public static Set<Buchung> getAllReiseziele() {
+    public static Set<Buchung> getAllBuchungen() {
         return Collections.unmodifiableSet(new HashSet(buchungen.values().stream().filter(rz -> rz != null).collect(Collectors.toList()))
         );
     }
@@ -66,7 +66,7 @@ public abstract class BuchungDaten {
      */
     public static String erzeugeId() {
         int aktuellesJahr = LocalDate.now().getYear();
-        String id = "B" + aktuellesJahr + (buchungen.size() + 1);
+        String id = "BU" + aktuellesJahr + (buchungen.size() + 1);
         buchungen.put(id, null);
         return id;
     }

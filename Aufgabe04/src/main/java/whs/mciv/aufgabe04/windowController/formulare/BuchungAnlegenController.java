@@ -1,4 +1,4 @@
-package whs.mciv.aufgabe04.windowController;
+package whs.mciv.aufgabe04.windowController.formulare;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import whs.mciv.aufgabe04.BaseController;
 import whs.mciv.aufgabe04.daten.buchung.Buchung;
+import whs.mciv.aufgabe04.daten.buchung.BuchungDaten;
 import whs.mciv.aufgabe04.daten.kunde.Kunde;
 import whs.mciv.aufgabe04.daten.kunde.KundenDaten;
 import whs.mciv.aufgabe04.daten.reiseziele.Reiseziel;
@@ -27,7 +28,7 @@ import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class BuchungAnlegenController extends BaseController {
+public class BuchungAnlegenController extends FormularController {
 
     @FXML
     private TextField id;
@@ -377,6 +378,18 @@ public class BuchungAnlegenController extends BaseController {
 
     @FXML
     public void speichern() {
+        this.buchung.setKunde(kundeComboBox.getSelectionModel().getSelectedItem());
+        this.buchung.setAnreisedatum(anreisedatum.getEditor().getText());
+//        @ToDo Gesamtpreis
+//        this.buchung.setGesamtpreis();
+        this.buchung.setAnzahlderNaechte(Integer.parseInt(anzahlDerNaechte.getText()));
+        this.buchung.setPersonenanzahl(Integer.parseInt(personenanzahl.getText()));
+        this.buchung.setVerpflegung(verpflegung.getSelectionModel().getSelectedItem());
+        this.buchung.setBuchungsStatus(buchungsStatus.getText());
+        this.buchung.setReiseziel(reisezielComboBox.getSelectionModel().getSelectedItem());
+
+        BuchungDaten.speichereBuchung(this.buchung);
+
         wurdeGespeichert = true;
         stage.close();
     }

@@ -1,14 +1,16 @@
 package whs.mciv.aufgabe04.daten.kunde;
 
+import whs.mciv.aufgabe04.daten.N;
+
 import java.util.Objects;
 
-public class Kunde {
+public class Kunde extends N {
     String id;
     String anrede;
     String vorname;
     String nachname;
     String adresse;
-    int plz;
+    String plz;
     String ort;
     String land;
     String bundesland;
@@ -63,11 +65,11 @@ public class Kunde {
         this.adresse = adresse;
     }
 
-    public int getPlz() {
+    public String getPlz() {
         return plz;
     }
 
-    public void setPlz(int plz) {
+    public void setPlz(String plz) {
         this.plz = plz;
     }
 
@@ -145,7 +147,7 @@ public class Kunde {
 
     @Override
     public String toString() {
-        return this.vorname + " " + this.nachname;
+        return this.id + " - " + this.vorname + " " + this.nachname;
     }
 
     @Override

@@ -40,7 +40,7 @@ public abstract class KundenDaten {
 
    public static String erzeugeId () {
        int aktuellesJahr = LocalDate.now().getYear();
-       String id = "K" + aktuellesJahr + (kunden.size() + 1);
+       String id = "KD" + aktuellesJahr + (kunden.size() + 1);
        kunden.put(id, null);
        return id;
    }

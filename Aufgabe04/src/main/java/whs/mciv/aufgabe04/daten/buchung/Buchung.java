@@ -1,5 +1,6 @@
 package whs.mciv.aufgabe04.daten.buchung;
 
+import whs.mciv.aufgabe04.daten.N;
 import whs.mciv.aufgabe04.daten.kunde.Kunde;
 import whs.mciv.aufgabe04.daten.reiseziele.Reiseziel;
 
@@ -9,7 +10,7 @@ import java.util.Objects;
  * Ein Objekt dieser Klasse repräsentiert eine Buchung.
  * Bereits vorhandene Buchungen werden in der Klasse BuchungDaten verwaltet.
  */
-public class Buchung {
+public class Buchung extends N {
 
     /** Die ID der Buchung. Wird automatisch im Konstruktor erzeugt. */
     private String id;
@@ -80,7 +81,7 @@ public class Buchung {
 
     /**
      * Setze den Status der Buchung
-     * @param status Status der Buchung
+     * @param buchungsStatus Status der Buchung
      */
     public void setBuchungsStatus(String buchungsStatus) {
         this.buchungsStatus = buchungsStatus;
@@ -176,7 +177,7 @@ public class Buchung {
 
     /**
      * Setzt den Gesamtpreis in Euro
-     * @param preis Gesamtpreis
+     * @param gesamtpreis Gesamtpreis
      */
     public void setGesamtpreis(double gesamtpreis) {
         this.gesamtpreis = gesamtpreis;
@@ -184,7 +185,7 @@ public class Buchung {
 
     @Override
     public String toString() {
-        return this.id;
+        return this.id + " - " + this.kunde.getVorname() + " " + this.kunde.getNachname() + " - " + this.reiseziel;
     }
 
     @Override

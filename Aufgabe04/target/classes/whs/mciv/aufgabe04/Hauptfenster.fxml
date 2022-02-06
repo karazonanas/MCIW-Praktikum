@@ -19,14 +19,14 @@
           </Menu>
           <Menu text="_Kunden">
             <items>
-              <MenuItem text="Kunden_übersicht" />
+              <MenuItem onAction="#zeigeKundeUebersichtDialog" text="Kunden_übersicht" />
               <MenuItem onAction="#zeigeKundeAnlegenDialog" text="Kunde _anlegen" />
               <MenuItem text="Kunden _verwalten" />
             </items>
           </Menu>
           <Menu text="_Buchung">
             <items>
-              <MenuItem text="Buchungs_übersicht" />
+              <MenuItem onAction="#zeigeBuchungUebersichtDialog" text="Buchungs_übersicht" />
               <MenuItem onAction="#zeigeBuchungAnlegenDialog" text="Buchung _anlegen" />
               <MenuItem text="Kunden _verwalten" />
             </items>

@@ -1,4 +1,4 @@
-package whs.mciv.aufgabe04.windowController;
+package whs.mciv.aufgabe04.windowController.formulare;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import whs.mciv.aufgabe04.BaseController;
 import whs.mciv.aufgabe04.daten.kunde.Kunde;
+import whs.mciv.aufgabe04.daten.kunde.KundenDaten;
 import whs.mciv.aufgabe04.filter.FilterEmail;
 import whs.mciv.aufgabe04.filter.FilterIban;
 import whs.mciv.aufgabe04.filter.FilterPhoneNumber;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.ResourceBundle;
 
-public class KundeAnlegenController extends BaseController {
+public class KundeAnlegenController extends FormularController {
 
     @FXML
     private TextField id;
@@ -335,6 +336,20 @@ public class KundeAnlegenController extends BaseController {
 
     @FXML
     public void speichern() {
+        this.kunde.setVorname(vorname.getText());
+        this.kunde.setNachname(nachname.getText());
+        this.kunde.setAnrede(anrede.getSelectionModel().getSelectedItem());
+        this.kunde.setAdresse(adresse.getText());
+        this.kunde.setPlz(plz.getText());
+        this.kunde.setLand(land.getSelectionModel().getSelectedItem());
+        this.kunde.setBundesland(bundesland.getSelectionModel().getSelectedItem());
+        this.kunde.setEmail(email.getText());
+        this.kunde.setTelefonnummer(telefonnummer.getText());
+        this.kunde.setBank(bank.getText());
+        this.kunde.setBic(bic.getText());
+        this.kunde.setIban(iban.getText());
+
+        KundenDaten.speichereKunde(this.kunde);
         wurdeGespeichert = true;
         stage.close();
     }

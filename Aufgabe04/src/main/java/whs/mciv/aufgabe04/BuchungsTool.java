@@ -14,13 +14,18 @@ import javafx.stage.Stage;
 
 public class BuchungsTool extends Application {
     private static final String HAUPTFENSTER_VIEW = "Hauptfenster.fxml";
+    private static final String REISEZIEL_ANLEGEN_VIEW = "formulare/ReisezielAnlegen.fxml";
+    private static final String KUNDE_ANLEGEN_VIEW = "formulare/KundeAnlegen.fxml";
+    private static final String BUCHUNG_ANLEGEN_VIEW = "formulare/BuchungAnlegen.fxml";
+    private static final String KUNDE_UEBERSICHT_VIEW = "uebersichten/KundeUebersicht.fxml";
+    private static final String BUCHUNG_UEBERSICHT_VIEW = "uebersichten/BuchungUebersicht.fxml";
+
     private static final String HAUPTFENSTER_TITLE = "Buchungssystem";
-    private static final String REISEZIEL_ANLEGEN_VIEW = "ReisezielAnlegen.fxml";
-    private static final String KUNDE_ANLEGEN_VIEW = "KundeAnlegen.fxml";
-    private static final String BUCHUNG_ANLEGEN_VIEW = "BuchungAnlegen.fxml";
     private static final String REISEZIEL_ANLEGEN_TITLE = "Reiseziel anlegen";
     private static final String KUNDE_ANLEGEN_TITLE = "Kunde anlegen";
     private static final String BUCHUNG_ANLEGEN_TITLE = "Buchung anlegen";
+    private static final String KUNDE_UEBERSICHT_TITLE = "Kundenübersicht";
+    private static final String BUCHUNGS_UEBERSICHT_TITLE = "Buchungsübersicht";
 
     private Stage hauptfensterStage;
 
@@ -66,6 +71,14 @@ public class BuchungsTool extends Application {
         return this.zeigeDialog(BUCHUNG_ANLEGEN_VIEW, BUCHUNG_ANLEGEN_TITLE);
     }
 
+    public boolean zeigeKundeUebersichtDialog() {
+        return this.zeigeDialog(KUNDE_UEBERSICHT_VIEW, KUNDE_UEBERSICHT_TITLE);
+    }
+
+    public boolean zeigeBuchungUebersichtDialog() {
+        return this.zeigeDialog(BUCHUNG_UEBERSICHT_VIEW, BUCHUNGS_UEBERSICHT_TITLE);
+    }
+
     private boolean zeigeDialog (String view, String titel) {
         try {
             // Laden der view aus dem FXML
@@ -92,7 +105,7 @@ public class BuchungsTool extends Application {
             dialogStage.showAndWait();
 
             // Gibt zurück, ob getätigte Angaben gespeichert wurden
-            return controller.wurdeGespeichert();
+            return controller.showController();
         } catch (IOException e) {
             e.printStackTrace();
             return false;
@@ -144,7 +157,7 @@ public class BuchungsTool extends Application {
         kunde.setNachname("Mustermann");
         kunde.setAdresse("Musterstraße 1");
         kunde.setOrt("Musterstadt");
-        kunde.setPlz(58594);
+        kunde.setPlz("58594");
         kunde.setBundesland("Nord-Rhein Westfalen");
         kunde.setLand("Deutschland");
         kunde.setIban("DE304561148550030484496");
@@ -159,7 +172,7 @@ public class BuchungsTool extends Application {
         kunde2.setNachname("Wannemaker");
         kunde2.setAdresse("Ollenhauer Str. 38");
         kunde2.setOrt("Stuttgart Asemwald");
-        kunde2.setPlz(70599);
+        kunde2.setPlz("70599");
         kunde2.setBundesland("Baden-Württemberg");
         kunde2.setLand("Deutschland");
         kunde2.setIban("DE12500105177264191851");
@@ -174,7 +187,7 @@ public class BuchungsTool extends Application {
         kunde3.setNachname("Kuhn");
         kunde3.setAdresse("Kieler Strasse 43");
         kunde3.setOrt("Engelsberg");
-        kunde3.setPlz(84549);
+        kunde3.setPlz("84549");
         kunde3.setBundesland("Bayern");
         kunde3.setLand("Deutschland");
         kunde3.setIban("DE46500105175887234626");
