@@ -5,7 +5,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
-import whs.mciv.aufgabe04.BaseController;
+import whs.mciv.aufgabe04.daten.N;
 import whs.mciv.aufgabe04.daten.kunde.Kunde;
 import whs.mciv.aufgabe04.daten.kunde.KundenDaten;
 import whs.mciv.aufgabe04.filter.FilterEmail;
@@ -86,7 +86,7 @@ public class KundeAnlegenController extends FormularController {
         iban.setTextFormatter(new TextFormatter<>(new FilterIban()));
         email.setTextFormatter(new TextFormatter<>(new FilterEmail()));
 
-        abbrechen.focusedProperty().addListener(new ChangeListener<Boolean>() {
+        button2.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
                 if (t1) {
@@ -298,6 +298,29 @@ public class KundeAnlegenController extends FormularController {
         return formValid;
     }
 
+    @Override
+    public void fillForm(N form) {
+        System.out.println("here");
+        if (form instanceof Kunde) {
+            Kunde kunde = (Kunde) form;
+            id.setText(kunde.getId());
+            anrede.getSelectionModel().select(kunde.getAnrede());
+            vorname.setText(kunde.getVorname());
+            nachname.setText(kunde.getNachname());
+            adresse.setText(kunde.getAdresse());
+            plz.setText(kunde.getPlz());
+            ort.setText(kunde.getOrt());
+            land.getSelectionModel().select(kunde.getLand());
+            bundesland.getSelectionModel().select(kunde.getBundesland());
+            kontoinhaber.setText(kunde.getKontoinhaber());
+            bic.setText(kunde.getBic());
+            iban.setText(kunde.getIban());
+            bank.setText(kunde.getBank());
+            telefonnummer.setText(kunde.getTelefonnummer());
+            email.setText(kunde.getEmail());
+        }
+    }
+
     /**
      * Controller-spezifisch: Überprüfe, ob Formular bearbeitet wurde
      *
@@ -351,12 +374,6 @@ public class KundeAnlegenController extends FormularController {
 
         KundenDaten.speichereKunde(this.kunde);
         wurdeGespeichert = true;
-        stage.close();
-    }
-
-    @FXML
-    public void abbrechen() {
-        wurdeGespeichert = false;
         stage.close();
     }
 }

@@ -3,8 +3,8 @@ package whs.mciv.aufgabe04.windowController.uebersichten;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import whs.mciv.aufgabe04.BaseController;
+import whs.mciv.aufgabe04.BuchungsTool;
 import whs.mciv.aufgabe04.daten.N;
-import whs.mciv.aufgabe04.daten.kunde.Kunde;
 
 public abstract class UebersichtController extends BaseController {
 
@@ -12,17 +12,12 @@ public abstract class UebersichtController extends BaseController {
     protected ListView<N> listView = new ListView<>();
 
     @Override
-    protected void onActionSpeichern() {
-
+    protected void onSecondButton() {
+        abbrechen();
     }
 
-    @Override
-    protected void onActionAbbrechen() {
-
-    }
-
-    @Override
-    protected boolean showController() {
-        return false;
+    protected BaseController zeigeDialog (String view, String titel) {
+        BuchungsTool buchungsTool = new BuchungsTool();
+        return buchungsTool.zeigeDialog(view, titel, stage);
     }
 }

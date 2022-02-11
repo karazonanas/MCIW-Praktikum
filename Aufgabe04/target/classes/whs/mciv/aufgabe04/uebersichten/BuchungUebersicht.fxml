@@ -3,8 +3,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whs.mciv.aufgabe04.windowController.uebersichten.BuchungUebersichtController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="386.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whs.mciv.aufgabe04.windowController.uebersichten.BuchungUebersichtController">
    <children>
-      <ListView fx:id="listView" layoutX="18.0" layoutY="61.0" prefHeight="312.0" prefWidth="555.0" />
+      <ListView fx:id="listView" layoutX="23.0" layoutY="14.0" prefHeight="312.0" prefWidth="555.0" />
+      <Button fx:id="button1" layoutX="526.0" layoutY="347.0" mnemonicParsing="false" text="Button" />
+      <Button fx:id="button2" layoutX="446.0" layoutY="347.0" mnemonicParsing="false" text="Button" />
    </children>
 </AnchorPane>

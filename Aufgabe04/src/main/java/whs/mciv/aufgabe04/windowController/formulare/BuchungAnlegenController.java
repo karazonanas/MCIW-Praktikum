@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import whs.mciv.aufgabe04.BaseController;
+import whs.mciv.aufgabe04.daten.N;
 import whs.mciv.aufgabe04.daten.buchung.Buchung;
 import whs.mciv.aufgabe04.daten.buchung.BuchungDaten;
 import whs.mciv.aufgabe04.daten.kunde.Kunde;
@@ -332,6 +333,11 @@ public class BuchungAnlegenController extends FormularController {
         return formValid;
     }
 
+    @Override
+    public void fillForm(N form) {
+
+    }
+
     /**
      * Erstelle HashMap für das Formular
      *
@@ -391,12 +397,6 @@ public class BuchungAnlegenController extends FormularController {
         BuchungDaten.speichereBuchung(this.buchung);
 
         wurdeGespeichert = true;
-        stage.close();
-    }
-
-    @FXML
-    public void abbrechen() {
-        wurdeGespeichert = false;
         stage.close();
     }
 }

@@ -25,8 +25,7 @@ public class HauptfensterController implements Initializable {
     private final String BEENDEN_HINWEIS = "Möchten Sie wirklich die Anwendung und alle dazugehörigen Fenster schließen?";
     private final String BEENDEN_TITEL = "Anwendung beenden";
     private final String DEV_INFO = "Buchungssystem WHS\nVersion 1.0.3 \nEntwickelt von Anas Karazon und Enes Erk";
-    private final String DEV_INFO_TITEL = "Info";
-    
+
     public void setMainApp(BuchungsTool mainApp){
         this.mainApp = mainApp;
     }
@@ -39,28 +38,28 @@ public class HauptfensterController implements Initializable {
     @FXML
     private void zeigeReisezielAnlegenDialog(ActionEvent event) {
         System.out.println("Reiseziel Anlegen");
-        boolean wurdeAngelegt = mainApp.zeigeReisezielAnlegenDialog();
-        System.out.println("Angelegt: " + wurdeAngelegt);
+        BaseController controller = mainApp.zeigeReisezielAnlegenDialog();
+//        System.out.println("Angelegt: " + wurdeAngelegt);
     }
 
     @FXML
     public void zeigeKundeAnlegenDialog(ActionEvent actionEvent) {
-        boolean wurdeAngelegt = mainApp.zeigeKundeAnlegenDialog();
+        BaseController controller = mainApp.zeigeKundeAnlegenDialog();
     }
 
     @FXML
     public void zeigeBuchungAnlegenDialog(ActionEvent actionEvent) {
-        boolean wurdeAngelegt = mainApp.zeigeBuchungAnlegenDialog();
+        BaseController controller = mainApp.zeigeBuchungAnlegenDialog();
     }
 
     @FXML
     public void zeigeKundeUebersichtDialog(ActionEvent actionEvent) {
-        boolean wurdeAngelegt = mainApp.zeigeKundeUebersichtDialog();
+        BaseController controller = mainApp.zeigeKundeUebersichtDialog();
     }
 
     @FXML
     public void zeigeBuchungUebersichtDialog(ActionEvent actionEvent) {
-        boolean wurdeAngelegt = mainApp.zeigeBuchungUebersichtDialog();
+        BaseController controller = mainApp.zeigeBuchungUebersichtDialog();
     }
 
     @FXML

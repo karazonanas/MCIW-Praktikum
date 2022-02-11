@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import whs.mciv.aufgabe04.BaseController;
+import whs.mciv.aufgabe04.daten.N;
 
 import java.awt.*;
 import java.util.*;
@@ -43,7 +44,7 @@ public abstract class FormularController extends BaseController {
     }
 
     @Override
-    protected void onActionSpeichern() {
+    protected void onFirstButton() {
         boolean formIsValid = validateForm();
         if (formIsValid) {
             speichern();
@@ -51,10 +52,11 @@ public abstract class FormularController extends BaseController {
     }
 
     @Override
-    protected void onActionAbbrechen(){
+    protected void onSecondButton(){
         boolean formIsEmpty = wasFormEdited();
 
         if (formIsEmpty) {
+            wurdeGespeichert = false;
             abbrechen();
         } else {
             Alert meldung = new Alert(Alert.AlertType.WARNING, BEENDEN_HINWEIS, ButtonType.YES, ButtonType.NO);
@@ -63,6 +65,7 @@ public abstract class FormularController extends BaseController {
             Optional<ButtonType> beenden = meldung.showAndWait();
             if (beenden.isPresent()) {
                 if (Objects.equals(beenden.get().getButtonData().toString(), "YES")) {
+                    wurdeGespeichert = false;
                     abbrechen();
                 } else {
                     callIfAbbrechenAborted();
@@ -82,9 +85,6 @@ public abstract class FormularController extends BaseController {
      * Setze Styling der Felder zurück
      */
     protected abstract void resetStylingOfElements();
-
-    @FXML
-    public abstract void abbrechen();
 
     @FXML
     public abstract void speichern();
@@ -145,8 +145,6 @@ public abstract class FormularController extends BaseController {
         return true;
     }
 
-    @Override
-    protected boolean showController() {
-        return this.wurdeGespeichert;
-    }
+    public abstract void fillForm(N form);
+
 }

@@ -5,7 +5,7 @@
  */
 package whs.mciv.aufgabe04.windowController.formulare;
 
-import whs.mciv.aufgabe04.BaseController;
+import whs.mciv.aufgabe04.daten.N;
 import whs.mciv.aufgabe04.daten.reiseziele.Reiseziel;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -83,9 +83,8 @@ public class ReisezielAnlegenController extends FormularController {
         return false;
     }
 
-    @FXML
-    public void abbrechen() {
-        wurdeGespeichert = false;
-        stage.close();
+    @Override
+    public void fillForm(N form) {
+
     }
 }

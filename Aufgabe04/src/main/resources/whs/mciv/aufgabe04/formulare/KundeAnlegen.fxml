@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="882.0" prefWidth="405.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whs.mciv.aufgabe04.windowController.formulare.KundeAnlegenController">
+<AnchorPane id="AnchorPane" prefHeight="882.0" prefWidth="405.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whs.mciv.aufgabe04.windowController.uebersichten.KundenUebersichtController">
     <children>
         <Label layoutX="25.0" layoutY="25.0" text="Kunde anlegen">
             <font>
@@ -71,8 +71,8 @@
         <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="786.0" prefHeight="17.0" prefWidth="141.0" text="Bank" />
         <TextField fx:id="bank" layoutX="175.0" layoutY="782.0" prefHeight="25.0" prefWidth="200.0" promptText="Sparkasse Musterstadt" />
 
-        <Button fx:id="speichern" layoutX="201.0" layoutY="839.0" mnemonicParsing="false" text="Speichern" />
-        <Button fx:id="abbrechen" layoutX="299.0" layoutY="839.0" mnemonicParsing="false" text="Abbrechen" />
+        <Button fx:id="button1" layoutX="201.0" layoutY="839.0" mnemonicParsing="false" text="Speichern" />
+        <Button fx:id="button2" layoutX="299.0" layoutY="839.0" mnemonicParsing="false" text="Abbrechen" />
       <Line endX="300.0" layoutX="50.0" layoutY="581.0" stroke="#aeaeae" strokeWidth="0.5" />
       <Line endX="300.0" layoutX="50.0" layoutY="363.0" stroke="#aeaeae" strokeWidth="0.5" />
       <Label layoutX="25.0" layoutY="822.0" text="* Pflichtfeld" />

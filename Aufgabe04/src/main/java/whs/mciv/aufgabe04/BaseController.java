@@ -6,20 +6,22 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import whs.mciv.aufgabe04.daten.N;
 
 public abstract class BaseController implements Initializable {
 
     protected Stage stage;
 
     @FXML
-    protected Button speichern, abbrechen;
+    protected Button button1, button2;
 
     public void initButtons() {
-        abbrechen.setOnAction((ActionEvent event) -> {
-            onActionAbbrechen();
+        button1.setOnAction((ActionEvent event) -> {
+            onFirstButton();
         });
-        speichern.setOnAction((ActionEvent event) -> {
-            onActionSpeichern();
+
+        button2.setOnAction((ActionEvent event) -> {
+            onSecondButton();
         });
     }
 
@@ -52,11 +54,13 @@ public abstract class BaseController implements Initializable {
         meldung.showAndWait();
     }
 
-    protected abstract void onActionSpeichern();
+    protected abstract void onFirstButton();
 
-    protected abstract void onActionAbbrechen();
-
-    protected abstract boolean showController();
+    protected abstract void onSecondButton();
+    @FXML
+    public void abbrechen() {
+        stage.close();
+    }
 
     public void setStage(Stage stage) {
         this.stage = stage;

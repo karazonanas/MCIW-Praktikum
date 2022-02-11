@@ -59,27 +59,27 @@ public class BuchungsTool extends Application {
         hauptfensterStage.show();
     }
 
-    public boolean zeigeReisezielAnlegenDialog() {
-        return this.zeigeDialog(REISEZIEL_ANLEGEN_VIEW, REISEZIEL_ANLEGEN_TITLE);
+    public BaseController zeigeReisezielAnlegenDialog() {
+        return this.zeigeDialog(REISEZIEL_ANLEGEN_VIEW, REISEZIEL_ANLEGEN_TITLE, hauptfensterStage);
     }
 
-    public boolean zeigeKundeAnlegenDialog() {
-        return this.zeigeDialog(KUNDE_ANLEGEN_VIEW, KUNDE_ANLEGEN_TITLE);
+    public BaseController zeigeKundeAnlegenDialog() {
+        return this.zeigeDialog(KUNDE_ANLEGEN_VIEW, KUNDE_ANLEGEN_TITLE, hauptfensterStage);
     }
 
-    public boolean zeigeBuchungAnlegenDialog() {
-        return this.zeigeDialog(BUCHUNG_ANLEGEN_VIEW, BUCHUNG_ANLEGEN_TITLE);
+    public BaseController zeigeBuchungAnlegenDialog() {
+        return this.zeigeDialog(BUCHUNG_ANLEGEN_VIEW, BUCHUNG_ANLEGEN_TITLE, hauptfensterStage);
     }
 
-    public boolean zeigeKundeUebersichtDialog() {
-        return this.zeigeDialog(KUNDE_UEBERSICHT_VIEW, KUNDE_UEBERSICHT_TITLE);
+    public BaseController zeigeKundeUebersichtDialog() {
+        return this.zeigeDialog(KUNDE_UEBERSICHT_VIEW, KUNDE_UEBERSICHT_TITLE, hauptfensterStage);
     }
 
-    public boolean zeigeBuchungUebersichtDialog() {
-        return this.zeigeDialog(BUCHUNG_UEBERSICHT_VIEW, BUCHUNGS_UEBERSICHT_TITLE);
+    public BaseController zeigeBuchungUebersichtDialog() {
+        return this.zeigeDialog(BUCHUNG_UEBERSICHT_VIEW, BUCHUNGS_UEBERSICHT_TITLE, hauptfensterStage);
     }
 
-    private boolean zeigeDialog (String view, String titel) {
+    public BaseController zeigeDialog (String view, String titel, Stage stage) {
         try {
             // Laden der view aus dem FXML
             FXMLLoader loader = new FXMLLoader(getClass().getResource(view));
@@ -90,7 +90,7 @@ public class BuchungsTool extends Application {
             dialogStage.setTitle(titel);
 
             // Owner ist das Hauptfenster, damit die Modality weiß, wie sie sich verhalten soll
-            dialogStage.initOwner(hauptfensterStage);
+            dialogStage.initOwner(stage);
             dialogStage.initModality(Modality.WINDOW_MODAL);
 
             // Neue Scene erstellen
@@ -102,13 +102,13 @@ public class BuchungsTool extends Application {
             controller.setStage(dialogStage);
 
             // Dialog anzeigen bis er geschlossen wird
-            dialogStage.showAndWait();
+            dialogStage.show();
 
             // Gibt zurück, ob getätigte Angaben gespeichert wurden
-            return controller.showController();
+            return controller;
         } catch (IOException e) {
             e.printStackTrace();
-            return false;
+            return null;
         }
     }
 

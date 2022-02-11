@@ -50,8 +50,8 @@
             <Font name="System Bold" size="15.0" />
          </font></Label>
 
-        <Button id="speichern" fx:id="speichern" layoutX="325.0" layoutY="525.0" mnemonicParsing="false" text="Speichern" />
-        <Button id="abbrechen" fx:id="abbrechen" layoutX="221.0" layoutY="525.0" mnemonicParsing="false" onAction="#abbrechen" text="Abbrechen" />
+        <Button id="speichern" fx:id="button1" layoutX="325.0" layoutY="525.0" mnemonicParsing="false" text="Speichern" />
+        <Button id="abbrechen" fx:id="button2" layoutX="221.0" layoutY="525.0" mnemonicParsing="false" onAction="#abbrechen" text="Abbrechen" />
       <Label layoutX="25.0" layoutY="529.0" text="* Pflichtfeld" />
 <!--      <Spinner  accessibleRole="HYPERLINK" cache="true" disable="true" layoutX="195.0" layoutY="471.0" prefHeight="25.0" prefWidth="69.0" />-->
     </children>
