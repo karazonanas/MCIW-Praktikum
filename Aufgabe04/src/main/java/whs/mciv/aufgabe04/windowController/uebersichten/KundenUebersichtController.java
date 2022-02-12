@@ -35,8 +35,10 @@ public class KundenUebersichtController extends UebersichtController {
     @Override
     protected void onFirstButton() {
         Kunde kunde = KundenDaten.getKunde(key);
-        System.out.println(kunde);
         BaseController controller = zeigeDialog(KUNDE_ANLEGEN_VIEW,KUNDE_ANLEGEN_TITLE);
+        if (controller instanceof FormularController)
+            ((FormularController) controller).fillForm(kunde);
+        listView.getItems().addAll(KundenDaten.getAllKunden());
 
     }
 }

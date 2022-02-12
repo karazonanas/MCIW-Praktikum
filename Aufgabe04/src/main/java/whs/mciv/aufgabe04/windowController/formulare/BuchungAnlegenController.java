@@ -335,7 +335,17 @@ public class BuchungAnlegenController extends FormularController {
 
     @Override
     public void fillForm(N form) {
+        if (form instanceof Buchung buchung) {
 
+            id.setText(buchung.getId());
+            kundeComboBox.getSelectionModel().select(buchung.getKunde());
+            reisezielComboBox.getSelectionModel().select(buchung.getReiseziel());
+            personenanzahl.setText(String.valueOf(buchung.getPersonenanzahl()));
+            anreisedatum.setValue(buchung.getAnreisedatum());
+            anzahlDerNaechte.setText(String.valueOf(buchung.getAnzahlderNaechte()));
+            verpflegung.getSelectionModel().select(buchung.getVerpflegung());
+            gesamtpreis.setText(String.valueOf(buchung.getGesamtpreis()));
+        }
     }
 
     /**
@@ -385,16 +395,20 @@ public class BuchungAnlegenController extends FormularController {
     @FXML
     public void speichern() {
         this.buchung.setKunde(kundeComboBox.getSelectionModel().getSelectedItem());
-        this.buchung.setAnreisedatum(anreisedatum.getEditor().getText());
-//        @ToDo Gesamtpreis
-//        this.buchung.setGesamtpreis();
+        this.buchung.setAnreisedatum(anreisedatum.getValue());
+
+        this.buchung.setGesamtpreis(gesamtpreis.getText());
         this.buchung.setAnzahlderNaechte(Integer.parseInt(anzahlDerNaechte.getText()));
         this.buchung.setPersonenanzahl(Integer.parseInt(personenanzahl.getText()));
         this.buchung.setVerpflegung(verpflegung.getSelectionModel().getSelectedItem());
         this.buchung.setBuchungsStatus(buchungsStatus.getText());
         this.buchung.setReiseziel(reisezielComboBox.getSelectionModel().getSelectedItem());
 
-        BuchungDaten.speichereBuchung(this.buchung);
+        boolean buchungGespeichert = BuchungDaten.speichereBuchung(this.buchung);
+
+        if (! buchungGespeichert) {
+            BuchungDaten.updateBuchung(this.buchung);
+        }
 
         wurdeGespeichert = true;
         stage.close();

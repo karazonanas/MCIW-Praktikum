@@ -300,7 +300,7 @@ public class KundeAnlegenController extends FormularController {
 
     @Override
     public void fillForm(N form) {
-        System.out.println("here");
+        KundenDaten.loescheKunde(KundenDaten.getKunde(id.getText()));
         if (form instanceof Kunde) {
             Kunde kunde = (Kunde) form;
             id.setText(kunde.getId());

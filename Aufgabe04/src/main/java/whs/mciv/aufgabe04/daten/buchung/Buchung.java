@@ -4,6 +4,7 @@ import whs.mciv.aufgabe04.daten.N;
 import whs.mciv.aufgabe04.daten.kunde.Kunde;
 import whs.mciv.aufgabe04.daten.reiseziele.Reiseziel;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -25,7 +26,7 @@ public class Buchung extends N {
     private int personenanzahl;
 
     /** Das Anreisedatum @ToDo: DateTime */
-    private String anreisedatum;
+    private LocalDate anreisedatum;
 
     /** Anzahl der Übernachtungen */
     private int anzahlderNaechte;
@@ -37,7 +38,7 @@ public class Buchung extends N {
     private String verpflegung;
 
     /** Gesamtpreis der Buchung */
-    private double gesamtpreis;
+    private String gesamtpreis;
 
 
     /**
@@ -107,7 +108,7 @@ public class Buchung extends N {
      * Gibt das Anreisedatum zurück
      * @return Anreisedatum der Buchung
      */
-    public String getAnreisedatum() {
+    public LocalDate getAnreisedatum() {
         return anreisedatum;
     }
 
@@ -115,8 +116,8 @@ public class Buchung extends N {
      * Setzt das Anreisedatum
      * @param anreisedatum der Buchung
      */
-    public void setAnreisedatum(String anreisedatum) {
-        this.anreisedatum = this.anreisedatum;
+    public void setAnreisedatum(LocalDate anreisedatum) {
+        this.anreisedatum = anreisedatum;
     }
 
     /**
@@ -132,7 +133,7 @@ public class Buchung extends N {
      * @param anzahlderNaechte Anzahl der Nächte der Buchung
      */
     public void setAnzahlderNaechte(int anzahlderNaechte) {
-        this.anzahlderNaechte = this.anzahlderNaechte;
+        this.anzahlderNaechte = anzahlderNaechte;
     }
 
     /**
@@ -164,14 +165,14 @@ public class Buchung extends N {
      * @param verpflegung Verpflegung
      */
     public void setVerpflegung(String verpflegung) {
-        this.verpflegung = this.verpflegung;
+        this.verpflegung = verpflegung;
     }
 
     /**
      * Gibt den Gesamtpreis in Euro zurück
      * @return Gesamtpreis
      */
-    public double getGesamtpreis() {
+    public String getGesamtpreis() {
         return gesamtpreis;
     }
 
@@ -179,7 +180,7 @@ public class Buchung extends N {
      * Setzt den Gesamtpreis in Euro
      * @param gesamtpreis Gesamtpreis
      */
-    public void setGesamtpreis(double gesamtpreis) {
+    public void setGesamtpreis(String gesamtpreis) {
         this.gesamtpreis = gesamtpreis;
     }
 

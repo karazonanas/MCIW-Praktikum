@@ -107,7 +107,7 @@ public abstract class FormularController extends BaseController {
                 Control item = form.get(key);
                 if (item.contextMenuProperty().getBean().getClass().getName().equals("javafx.scene.control.TextField")) {
                     TextField field = (TextField) item;
-                    if (field.getText().isEmpty()) {
+                    if (field.getText() != null && field.getText().isEmpty()) {
                         missingValues.add(key);
                         field.setStyle("-fx-border-color: red;");
 
