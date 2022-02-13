@@ -56,6 +56,10 @@ public class Buchung extends N {
         return id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
     /**
      * Gibt den Kunden der Buchung zurück.
      * @return Kunden-Objekt der Buchung

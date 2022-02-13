@@ -2,7 +2,8 @@ package whs.mciv.aufgabe04.windowController.uebersichten;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.scene.control.MultipleSelectionModel;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
 import whs.mciv.aufgabe04.BaseController;
 import whs.mciv.aufgabe04.daten.N;
 import whs.mciv.aufgabe04.daten.kunde.Kunde;
@@ -16,11 +17,22 @@ import java.util.StringTokenizer;
 public class KundenUebersichtController extends UebersichtController {
     private static final String KUNDE_ANLEGEN_VIEW = "formulare/KundeAnlegen.fxml";
     private static final String KUNDE_ANLEGEN_TITLE = "Kunde bearbeiten";
+    private static final String KUNDE_AUSWAELEN_HINWEIS = "Bitte wählen Sie einen Kunden aus der Liste aus";
 
     private String key;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        loeschen.setOnAction((ActionEvent event) -> {
+            if (KundenDaten.getKunde(key) != null) {
+                KundenDaten.loescheKunde(KundenDaten.getKunde(key));
+                updateListView(KundenDaten.getAllKunden());
+            } else {
+                BaseController.setMessage(Alert.AlertType.WARNING, KUNDE_AUSWAELEN_HINWEIS );
+            }
+        });
+
         listView.getItems().addAll(KundenDaten.getAllKunden());
         initButtons();
         listView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<N>() {
@@ -35,10 +47,15 @@ public class KundenUebersichtController extends UebersichtController {
     @Override
     protected void onFirstButton() {
         Kunde kunde = KundenDaten.getKunde(key);
-        BaseController controller = zeigeDialog(KUNDE_ANLEGEN_VIEW,KUNDE_ANLEGEN_TITLE);
-        if (controller instanceof FormularController)
-            ((FormularController) controller).fillForm(kunde);
-        listView.getItems().addAll(KundenDaten.getAllKunden());
-
+        if (kunde != null) {
+            BaseController controller = zeigeDialog(KUNDE_ANLEGEN_VIEW,KUNDE_ANLEGEN_TITLE);
+            if (controller instanceof FormularController formularController) {
+                formularController.fillForm(kunde);
+                formularController.getStage().setOnHidden(h -> updateListView(KundenDaten.getAllKunden()));
+            }
+        } else {
+            BaseController.setMessage(Alert.AlertType.WARNING, KUNDE_AUSWAELEN_HINWEIS );
+        }
     }
+
 }

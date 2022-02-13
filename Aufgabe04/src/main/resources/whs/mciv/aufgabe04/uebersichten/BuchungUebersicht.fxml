@@ -7,6 +7,7 @@
    <children>
       <ListView fx:id="listView" layoutX="23.0" layoutY="14.0" prefHeight="312.0" prefWidth="555.0" />
       <Button fx:id="button1" layoutX="505.0" layoutY="347.0" mnemonicParsing="false" text="Bearbeiten" />
-      <Button fx:id="button2" layoutX="408.0" layoutY="347.0" mnemonicParsing="false" text="Abbrechen" />
+      <Button fx:id="button2" layoutX="345.0" layoutY="347.0" mnemonicParsing="false" text="Schließen" />
+      <Button fx:id="loeschen" layoutX="431.0" layoutY="347.0" mnemonicParsing="false" text="Löschen" />
    </children>
 </AnchorPane>

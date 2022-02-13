@@ -6,7 +6,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import whs.mciv.aufgabe04.daten.N;
 
 public abstract class BaseController implements Initializable {
 
@@ -64,5 +63,9 @@ public abstract class BaseController implements Initializable {
 
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+
+    public Stage getStage() {
+        return stage;
     }
 }

@@ -54,6 +54,7 @@ public abstract class FormularController extends BaseController {
     @Override
     protected void onSecondButton(){
         boolean formIsEmpty = wasFormEdited();
+        System.out.println(formIsEmpty);
 
         if (formIsEmpty) {
             wurdeGespeichert = false;
@@ -147,4 +148,11 @@ public abstract class FormularController extends BaseController {
 
     public abstract void fillForm(N form);
 
+    public boolean getWurdeGespeichert() {
+        return wurdeGespeichert;
+    }
+
+    public void setWurdeGespeichert(boolean wurdeGespeichert) {
+        this.wurdeGespeichert = wurdeGespeichert;
+    }
 }

@@ -394,6 +394,7 @@ public class BuchungAnlegenController extends FormularController {
 
     @FXML
     public void speichern() {
+        this.buchung.setId(id.getText());
         this.buchung.setKunde(kundeComboBox.getSelectionModel().getSelectedItem());
         this.buchung.setAnreisedatum(anreisedatum.getValue());
 

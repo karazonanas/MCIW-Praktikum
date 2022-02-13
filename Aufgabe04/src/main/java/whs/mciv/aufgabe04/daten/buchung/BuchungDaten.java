@@ -41,7 +41,6 @@ public abstract class BuchungDaten {
      */
     public static boolean speichereBuchung(Buchung buchung) {
         if (buchungen.containsKey(buchung.getId()) && buchungen.get(buchung.getId()) == null) {
-            System.out.println("1");
             buchungen.put(buchung.getId(), buchung);
             return true;
         }
@@ -49,9 +48,7 @@ public abstract class BuchungDaten {
     }
 
     public static boolean updateBuchung (Buchung buchung) {
-        System.out.println("it's updateBuchung");
         if (buchungen.containsKey(buchung.getId()) && buchungen.get(buchung.getId()) != null) {
-            System.out.println("2");
             buchungen.remove(buchung.getId());
             buchungen.put(buchung.getId(), buchung);
             return true;

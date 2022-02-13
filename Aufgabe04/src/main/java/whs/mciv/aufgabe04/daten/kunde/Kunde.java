@@ -17,6 +17,7 @@ public class Kunde extends N {
     String telefonnummer;
     String email;
     String kontoinhaber;
+    boolean sameAsCustomer;
     String iban;
     String bic;
     String bank;
@@ -143,6 +144,14 @@ public class Kunde extends N {
 
     public void setBank(String bank) {
         this.bank = bank;
+    }
+
+    public boolean getSameAsCustomer() {
+        return sameAsCustomer;
+    }
+
+    public void setSameAsCustomer(boolean sameAsCustomer) {
+        this.sameAsCustomer = sameAsCustomer;
     }
 
     @Override

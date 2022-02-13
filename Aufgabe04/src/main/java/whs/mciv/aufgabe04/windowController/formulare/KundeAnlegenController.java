@@ -12,6 +12,9 @@ import whs.mciv.aufgabe04.filter.FilterEmail;
 import whs.mciv.aufgabe04.filter.FilterIban;
 import whs.mciv.aufgabe04.filter.FilterPhoneNumber;
 import whs.mciv.aufgabe04.filter.FilterPlz;
+import whs.mciv.aufgabe04.windowController.uebersichten.KundenUebersichtController;
+import whs.mciv.aufgabe04.windowController.uebersichten.UebersichtController;
+
 import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
@@ -122,6 +125,7 @@ public class KundeAnlegenController extends FormularController {
      * Listener: Aktualisiere den Kontoinhaber
      */
     private void updateKontoinhaber() {
+        kontoinhaber.setText(vorname.getText() + " " + nachname.getText());
         ChangeListener<Boolean> namensAenderungChangeListener = new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldProperty, Boolean newProperty) {
@@ -300,7 +304,6 @@ public class KundeAnlegenController extends FormularController {
 
     @Override
     public void fillForm(N form) {
-        KundenDaten.loescheKunde(KundenDaten.getKunde(id.getText()));
         if (form instanceof Kunde) {
             Kunde kunde = (Kunde) form;
             id.setText(kunde.getId());
@@ -312,6 +315,7 @@ public class KundeAnlegenController extends FormularController {
             ort.setText(kunde.getOrt());
             land.getSelectionModel().select(kunde.getLand());
             bundesland.getSelectionModel().select(kunde.getBundesland());
+            sameAsCustomer.setSelected(kunde.getSameAsCustomer());
             kontoinhaber.setText(kunde.getKontoinhaber());
             bic.setText(kunde.getBic());
             iban.setText(kunde.getIban());
@@ -359,11 +363,13 @@ public class KundeAnlegenController extends FormularController {
 
     @FXML
     public void speichern() {
+        this.kunde.setId(id.getText());
         this.kunde.setVorname(vorname.getText());
         this.kunde.setNachname(nachname.getText());
         this.kunde.setAnrede(anrede.getSelectionModel().getSelectedItem());
         this.kunde.setAdresse(adresse.getText());
         this.kunde.setPlz(plz.getText());
+        this.kunde.setOrt(ort.getText());
         this.kunde.setLand(land.getSelectionModel().getSelectedItem());
         this.kunde.setBundesland(bundesland.getSelectionModel().getSelectedItem());
         this.kunde.setEmail(email.getText());
@@ -371,6 +377,8 @@ public class KundeAnlegenController extends FormularController {
         this.kunde.setBank(bank.getText());
         this.kunde.setBic(bic.getText());
         this.kunde.setIban(iban.getText());
+        this.kunde.setKontoinhaber(kontoinhaber.getText());
+        this.kunde.setSameAsCustomer(sameAsCustomer.isSelected());
 
         KundenDaten.speichereKunde(this.kunde);
         wurdeGespeichert = true;
