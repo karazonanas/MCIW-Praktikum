@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
  * Diese Klasse stellt statische Methoden bereit, um alle gespeicherten
  * Buchungen zu verwalten.
  */
-public abstract class BuchungDaten {
+public class BuchungDaten {
     /** Liste der Buchungen (IDs der Reiseziele werden als Schlüssel verwendet) */
     private static HashMap<String, Buchung> buchungen = new HashMap<>();
 

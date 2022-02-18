@@ -7,17 +7,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public abstract class KundenDaten {
+public class KundenDaten {
     private static HashMap<String, Kunde> kunden = new HashMap<>();
-    private static boolean hasChanged = false;
-
-    public static boolean getHasChanged() {
-        return hasChanged;
-    }
-
-    public static void setHasChanged(boolean hasChanged) {
-        hasChanged = hasChanged;
-    }
 
     public static Set<Kunde> getAllKunden() {
         return Collections.unmodifiableSet(new HashSet<>(kunden.values().stream().filter(k -> k != null).collect(Collectors.toList())));

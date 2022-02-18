@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
  * Diese Klasse stellt statische Methoden bereit, um alle gespeicherten
  * Reiseziele zu verwalten.
  */
-public abstract class ReisezielDaten {
+public class ReisezielDaten {
     /** Liste der Reiseziele (IDs der Reiseziele werden als Schlüssel verwendet) */
     private static HashMap<String, Reiseziel> reiseziele = new HashMap<>();
     
