@@ -156,6 +156,7 @@ public class BuchungsTool extends Application {
         kunde.setVorname("Max");
         kunde.setNachname("Mustermann");
         kunde.setAdresse("Musterstraße 1");
+        kunde.setTelefonnummer("3246547987");
         kunde.setOrt("Musterstadt");
         kunde.setPlz("58594");
         kunde.setBundesland("Nordrhein-Westfalen");
@@ -171,6 +172,7 @@ public class BuchungsTool extends Application {
         kunde2.setAnrede("Herr");
         kunde2.setVorname("Stephan");
         kunde2.setNachname("Wannemaker");
+        kunde2.setTelefonnummer("65498765462");
         kunde2.setAdresse("Ollenhauer Str. 38");
         kunde2.setOrt("Stuttgart Asemwald");
         kunde2.setPlz("70599");
@@ -187,6 +189,7 @@ public class BuchungsTool extends Application {
         kunde3.setAnrede("Frau");
         kunde3.setVorname("Christin");
         kunde3.setNachname("Kuhn");
+        kunde3.setTelefonnummer("65498765436");
         kunde3.setAdresse("Kieler Strasse 43");
         kunde3.setOrt("Engelsberg");
         kunde3.setPlz("84549");

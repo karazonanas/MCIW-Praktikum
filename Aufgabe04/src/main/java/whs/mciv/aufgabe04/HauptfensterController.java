@@ -39,7 +39,6 @@ public class HauptfensterController implements Initializable {
     private void zeigeReisezielAnlegenDialog(ActionEvent event) {
         System.out.println("Reiseziel Anlegen");
         BaseController controller = mainApp.zeigeReisezielAnlegenDialog();
-//        System.out.println("Angelegt: " + wurdeAngelegt);
     }
 
     @FXML
