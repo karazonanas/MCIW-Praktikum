@@ -158,9 +158,10 @@ public class BuchungsTool extends Application {
         kunde.setAdresse("Musterstraße 1");
         kunde.setOrt("Musterstadt");
         kunde.setPlz("58594");
-        kunde.setBundesland("Nord-Rhein Westfalen");
+        kunde.setBundesland("Nordrhein-Westfalen");
         kunde.setLand("Deutschland");
-        kunde.setIban("DE304561148550030484496");
+        kunde.setKontoinhaber("Max Mustermann");
+        kunde.setIban("DE3045611485500304");
         kunde.setBank("Sparkasse Gelsenkirchen");
         kunde.setBic("WELADED1GEL");
         kunde.setEmail("no@mail.de");
@@ -175,6 +176,7 @@ public class BuchungsTool extends Application {
         kunde2.setPlz("70599");
         kunde2.setBundesland("Baden-Württemberg");
         kunde2.setLand("Deutschland");
+        kunde2.setKontoinhaber("Stephan Wannemaker");
         kunde2.setIban("DE12500105177264191851");
         kunde2.setBank("Sparkasse Gelsenkirchen");
         kunde2.setBic("WELADED1GEL");
@@ -190,6 +192,7 @@ public class BuchungsTool extends Application {
         kunde3.setPlz("84549");
         kunde3.setBundesland("Bayern");
         kunde3.setLand("Deutschland");
+        kunde3.setKontoinhaber("Christin Kuhn");
         kunde3.setIban("DE46500105175887234626");
         kunde3.setBank("Sparkasse Gelsenkirchen");
         kunde3.setBic("WELADED1GEL");

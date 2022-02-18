@@ -28,7 +28,7 @@
             <items>
               <MenuItem onAction="#zeigeBuchungUebersichtDialog" text="Buchungs_übersicht" />
               <MenuItem onAction="#zeigeBuchungAnlegenDialog" text="Buchung _anlegen" />
-              <MenuItem text="Kunden _verwalten" />
+              <MenuItem text="Buchungen _verwalten" />
             </items>
           </Menu>
           <Menu text="_Reiseziele">
