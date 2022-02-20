@@ -92,7 +92,7 @@ public class BuchungAnlegenController extends FormularController {
             // Check format if the field has no focus anymore
             if (!newProperty) {
                 if (Integer.parseInt(personenanzahl.getText()) > 30) {
-                    setMessage(Alert.AlertType.WARNING,"Die Reise beinhaltet mehr als 30 Teilnehmer!");
+                    setMessage(Alert.AlertType.WARNING,"Hinweis: Die Reise beinhaltet mehr als 30 Teilnehmer!\n\nIst die Angabe korrekt? Hierbei handelt es sich um eine eher unübliche Personenmenge.");
                 }
             }
         };
@@ -102,7 +102,7 @@ public class BuchungAnlegenController extends FormularController {
             // Check format if the field has no focus anymore
             if (!newProperty) {
                 if (Integer.parseInt(anzahlDerNaechte.getText()) > 30) {
-                    setMessage(Alert.AlertType.WARNING,"Die Anzahl der Nächte ist größer als 30!");
+                    setMessage(Alert.AlertType.WARNING,"Hinweis: Die Anzahl der Nächte ist größer als 30!\n\nIst die Angabe korrekt?");
                 }
             }
         };
@@ -130,20 +130,20 @@ public class BuchungAnlegenController extends FormularController {
             date = LocalDate.parse(anreisedatum.getEditor().getText(), formatter);
 
             if (date.isBefore(LocalDate.now())) {
-                setMessage(Alert.AlertType.ERROR,"Das Datum liegt in der Vergangenheit");
+                setMessage(Alert.AlertType.WARNING,"Das Datum liegt in der Vergangenheit");
                 Toolkit.getDefaultToolkit().beep();
                 anreisedatum.requestFocus();
             }
 
             if (date.isAfter(LocalDate.now().minusDays(1)) && date.isBefore(LocalDate.now().plusDays(2))) {
-                setMessage(Alert.AlertType.WARNING,"Die Reise startet in weniger als zwei Tagen");
+                setMessage(Alert.AlertType.WARNING,"Hinweis: Die Reise startet in weniger als zwei Tagen.\n\nAufgrund dessen, dass es sich bei Lastminute-Reisen um Sonderfälle handelt, überprüfen Sie bitte die Eingabe auf Korrektheit.\nIst das Datum korrekt, können Sie diesen Hinweis ignorieren.");
             }
             anreiseDatumOldValue = anreisedatum.getEditor().getText();
 
             return date;
         } catch (DateTimeParseException e) {
             if (! anreisedatum.getEditor().getText().isEmpty()) {
-                setMessage(Alert.AlertType.ERROR,"Das Datum muss dem Format DD/MM/YYYY entsprechen");
+                setMessage(Alert.AlertType.WARNING,"Das Datum muss dem Format DD/MM/YYYY entsprechen");
                 Toolkit.getDefaultToolkit().beep();
                 anreisedatum.requestFocus();
             }
@@ -315,7 +315,7 @@ public class BuchungAnlegenController extends FormularController {
                 date = LocalDate.parse(datum, formatter);
             } catch (DateTimeParseException e) {
                 anreisedatum.requestFocus();
-                setMessage(Alert.AlertType.ERROR, "Das Datum muss dem Format DD/MM/YYYY entsprechen");
+                setMessage(Alert.AlertType.WARNING, "Das Datum muss dem Format DD/MM/YYYY entsprechen");
                 anreisedatum.getEditor().selectAll();
                 Toolkit.getDefaultToolkit().beep();
                 return false;
@@ -323,7 +323,7 @@ public class BuchungAnlegenController extends FormularController {
 
             if (date.isBefore(LocalDate.now())) {
                 anreisedatum.requestFocus();
-                setMessage(Alert.AlertType.ERROR, "Das Datum liegt in der Vergangenheit");
+                setMessage(Alert.AlertType.WARNING, "Das Datum liegt in der Vergangenheit");
                 anreisedatum.getEditor().selectAll();
                 Toolkit.getDefaultToolkit().beep();
                 return false;

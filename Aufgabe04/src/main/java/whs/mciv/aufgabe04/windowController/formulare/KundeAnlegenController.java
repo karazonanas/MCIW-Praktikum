@@ -220,7 +220,7 @@ public class KundeAnlegenController extends FormularController {
             if (land.getSelectionModel().selectedItemProperty().get().equals("Deutschland") && plz.getText().length() != 5) {
                 Toolkit.getDefaultToolkit().beep();
                 plz.requestFocus();
-                setMessage(Alert.AlertType.ERROR, "Die PLZ einer deutschen Adresse besteht aus fünf Zahlen.");
+                setMessage(Alert.AlertType.WARNING, "Die PLZ einer deutschen Adresse besteht aus fünf Zahlen.");
                 plz.setStyle("-fx-border-color: red;");
 
                 return false;
@@ -230,7 +230,7 @@ public class KundeAnlegenController extends FormularController {
             if (land.getSelectionModel().selectedItemProperty().get().equals("Österreich") && plz.getText().length() != 4) {
                 Toolkit.getDefaultToolkit().beep();
                 plz.requestFocus();
-                setMessage(Alert.AlertType.ERROR, "Die PLZ einer österreichischen Adresse besteht aus vier Zahlen.");
+                setMessage(Alert.AlertType.WARNING, "Die PLZ einer österreichischen Adresse besteht aus vier Zahlen.");
                 plz.setStyle("-fx-border-color: red;");
 
                 return false;
@@ -282,7 +282,7 @@ public class KundeAnlegenController extends FormularController {
                     }
 
                     Toolkit.getDefaultToolkit().beep();
-                    setMessage(Alert.AlertType.ERROR, "Sie haben unvollständige oder fehlerhafte Bankdaten angegeben:\n" + String.join("", errorMessages));
+                    setMessage(Alert.AlertType.WARNING, "Sie haben unvollständige oder fehlerhafte Bankdaten angegeben:\n" + String.join("", errorMessages));
 
                     return false;
                 }
@@ -291,7 +291,7 @@ public class KundeAnlegenController extends FormularController {
                 if (bic.getText().length() < 8) {
                     Toolkit.getDefaultToolkit().beep();
                     bic.requestFocus();
-                    setMessage(Alert.AlertType.ERROR, "Der BIC ist nicht gültig!");
+                    setMessage(Alert.AlertType.WARNING, "Der BIC ist nicht gültig!");
                     bic.setStyle("-fx-border-color: red;");
 
                     return false;

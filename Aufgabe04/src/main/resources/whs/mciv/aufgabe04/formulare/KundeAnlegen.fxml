@@ -40,7 +40,7 @@
         <TextField fx:id="email" layoutX="175.0" layoutY="317.0" prefHeight="25.0" prefWidth="173.0" promptText="muster@mail.de" />
 
         <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="388.0" text="Straße und Hausnummer *" />
-        <TextField fx:id="adresse" layoutX="175.0" layoutY="384.0" prefHeight="25.0" prefWidth="173.0" promptText="MusterStr. 30" />
+        <TextField fx:id="adresse" layoutX="175.0" layoutY="384.0" prefHeight="25.0" prefWidth="173.0" promptText="Muster Str. 30" />
 
         <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="438.0" prefHeight="17.0" prefWidth="141.0" text="Postleitzahl *" />
         <TextField fx:id="plz" alignment="CENTER_RIGHT" layoutX="175.0" layoutY="434.0" prefHeight="25.0" prefWidth="51.0" promptText="78962" />

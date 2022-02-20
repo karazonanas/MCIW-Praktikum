@@ -45,10 +45,11 @@
         </ComboBox>
 
         <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="475.0" prefHeight="17.0" prefWidth="160.0" text="Gesamtpreis (in EUR)" />
-        <Label id="gesamtpreis" fx:id="gesamtpreis" alignment="CENTER_RIGHT" disable="true" layoutX="299.0" layoutY="471.0" prefHeight="25.0" prefWidth="96.0" text="0.00 €">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font></Label>
+        <Label id="gesamtpreis" fx:id="gesamtpreis" alignment="CENTER_RIGHT" layoutX="299.0" layoutY="471.0"  prefHeight="25.0" prefWidth="96.0" text="0.00 €">
+            <font>
+                <Font name="System Bold" size="15.0" />
+            </font>
+        </Label>
 
         <Button id="speichern" fx:id="button1" layoutX="325.0" layoutY="525.0" mnemonicParsing="false" text="Speichern" />
         <Button id="abbrechen" fx:id="button2" layoutX="221.0" layoutY="525.0" mnemonicParsing="false" onAction="#abbrechen" text="Abbrechen" />

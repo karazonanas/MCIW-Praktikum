@@ -19,7 +19,7 @@ public class FilterEmail  implements UnaryOperator<TextFormatter.Change> {
          */
         if (!neu.matches(EMAIL_REGEX) && change.getControlNewText().length() > 0 && !change.getControl().isFocused()) {
             Toolkit.getDefaultToolkit().beep();
-            BaseController.setMessage(Alert.AlertType.WARNING, "Die angegebene E-Mail Adresse ist nicht valide!");
+            BaseController.setMessage(Alert.AlertType.WARNING, "Die angegebene E-Mail Adresse ist nicht valide!\n\nBeispiel für korrekte E-Mail: max.mustermann@mail.de");
             change.getControl().requestFocus();
         }
 

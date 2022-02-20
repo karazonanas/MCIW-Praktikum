@@ -43,7 +43,7 @@ public class FilterPlz implements UnaryOperator<TextFormatter.Change> {
 
         if (!neu.matches(regexPlz) && !Objects.equals(tfc.getControlText(), tfc.getControlNewText())) {
             Toolkit.getDefaultToolkit().beep();
-            BaseController.setMessage(Alert.AlertType.ERROR, "Die Postleitzahl in " + country + " muss aus " + numberLimit + " Zahlen bestehen!");
+            BaseController.setMessage(Alert.AlertType.WARNING, "Die Postleitzahl in " + country + " muss aus " + numberLimit + " Zahlen bestehen!");
 
             return null;
         }

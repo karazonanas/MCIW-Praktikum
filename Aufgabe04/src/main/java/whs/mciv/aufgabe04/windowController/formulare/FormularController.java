@@ -14,7 +14,7 @@ import java.util.*;
 public abstract class FormularController extends BaseController {
 
     protected final String BEENDEN_HINWEIS = "Sie haben das Formular bearbeitet, möchten Sie wirklich Ihre Eingaben verwerfen?";
-    protected final String BEENDEN_TITEL = "Beenden";
+    protected final String BEENDEN_TITEL = "Abbrechen";
     private final String[] HASDEFAULTVALUE = {"Land", "Anzahl der Reisenden", "Anzahl der Übernachtungen"};
     protected boolean wurdeGespeichert = false;
 
@@ -135,7 +135,7 @@ public abstract class FormularController extends BaseController {
 
         if (!allValuesAreValid) {
             Toolkit.getDefaultToolkit().beep();
-            setMessage(Alert.AlertType.ERROR, "Es wurden nicht alle erforderlichen Felder ausgefüllt: \n - " + String.join("\n - ", missingValues));
+            setMessage(Alert.AlertType.WARNING, "Es wurden nicht alle erforderlichen Felder ausgefüllt: \n - " + String.join("\n - ", missingValues));
             Optional<String> firstInvalidElement = missingValues.stream().findFirst();
 
             firstInvalidElement.ifPresent(s -> form.get(s).requestFocus());
