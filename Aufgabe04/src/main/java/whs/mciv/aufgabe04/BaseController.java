@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import java.util.Optional;
 
 public abstract class BaseController implements Initializable {
 
@@ -51,6 +52,13 @@ public abstract class BaseController implements Initializable {
         meldung.setHeaderText("");
         meldung.setTitle(titel);
         meldung.showAndWait();
+    }
+
+    public static Optional<ButtonType> beende(String hinweis, String titel) {
+        Alert meldung = new Alert(Alert.AlertType.WARNING, hinweis, ButtonType.YES, ButtonType.NO);
+        meldung.setHeaderText("");
+        meldung.setTitle(titel);
+        return meldung.showAndWait();
     }
 
     protected abstract void onFirstButton();

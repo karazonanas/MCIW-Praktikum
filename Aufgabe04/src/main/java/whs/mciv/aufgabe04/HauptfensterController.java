@@ -62,10 +62,7 @@ public class HauptfensterController implements Initializable {
 
     @FXML
     private void beenden() {
-        Alert meldung = new Alert(Alert.AlertType.WARNING, BEENDEN_HINWEIS, ButtonType.YES, ButtonType.NO);
-        meldung.setHeaderText("");
-        meldung.setTitle(BEENDEN_TITEL);
-        Optional<ButtonType> beenden = meldung.showAndWait();
+        Optional<ButtonType> beenden = BaseController.beende(BEENDEN_HINWEIS, BEENDEN_TITEL);
         if (beenden.isPresent()) {
             if (Objects.equals(beenden.get().getButtonData().toString(), "YES")) {
                 mainApp.closeStage();
