@@ -8,7 +8,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="559.0" prefWidth="425.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="whs.mciv.aufgabe04.windowController.formulare.BuchungAnlegenController">
     <children>
-        <Label layoutX="25.0" layoutY="25.0" text="Buchung anlegen">
+        <Label fx:id="headline" layoutX="25.0" layoutY="25.0" text="Buchung anlegen">
             <font>
                 <Font name="System Bold" size="18.0" />
             </font>

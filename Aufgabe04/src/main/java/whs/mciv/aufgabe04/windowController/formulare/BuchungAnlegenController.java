@@ -30,6 +30,9 @@ import java.util.stream.Collectors;
 public class BuchungAnlegenController extends FormularController {
 
     @FXML
+    private Label headline;
+
+    @FXML
     private TextField id;
 
     @FXML
@@ -334,6 +337,7 @@ public class BuchungAnlegenController extends FormularController {
     @Override
     public void fillForm(N form) {
         if (form instanceof Buchung buchung) {
+            headline.setText("Buchung bearbeiten");
             id.setText(buchung.getId());
             kundeComboBox.getSelectionModel().select(buchung.getKunde());
             reisezielComboBox.getSelectionModel().select(buchung.getReiseziel());

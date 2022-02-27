@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
 import java.util.StringTokenizer;
 
 public class KundenUebersichtController extends UebersichtController {
-    private static final String KUNDE_ANLEGEN_VIEW = "formulare/KundeBearbeiten.fxml";
+    private static final String KUNDE_ANLEGEN_VIEW = "formulare/KundeAnlegen.fxml";
     private static final String KUNDE_ANLEGEN_TITLE = "Kunde bearbeiten";
     private static final String KUNDE_AUSWAELEN_HINWEIS = "Bitte wählen Sie einen Kunden aus der Liste aus";
     private static final String KUNDE_LOESCHEN_HINWEIS = "Sind Sie sicher den ausgewählten Kunden zu löschen";

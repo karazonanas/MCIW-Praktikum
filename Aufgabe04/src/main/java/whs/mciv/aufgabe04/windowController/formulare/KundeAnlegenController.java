@@ -4,6 +4,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import whs.mciv.aufgabe04.daten.N;
 import whs.mciv.aufgabe04.daten.buchung.BuchungDaten;
@@ -23,6 +24,9 @@ import java.util.LinkedHashMap;
 import java.util.ResourceBundle;
 
 public class KundeAnlegenController extends FormularController {
+
+    @FXML
+    private Label headline;
 
     @FXML
     private TextField id;
@@ -307,6 +311,7 @@ public class KundeAnlegenController extends FormularController {
     public void fillForm(N form) {
         if (form instanceof Kunde) {
             Kunde kunde = (Kunde) form;
+            headline.setText("Kunde bearbeiten");
             id.setText(kunde.getId());
             anrede.getSelectionModel().select(kunde.getAnrede());
             vorname.setText(kunde.getVorname());
