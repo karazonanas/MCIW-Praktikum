@@ -65,6 +65,7 @@ public class BuchungUebersichtController extends UebersichtController {
             if (controller instanceof FormularController formularController) {
                 formularController.fillForm(buchung);
                 formularController.getStage().setOnHidden(h -> updateListView(BuchungDaten.getAllBuchungen()));
+                formularController.runOnClose();
             }
         } else {
             BaseController.setMessage(Alert.AlertType.WARNING, BUCHUNG_AUSWAEHLEN_HINWEIS);

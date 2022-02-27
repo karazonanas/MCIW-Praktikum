@@ -371,9 +371,7 @@ public class KundeAnlegenController extends FormularController {
     }
 
     @Override
-    protected void onSecondButton(){
-        super.onSecondButton();
-
+    public void runOnClose() {
         if (!KundenDaten.kundeExistiert(kunde.getId())) {
             KundenDaten.loescheKundenBeiId(kunde.getId());
         }

@@ -3,8 +3,10 @@ package whs.mciv.aufgabe04.windowController.uebersichten;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.stage.WindowEvent;
 import whs.mciv.aufgabe04.BaseController;
 import whs.mciv.aufgabe04.daten.N;
 import whs.mciv.aufgabe04.daten.buchung.BuchungDaten;
@@ -73,6 +75,7 @@ public class KundenUebersichtController extends UebersichtController {
             if (controller instanceof FormularController formularController) {
                 formularController.fillForm(kunde);
                 formularController.getStage().setOnHidden(h -> updateListView(KundenDaten.getAllKunden()));
+                formularController.runOnClose();
             }
         } else {
             BaseController.setMessage(Alert.AlertType.WARNING, KUNDE_AUSWAELEN_HINWEIS );

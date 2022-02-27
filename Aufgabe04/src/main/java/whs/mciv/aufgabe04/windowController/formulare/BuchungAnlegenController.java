@@ -401,9 +401,7 @@ public class BuchungAnlegenController extends FormularController {
     }
 
     @Override
-    protected void onSecondButton(){
-        super.onSecondButton();
-
+    public void runOnClose() {
         if (!BuchungDaten.buchungExistiert(buchung.getId())) {
             BuchungDaten.loescheBuchungBeiId(buchung.getId());
         }

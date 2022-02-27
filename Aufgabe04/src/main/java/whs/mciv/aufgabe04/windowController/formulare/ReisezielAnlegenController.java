@@ -87,4 +87,9 @@ public class ReisezielAnlegenController extends FormularController {
     public void fillForm(N form) {
 
     }
+
+    @Override
+    public void runOnClose() {
+
+    }
 }

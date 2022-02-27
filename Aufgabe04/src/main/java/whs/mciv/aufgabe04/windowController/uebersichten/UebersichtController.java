@@ -32,5 +32,4 @@ public abstract class UebersichtController extends BaseController {
         loeschen.setDisable(true);
         button1.setDisable(true);
     }
-
 }

@@ -15,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import whs.mciv.aufgabe04.windowController.formulare.FormularController;
 
 public class BuchungsTool extends Application {
     private static final String HAUPTFENSTER_VIEW = "Hauptfenster.fxml";
@@ -105,6 +106,10 @@ public class BuchungsTool extends Application {
             // Der Controller muss die Stage kennen, um sie selbstständig schließen zu können
             BaseController controller = loader.getController();
             controller.setStage(dialogStage);
+
+            if (controller instanceof FormularController formularController) {
+                controller.getStage().setOnHidden(h -> formularController.runOnClose());
+            }
 
             // Dialog anzeigen bis er geschlossen wird
             dialogStage.show();

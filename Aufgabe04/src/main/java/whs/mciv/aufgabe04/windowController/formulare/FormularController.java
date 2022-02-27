@@ -86,6 +86,8 @@ public abstract class FormularController extends BaseController {
 
     public abstract boolean validateForm();
 
+    public abstract void runOnClose();
+
     /**
      * Überprüfe, ob alle Pflichtfelder ausgefüllt sind
      *
