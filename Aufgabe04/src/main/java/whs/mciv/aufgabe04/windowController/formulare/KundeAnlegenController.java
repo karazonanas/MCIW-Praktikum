@@ -331,6 +331,9 @@ public class KundeAnlegenController extends FormularController {
      * @return wahr, wenn das Formular bearbeitet wurde
      */
     public boolean wasFormEdited() {
+        if (KundenDaten.getKunde(id.getText()) != null) {
+            return true;
+        }
         LinkedHashMap<String, Control> form = createForm();
 
         form.put("Anrede", anrede);

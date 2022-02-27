@@ -1,10 +1,15 @@
 package whs.mciv.aufgabe04;
 
+import javafx.util.converter.LocalDateStringConverter;
+import whs.mciv.aufgabe04.daten.buchung.Buchung;
+import whs.mciv.aufgabe04.daten.buchung.BuchungDaten;
 import whs.mciv.aufgabe04.daten.kunde.Kunde;
 import whs.mciv.aufgabe04.daten.reiseziele.Reiseziel;
 import whs.mciv.aufgabe04.daten.reiseziele.ReisezielDaten;
 import whs.mciv.aufgabe04.daten.kunde.KundenDaten;
 import java.io.IOException;
+import java.time.LocalDate;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -35,6 +40,7 @@ public class BuchungsTool extends Application {
         
         erzeugeReisezielDaten();
         erzeugeKundenDaten();
+        erzeugeBuchungen();
         
         zeigeHauptfenster();
     }
@@ -201,5 +207,35 @@ public class BuchungsTool extends Application {
         kunde3.setBic("WELADED1GEL");
         kunde3.setEmail("no3@mail.de");
         KundenDaten.speichereKunde(kunde3);
+    }
+
+    private void erzeugeBuchungen() {
+
+        Buchung buchung1= new Buchung();
+        buchung1.setReiseziel(ReisezielDaten.getReiseziel("RZ20221"));
+        buchung1.setPersonenanzahl(2);
+        buchung1.setAnzahlderNaechte(2);
+        buchung1.setAnreisedatum(LocalDate.of(2022,6,12));
+        buchung1.setKunde(KundenDaten.getKunde("KD20221"));
+        buchung1.setVerpflegung("Vollpension");
+        BuchungDaten.speichereBuchung(buchung1);
+
+        Buchung buchung2= new Buchung();
+        buchung2.setReiseziel(ReisezielDaten.getReiseziel("RZ20223"));
+        buchung2.setPersonenanzahl(6);
+        buchung2.setAnzahlderNaechte(4);
+        buchung2.setAnreisedatum(LocalDate.of(2022,8,12));
+        buchung2.setKunde(KundenDaten.getKunde("KD20222"));
+        buchung2.setVerpflegung("Vollpension");
+        BuchungDaten.speichereBuchung(buchung2);
+
+        Buchung buchung3= new Buchung();
+        buchung3.setReiseziel(ReisezielDaten.getReiseziel("RZ20221"));
+        buchung3.setPersonenanzahl(6);
+        buchung3.setAnzahlderNaechte(4);
+        buchung3.setAnreisedatum(LocalDate.of(2022,12,12));
+        buchung3.setKunde(KundenDaten.getKunde("KD20223"));
+        buchung3.setVerpflegung("Vollpension");
+        BuchungDaten.speichereBuchung(buchung3);
     }
 }

@@ -10,7 +10,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
-import whs.mciv.aufgabe04.BaseController;
 import whs.mciv.aufgabe04.daten.N;
 import whs.mciv.aufgabe04.daten.buchung.Buchung;
 import whs.mciv.aufgabe04.daten.buchung.BuchungDaten;
@@ -19,7 +18,6 @@ import whs.mciv.aufgabe04.daten.kunde.KundenDaten;
 import whs.mciv.aufgabe04.daten.reiseziele.Reiseziel;
 import whs.mciv.aufgabe04.daten.reiseziele.ReisezielDaten;
 import whs.mciv.aufgabe04.filter.FilterDatum;
-
 import java.awt.*;
 import java.net.URL;
 import java.time.LocalDate;
@@ -336,7 +334,6 @@ public class BuchungAnlegenController extends FormularController {
     @Override
     public void fillForm(N form) {
         if (form instanceof Buchung buchung) {
-
             id.setText(buchung.getId());
             kundeComboBox.getSelectionModel().select(buchung.getKunde());
             reisezielComboBox.getSelectionModel().select(buchung.getReiseziel());
@@ -344,7 +341,11 @@ public class BuchungAnlegenController extends FormularController {
             anreisedatum.setValue(buchung.getAnreisedatum());
             anzahlDerNaechte.setText(String.valueOf(buchung.getAnzahlderNaechte()));
             verpflegung.getSelectionModel().select(buchung.getVerpflegung());
-            gesamtpreis.setText(String.valueOf(buchung.getGesamtpreis()));
+            if (!Objects.equals(String.valueOf(buchung.getGesamtpreis()), "null")) {
+                gesamtpreis.setText(String.valueOf(buchung.getGesamtpreis()));
+            } else {
+                updateGesamtpreis(buchung.getReiseziel(), buchung.getVerpflegung());
+            }
         }
     }
 
@@ -383,6 +384,9 @@ public class BuchungAnlegenController extends FormularController {
      * @return wahr, wenn das Formular bearbeitet wurde
      */
     public boolean wasFormEdited() {
+        if (BuchungDaten.getBuchung(id.getText()) != null) {
+            return true;
+        }
         LinkedHashMap<String, Control> form = createForm();
 
         return wasFormEdited(form);
