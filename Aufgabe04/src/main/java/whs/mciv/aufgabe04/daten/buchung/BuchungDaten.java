@@ -42,7 +42,7 @@ public class BuchungDaten {
         for (String buchungKey : buchungen.keySet()) {
              Buchung buchung = buchungen.get(buchungKey);
 
-             if (buchung.getKunde().equals(kunde)) {
+             if (buchung != null && buchung.getKunde().equals(kunde)) {
                  return true;
              }
         }
@@ -56,16 +56,7 @@ public class BuchungDaten {
      * @return true, wenn das Speichern erfolgreich war, andernfalls false.
      */
     public static boolean speichereBuchung(Buchung buchung) {
-        if (buchungen.containsKey(buchung.getId()) && buchungen.get(buchung.getId()) == null) {
-            buchungen.put(buchung.getId(), buchung);
-            return true;
-        }
-        return false;
-    }
-
-    public static boolean updateBuchung (Buchung buchung) {
-        if (buchungen.containsKey(buchung.getId()) && buchungen.get(buchung.getId()) != null) {
-            buchungen.remove(buchung.getId());
+        if (buchungen.containsKey(buchung.getId())) {
             buchungen.put(buchung.getId(), buchung);
             return true;
         }

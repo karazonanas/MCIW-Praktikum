@@ -418,11 +418,7 @@ public class BuchungAnlegenController extends FormularController {
         this.buchung.setBuchungsStatus(buchungsStatus.getText());
         this.buchung.setReiseziel(reisezielComboBox.getSelectionModel().getSelectedItem());
 
-        boolean buchungGespeichert = BuchungDaten.speichereBuchung(this.buchung);
-
-        if (! buchungGespeichert) {
-            BuchungDaten.updateBuchung(this.buchung);
-        }
+        BuchungDaten.speichereBuchung(this.buchung);
 
         wurdeGespeichert = true;
         stage.close();
