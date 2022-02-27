@@ -49,6 +49,8 @@ public class BuchungUebersichtController extends UebersichtController {
             public void changed(ObservableValue<? extends N> observableValue, N n, N t1) {
                 StringTokenizer st = new StringTokenizer(String.valueOf(t1), " ");
                 key = st.nextToken();
+                loeschen.setDisable(false);
+                button1.setDisable(false);
             }
         });
     }
