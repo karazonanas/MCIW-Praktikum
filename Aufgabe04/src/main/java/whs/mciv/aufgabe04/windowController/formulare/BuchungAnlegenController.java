@@ -396,6 +396,15 @@ public class BuchungAnlegenController extends FormularController {
         this.stage = stage;
     }
 
+    @Override
+    protected void onSecondButton(){
+        super.onSecondButton();
+
+        if (!BuchungDaten.buchungExistiert(buchung.getId())) {
+            BuchungDaten.loescheBuchungBeiId(buchung.getId());
+        }
+    }
+
     @FXML
     public void speichern() {
         this.buchung.setId(id.getText());

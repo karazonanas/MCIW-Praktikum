@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 public class KundenDaten {
     private static HashMap<String, Kunde> kunden = new HashMap<>();
+    public static int letzteId = 0;
 
     public static Set<Kunde> getAllKunden() {
         return Collections.unmodifiableSet(new HashSet<>(kunden.values().stream().filter(k -> k != null).collect(Collectors.toList())));
@@ -20,6 +21,14 @@ public class KundenDaten {
 
     public static Kunde getKunde (String kundenId) {
         return kunden.get(kundenId);
+    }
+
+    public static boolean kundeExistiert(String buchungId) {
+        if (kunden.containsKey(buchungId)) {
+            return kunden.get(buchungId) != null;
+        }
+
+        return false;
     }
 
     public static boolean speichereKunde (Kunde kunde) {
@@ -38,9 +47,21 @@ public class KundenDaten {
         return false;
    }
 
+    public static boolean loescheKundenBeiId(String kundenId) {
+        if (kunden.containsKey(kundenId)) {
+            kunden.remove(kundenId);
+            letzteId = letzteId - 1;
+
+            return true;
+        }
+
+        return false;
+    }
+
    public static String erzeugeId () {
        int aktuellesJahr = LocalDate.now().getYear();
-       String id = "KD" + aktuellesJahr + (kunden.size() + 1);
+       letzteId = letzteId + 1;
+       String id = "KD" + aktuellesJahr + letzteId;
        kunden.put(id, null);
        return id;
    }

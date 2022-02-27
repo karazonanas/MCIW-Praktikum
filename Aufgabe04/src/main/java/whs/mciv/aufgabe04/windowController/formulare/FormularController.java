@@ -29,7 +29,7 @@ public abstract class FormularController extends BaseController {
                 Control item = form.get(key);
                 if (item.contextMenuProperty().getBean().getClass().getName().equals("javafx.scene.control.TextField")) {
                     TextField field = (TextField) item;
-                    if (!field.getText().isEmpty()) {
+                    if (field.getText() != null && !field.getText().isEmpty()) {
                         return false;
                     }
                 } else if (item.contextMenuProperty().getBean().getClass().getName().equals("javafx.scene.control.ComboBox")) {
@@ -110,7 +110,7 @@ public abstract class FormularController extends BaseController {
                         field.textProperty().addListener(new ChangeListener<String>() {
                             @Override
                             public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
-                                if (!newValue.isEmpty()) {
+                                if (newValue != null && !newValue.isEmpty()) {
                                     field.setStyle("");
                                 }
                             }
@@ -137,7 +137,7 @@ public abstract class FormularController extends BaseController {
                     }
                 } else if (item.contextMenuProperty().getBean().getClass().getName().equals("javafx.scene.control.DatePicker")) {
                     DatePicker datePicker = (DatePicker) item;
-                    if (datePicker.getEditor().getText().isEmpty()) {
+                    if (datePicker.getEditor().getText() == null || datePicker.getEditor().getText().isEmpty()) {
                         missingValues.add(key);
                         datePicker.setStyle("-fx-border-color: red;");
 

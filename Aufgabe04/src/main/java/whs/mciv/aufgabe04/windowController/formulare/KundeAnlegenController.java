@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import whs.mciv.aufgabe04.daten.N;
+import whs.mciv.aufgabe04.daten.buchung.BuchungDaten;
 import whs.mciv.aufgabe04.daten.kunde.Kunde;
 import whs.mciv.aufgabe04.daten.kunde.KundenDaten;
 import whs.mciv.aufgabe04.filter.FilterEmail;
@@ -362,6 +363,15 @@ public class KundeAnlegenController extends FormularController {
         form.put("Land", land);
 
         return form;
+    }
+
+    @Override
+    protected void onSecondButton(){
+        super.onSecondButton();
+
+        if (!KundenDaten.kundeExistiert(kunde.getId())) {
+            KundenDaten.loescheKundenBeiId(kunde.getId());
+        }
     }
 
     @FXML
