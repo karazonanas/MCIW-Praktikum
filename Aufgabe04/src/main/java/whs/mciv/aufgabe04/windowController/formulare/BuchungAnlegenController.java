@@ -10,7 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
-import whs.mciv.aufgabe04.daten.N;
+import whs.mciv.aufgabe04.daten.Datensatz;
 import whs.mciv.aufgabe04.daten.buchung.Buchung;
 import whs.mciv.aufgabe04.daten.buchung.BuchungDaten;
 import whs.mciv.aufgabe04.daten.kunde.Kunde;
@@ -335,7 +335,7 @@ public class BuchungAnlegenController extends FormularController {
     }
 
     @Override
-    public void fillForm(N form) {
+    public void fillForm(Datensatz form) {
         if (form instanceof Buchung buchung) {
             headline.setText("Buchung bearbeiten");
             id.setText(buchung.getId());

@@ -5,13 +5,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import whs.mciv.aufgabe04.BaseController;
 import whs.mciv.aufgabe04.BuchungsTool;
-import whs.mciv.aufgabe04.daten.N;
+import whs.mciv.aufgabe04.daten.Datensatz;
+
 import java.util.Collection;
 
 public abstract class UebersichtController extends BaseController {
 
     @FXML
-    protected ListView<N> listView = new ListView<>();
+    protected ListView<Datensatz> listView = new ListView<>();
 
     @FXML
     protected Button loeschen;

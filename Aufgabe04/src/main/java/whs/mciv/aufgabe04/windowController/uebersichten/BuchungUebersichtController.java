@@ -6,7 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import whs.mciv.aufgabe04.BaseController;
-import whs.mciv.aufgabe04.daten.N;
+import whs.mciv.aufgabe04.daten.Datensatz;
 import whs.mciv.aufgabe04.daten.buchung.Buchung;
 import whs.mciv.aufgabe04.daten.buchung.BuchungDaten;
 import whs.mciv.aufgabe04.windowController.formulare.FormularController;
@@ -46,9 +46,9 @@ public class BuchungUebersichtController extends UebersichtController {
             }
         });
 
-        listView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<N>() {
+        listView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Datensatz>() {
             @Override
-            public void changed(ObservableValue<? extends N> observableValue, N n, N t1) {
+            public void changed(ObservableValue<? extends Datensatz> observableValue, Datensatz datensatz, Datensatz t1) {
                 StringTokenizer st = new StringTokenizer(String.valueOf(t1), " ");
                 key = st.nextToken();
                 loeschen.setDisable(false);

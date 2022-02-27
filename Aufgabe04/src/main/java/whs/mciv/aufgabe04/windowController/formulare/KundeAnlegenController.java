@@ -6,16 +6,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import whs.mciv.aufgabe04.daten.N;
-import whs.mciv.aufgabe04.daten.buchung.BuchungDaten;
+import whs.mciv.aufgabe04.daten.Datensatz;
 import whs.mciv.aufgabe04.daten.kunde.Kunde;
 import whs.mciv.aufgabe04.daten.kunde.KundenDaten;
 import whs.mciv.aufgabe04.filter.FilterEmail;
 import whs.mciv.aufgabe04.filter.FilterIban;
 import whs.mciv.aufgabe04.filter.FilterPhoneNumber;
 import whs.mciv.aufgabe04.filter.FilterPlz;
-import whs.mciv.aufgabe04.windowController.uebersichten.KundenUebersichtController;
-import whs.mciv.aufgabe04.windowController.uebersichten.UebersichtController;
 
 import java.awt.*;
 import java.net.URL;
@@ -308,7 +305,7 @@ public class KundeAnlegenController extends FormularController {
     }
 
     @Override
-    public void fillForm(N form) {
+    public void fillForm(Datensatz form) {
         if (form instanceof Kunde) {
             Kunde kunde = (Kunde) form;
             headline.setText("Kunde bearbeiten");

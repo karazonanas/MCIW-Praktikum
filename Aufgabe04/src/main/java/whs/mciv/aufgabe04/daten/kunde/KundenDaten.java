@@ -65,5 +65,4 @@ public class KundenDaten {
        kunden.put(id, null);
        return id;
    }
-
 }

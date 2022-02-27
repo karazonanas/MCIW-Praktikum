@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import whs.mciv.aufgabe04.BaseController;
-import whs.mciv.aufgabe04.daten.N;
+import whs.mciv.aufgabe04.daten.Datensatz;
 
 import java.awt.*;
 import java.util.*;
@@ -170,7 +170,7 @@ public abstract class FormularController extends BaseController {
         return true;
     }
 
-    public abstract void fillForm(N form);
+    public abstract void fillForm(Datensatz form);
 
     public boolean getWurdeGespeichert() {
         return wurdeGespeichert;

@@ -1,10 +1,10 @@
 package whs.mciv.aufgabe04.daten.kunde;
 
-import whs.mciv.aufgabe04.daten.N;
+import whs.mciv.aufgabe04.daten.Datensatz;
 
 import java.util.Objects;
 
-public class Kunde extends N {
+public class Kunde extends Datensatz {
     String id;
     String anrede;
     String vorname;

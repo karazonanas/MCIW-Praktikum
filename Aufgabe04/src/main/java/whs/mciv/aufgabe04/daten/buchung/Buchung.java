@@ -1,6 +1,6 @@
 package whs.mciv.aufgabe04.daten.buchung;
 
-import whs.mciv.aufgabe04.daten.N;
+import whs.mciv.aufgabe04.daten.Datensatz;
 import whs.mciv.aufgabe04.daten.kunde.Kunde;
 import whs.mciv.aufgabe04.daten.reiseziele.Reiseziel;
 
@@ -11,7 +11,7 @@ import java.util.Objects;
  * Ein Objekt dieser Klasse repräsentiert eine Buchung.
  * Bereits vorhandene Buchungen werden in der Klasse BuchungDaten verwaltet.
  */
-public class Buchung extends N {
+public class Buchung extends Datensatz {
 
     /** Die ID der Buchung. Wird automatisch im Konstruktor erzeugt. */
     private String id;

@@ -1,6 +1,6 @@
 package whs.mciv.aufgabe04.daten.reiseziele;
 
-import whs.mciv.aufgabe04.daten.N;
+import whs.mciv.aufgabe04.daten.Datensatz;
 
 import java.util.Objects;
 
@@ -9,7 +9,7 @@ import java.util.Objects;
  * angelegt werden können.
  * Bereits vorhandene Reiseziele werden in der Klasse ReisezielDaten verwaltet.
  */
-public class Reiseziel extends N {
+public class Reiseziel extends Datensatz {
     
     /** Die ID des Reiseziels. Wird automatisch im Konstruktor erzeugt. */
     private String id;

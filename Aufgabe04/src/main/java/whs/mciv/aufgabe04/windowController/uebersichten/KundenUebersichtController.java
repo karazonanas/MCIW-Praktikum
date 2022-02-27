@@ -3,12 +3,10 @@ package whs.mciv.aufgabe04.windowController.uebersichten;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.stage.WindowEvent;
 import whs.mciv.aufgabe04.BaseController;
-import whs.mciv.aufgabe04.daten.N;
+import whs.mciv.aufgabe04.daten.Datensatz;
 import whs.mciv.aufgabe04.daten.buchung.BuchungDaten;
 import whs.mciv.aufgabe04.daten.kunde.Kunde;
 import whs.mciv.aufgabe04.daten.kunde.KundenDaten;
@@ -56,9 +54,9 @@ public class KundenUebersichtController extends UebersichtController {
 
         listView.getItems().addAll(KundenDaten.getAllKunden());
         initButtons();
-        listView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<N>() {
+        listView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Datensatz>() {
             @Override
-            public void changed(ObservableValue<? extends N> observableValue, N n, N t1) {
+            public void changed(ObservableValue<? extends Datensatz> observableValue, Datensatz datensatz, Datensatz t1) {
                 StringTokenizer st = new StringTokenizer(String.valueOf(t1), " ");
                 key = st.nextToken();
                 loeschen.setDisable(false);

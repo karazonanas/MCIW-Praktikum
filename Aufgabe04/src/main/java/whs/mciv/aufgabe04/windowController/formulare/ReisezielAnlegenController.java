@@ -5,7 +5,7 @@
  */
 package whs.mciv.aufgabe04.windowController.formulare;
 
-import whs.mciv.aufgabe04.daten.N;
+import whs.mciv.aufgabe04.daten.Datensatz;
 import whs.mciv.aufgabe04.daten.reiseziele.Reiseziel;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -84,7 +84,7 @@ public class ReisezielAnlegenController extends FormularController {
     }
 
     @Override
-    public void fillForm(N form) {
+    public void fillForm(Datensatz form) {
 
     }
 
