@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 import java.util.StringTokenizer;
 
 public class BuchungUebersichtController extends UebersichtController {
-    private static final String BUCHUNG_ANLEGEN_VIEW = "formulare/BuchungAnlegen.fxml";
+    private static final String BUCHUNG_ANLEGEN_VIEW = "formulare/BuchungBearbeiten.fxml";
     private static final String BUCHUNG_ANLEGEN_TITLE = "Buchung bearbeiten";
     private static final String BUCHUNG_AUSWAEHLEN_HINWEIS = "Bitte wählen Sie eine Buchung aus";
     private static final String BUCHUNG_LOESCHEN_HINWEIS = "Sind Sie sicher die ausgewählte Buchung zu löschen";
