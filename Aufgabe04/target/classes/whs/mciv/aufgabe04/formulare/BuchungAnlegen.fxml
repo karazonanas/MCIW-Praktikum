@@ -32,7 +32,12 @@
         <TextField id="anzahlDerNaechte" fx:id="anzahlDerNaechte" alignment="CENTER_RIGHT" layoutX="195.0" layoutY="321.0" prefHeight="25.0" prefWidth="69.0" promptText="10" text="10" />
 
         <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="375.0" prefHeight="17.0" prefWidth="160.0" text="Reiseziel *" />
-        <ComboBox id="reisezielComboBox" fx:id="reisezielComboBox" layoutX="195.0" layoutY="371.0" prefHeight="25.0" prefWidth="200.0" promptText="Reiseziel auswählen" />
+        <ComboBox id="reisezielComboBox" fx:id="reisezielComboBox" layoutX="195.0" layoutY="371.0" prefHeight="25.0" prefWidth="200.0" promptText="Reiseziel auswählen">
+            <items>
+            <FXCollections fx:factory="observableArrayList">
+            </FXCollections>
+            </items>
+        </ComboBox>
 
         <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="425.0" prefHeight="17.0" prefWidth="160.0" text="Verpflegung *" />
         <ComboBox id="verpflegung" fx:id="verpflegung" layoutX="195.0" layoutY="421.0" prefHeight="25.0" prefWidth="200.0" promptText="Verpflegung auswählen">

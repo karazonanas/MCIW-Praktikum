@@ -1,5 +1,7 @@
 package whs.mciv.aufgabe04.windowController.formulare;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
@@ -83,6 +85,7 @@ public abstract class FormularController extends BaseController {
     public abstract void speichern();
 
     public abstract boolean validateForm();
+
     /**
      * Überprüfe, ob alle Pflichtfelder ausgefüllt sind
      *
@@ -104,6 +107,15 @@ public abstract class FormularController extends BaseController {
                         missingValues.add(key);
                         field.setStyle("-fx-border-color: red;");
 
+                        field.textProperty().addListener(new ChangeListener<String>() {
+                            @Override
+                            public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
+                                if (!newValue.isEmpty()) {
+                                    field.setStyle("");
+                                }
+                            }
+                        });
+
                         allValuesAreValid = false;
                     }
                 } else if (item.contextMenuProperty().getBean().getClass().getName().equals("javafx.scene.control.ComboBox")) {
@@ -112,6 +124,15 @@ public abstract class FormularController extends BaseController {
                         missingValues.add(key);
                         comboBox.setStyle("-fx-border-color: red;");
 
+                        comboBox.valueProperty().addListener(new ChangeListener<Object>() {
+                            @Override
+                            public void changed(ObservableValue<?> observableValue, Object o, Object t1) {
+                                if (t1 != null) {
+                                    comboBox.setStyle("");
+                                }
+                            }
+                        });
+
                         allValuesAreValid = false;
                     }
                 } else if (item.contextMenuProperty().getBean().getClass().getName().equals("javafx.scene.control.DatePicker")) {
@@ -119,6 +140,15 @@ public abstract class FormularController extends BaseController {
                     if (datePicker.getEditor().getText().isEmpty()) {
                         missingValues.add(key);
                         datePicker.setStyle("-fx-border-color: red;");
+
+                        datePicker.getEditor().textProperty().addListener(new ChangeListener<String>() {
+                            @Override
+                            public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
+                                if (newValue != null && !newValue.isEmpty()) {
+                                    datePicker.setStyle("");
+                                }
+                            }
+                        });
 
                         allValuesAreValid = false;
                     }
