@@ -37,6 +37,8 @@ public class BuchungUebersichtController extends UebersichtController {
                     if (Objects.equals(beenden.get().getButtonData().toString(), "YES")) {
                         BuchungDaten.loescheBuchung(BuchungDaten.getBuchung(key));
                         updateListView(BuchungDaten.getAllBuchungen());
+                        loeschen.setDisable(true);
+                        button1.setDisable(true);
                     }
                 }
             } else {

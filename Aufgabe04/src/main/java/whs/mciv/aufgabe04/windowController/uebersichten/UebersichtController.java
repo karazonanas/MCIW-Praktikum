@@ -29,6 +29,8 @@ public abstract class UebersichtController extends BaseController {
     public void updateListView(Collection collection) {
         listView.getItems().clear();
         listView.getItems().addAll(collection);
+        loeschen.setDisable(true);
+        button1.setDisable(true);
     }
 
 }

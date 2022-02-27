@@ -42,6 +42,8 @@ public class KundenUebersichtController extends UebersichtController {
                         if (Objects.equals(beenden.get().getButtonData().toString(), "YES")) {
                             KundenDaten.loescheKunde(kunde);
                             updateListView(KundenDaten.getAllKunden());
+                            loeschen.setDisable(true);
+                            button1.setDisable(true);
                         }
                     }
                 }
