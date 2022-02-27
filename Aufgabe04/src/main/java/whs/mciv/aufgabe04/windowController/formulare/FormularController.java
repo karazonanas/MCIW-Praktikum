@@ -62,8 +62,6 @@ public abstract class FormularController extends BaseController {
                 if (Objects.equals(beenden.get().getButtonData().toString(), "YES")) {
                     wurdeGespeichert = false;
                     abbrechen();
-                } else {
-                    callIfAbbrechenAborted();
                 }
             }
         }

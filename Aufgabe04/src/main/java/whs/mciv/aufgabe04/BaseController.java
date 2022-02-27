@@ -26,13 +26,6 @@ public abstract class BaseController implements Initializable {
     }
 
     /**
-     * Wird aufgerufen, wenn das Formular nicht abgebrochen/geschlossen werden soll
-     */
-    protected void callIfAbbrechenAborted() {
-        // ToDo: Whats should be done?
-    }
-
-    /**
      * Gebe eine Warnung oder einen Fehler als Nachricht aus
      *
      * @param alertType Typ des Fehlers (MESSAGE_WARNUNG|MESSAGE_FEHLER)

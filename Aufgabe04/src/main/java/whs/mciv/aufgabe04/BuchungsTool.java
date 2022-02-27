@@ -1,6 +1,5 @@
 package whs.mciv.aufgabe04;
 
-import javafx.util.converter.LocalDateStringConverter;
 import whs.mciv.aufgabe04.daten.buchung.Buchung;
 import whs.mciv.aufgabe04.daten.buchung.BuchungDaten;
 import whs.mciv.aufgabe04.daten.kunde.Kunde;
