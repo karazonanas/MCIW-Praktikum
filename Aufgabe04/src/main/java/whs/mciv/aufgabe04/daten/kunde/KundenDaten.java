@@ -23,9 +23,9 @@ public class KundenDaten {
         return kunden.get(kundenId);
     }
 
-    public static boolean kundeExistiert(String buchungId) {
-        if (kunden.containsKey(buchungId)) {
-            return kunden.get(buchungId) != null;
+    public static boolean kundeExistiert(String kundenId) {
+        if (kunden.containsKey(kundenId)) {
+            return kunden.get(kundenId) != null;
         }
 
         return false;
